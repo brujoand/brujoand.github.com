@@ -103,7 +103,7 @@ what configuration file that was used.</p>
 }
 </code></pre>
 
-<p>This function checks if we&rsquo;re in an interactive shell or not, and loads bashrc
+<p>This function checks if we&rsquo;re in an interactive shell or not, and returns bashrc
 if we are. If not it checks for the various login files.</p>
 
 <p>Thats all great, but now we need to figure out what files have been sourced from
@@ -129,7 +129,7 @@ file, and then calls <code>_sourced_files</code> to recursively check what files
 being sourced.</p>
 
 <p>Now we have some kind of idea about what is being configured in our shell. You
-might have noticed hat I add <code># some description</code> after my function definitions?
+might have noticed that I add <code># some description</code> after my function definitions?
 This is so I can get these two nifty helpers:</p>
 
 <pre><code class="language-bash">alias halp='echo -e &quot;Sourced files:\n$(sourced_files | sed &quot;s#$HOME/#~/#&quot;)\n # \nFunctions:\n$(list_functions)\n # \nAliases:\n\n$(list_aliases)&quot; | column -t -s &quot;#&quot;' # Show all custom aliases and functions
@@ -166,7 +166,7 @@ function wat() { # show help and location of a custom function or alias
 
 <p>So after looking at what helpers I have available using <code>halp</code> I can use <code>wat</code>
 to show me exactly where it&rsquo;s defined, what it looks like and how it&rsquo;s
-auto completed. A sample output would look like this:</p>
+auto completed. <code>wat</code> also has auto completion through the <code>_wat</code> function. A sample output would look like this:</p>
 
 <pre><code class="language-bash">$&gt; wat list_aliases
 # /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:66
