@@ -3,26 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://blog.brujordet.no/about/</loc>
+    <lastmod>2019-11-09T12:43:45+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/</loc>
+    <lastmod>2019-11-09T12:43:45+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/post/testing/okay/</loc>
     <lastmod>2019-11-09T11:32:39+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/testing/okay/</loc>
+    <loc>https://blog.brujordet.no/post/</loc>
     <lastmod>2019-11-09T11:32:39+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
-    <lastmod>2019-11-09T11:32:39+01:00</lastmod>
+    <loc>https://blog.brujordet.no/categories/</loc>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://blog.brujordet.no/tags/</loc>
   </url>
   
 </urlset>
