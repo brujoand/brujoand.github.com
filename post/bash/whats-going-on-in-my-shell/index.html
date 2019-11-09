@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>What&#39;s going on in my shell? // Automate attention</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.57.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://blog.brujordet.no/css/main.min.4c68b05cd7072e94a56c3a8acdd6f6e73fb7a62ba6e1bb047413ce09c4fea7a8.css" />
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-30621068-2', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="What&#39;s going on in my shell?"/>
+<meta name="twitter:description" content="To help me figure this out, I use a few shell functions. Firstly, I need to know what configuration file that was used.
+function shell_init_file() { # Returns what would be your initfile if [[ $- == *i* ]]; then echo ~/.bashrc elif [[ -f ~/.bash_profile ]]; then echo ~/.bash_profile elif [[ -f ~/.bash_login ]]; then echo ~/.bash_login elif [[ -f ~/.profile ]]; then echo ~/.profile else echo &quot;Could not find any config files."/>
+
+    <meta property="og:title" content="What&#39;s going on in my shell?" />
+<meta property="og:description" content="To help me figure this out, I use a few shell functions. Firstly, I need to know what configuration file that was used.
+function shell_init_file() { # Returns what would be your initfile if [[ $- == *i* ]]; then echo ~/.bashrc elif [[ -f ~/.bash_profile ]]; then echo ~/.bash_profile elif [[ -f ~/.bash_login ]]; then echo ~/.bash_login elif [[ -f ~/.profile ]]; then echo ~/.profile else echo &quot;Could not find any config files." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.brujordet.no/post/bash/whats-going-on-in-my-shell/" />
+<meta property="article:published_time" content="2019-11-09T15:13:36+01:00" />
+<meta property="article:modified_time" content="2019-11-09T15:13:36+01:00" />
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.brujordet.no/"><img class="app-header-avatar" src="/avatar.jpeg" alt="John Doe" /></a>
+      <h1>Automate attention</h1>
+      <p>Tools and techniques I use to make life easier</p>
+      <div class="app-header-categories">
+        <ul>
+          <li><a href="/about">About</a></li>
+          
+        </ul>
+      </div>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://twitter.com/brujoand"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">What&#39;s going on in my shell?</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Nov 9, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      <p>To help me figure this out, I use a few shell functions. Firstly, I need to know
+what configuration file that was used.</p>
+
+<pre><code class="language-bash">function shell_init_file() { # Returns what would be your initfile
+  if [[ $- == *i* ]]; then
+    echo ~/.bashrc
+  elif [[ -f ~/.bash_profile ]]; then
+    echo ~/.bash_profile
+  elif [[ -f ~/.bash_login ]]; then
+    echo ~/.bash_login
+  elif [[ -f ~/.profile ]]; then
+    echo ~/.profile
+  else
+    echo &quot;Could not find any config files..&quot;
+    exit 1
+  fi
+}
+</code></pre>
+
+<p>This function checks if we&rsquo;re in an interactive shell or not, and loads bashrc
+if we are. If not it checks for the various login files.</p>
+
+<p>Thats all great, but now we need to figure out what files have been sourced from
+that first file.</p>
+
+<pre><code class="language-bash">function _sourced_files(){ # Helper for sourced_files
+  sed -En 's/^[.|source]+ (.*)/\1/p' &quot;$1&quot; | while IFS= read -r f; do
+    expanded=$(echo ${f/#\~/$HOME} | envsubst | tr -d '&quot;')
+    echo &quot;$expanded&quot;
+    _sourced_files &quot;$expanded&quot;
+  done
+}
+
+function sourced_files() { # Lists files which (s/w)hould have been sourced to this shell
+  init_file=$(shell_init_file)
+  echo &quot;$init_file&quot;
+  _sourced_files &quot;$init_file&quot;
+}
+</code></pre>
+
+<p>The function <code>sourced_files</code> is just a wrapper that checks the initial config
+file, and then calls <code>_sourced_files</code> to recursively check what files are then
+being sourced.</p>
+
+<p>Now we have some kind of idea about what is being configured in our shell. You
+might have noticed hat I add <code># some description</code> after my function definitions?
+This is so I can get these two nifty helpers:</p>
+
+<pre><code class="language-bash">alias halp='echo -e &quot;Sourced files:\n$(sourced_files | sed &quot;s#$HOME/#~/#&quot;)\n # \nFunctions:\n$(list_functions)\n # \nAliases:\n\n$(list_aliases)&quot; | column -t -s &quot;#&quot;' # Show all custom aliases and functions
+</code></pre>
+
+<p>This is simply an alias that will list my sourced files, and show all functions,
+aliases and their description.</p>
+
+<pre><code class="language-bash">function _wat() { # Completion for wat
+  local cur words
+  _get_comp_words_by_ref cur
+  words=$(list_aliases; list_functions | cut -d ' ' -f 1)
+  COMPREPLY=( $( compgen -W &quot;$words&quot; -- &quot;$cur&quot;) )
+}
+
+complete -o nospace -F _wat wat
+
+function wat() { # show help and location of a custom function or alias
+  local query pp
+  query=&quot;$1&quot;
+  pp=&quot;cat&quot;
+  if [[ -n &quot;$(type bat 2&gt; /dev/null)&quot; ]]; then
+    pp=&quot;bat -l bash -p&quot;
+  fi
+
+  for file in $(sourced_files); do
+    awk '/^function '&quot;$query&quot;'\(\)/,/^}/ { i++; if(i==1){print &quot;# &quot; FILENAME &quot;:&quot; FNR RS $0;} else {print $0;}}' &quot;$file&quot;
+    awk '/^function \_'&quot;$query&quot;'\(\)/,/^}/ { i++; if(i==1){print &quot;# &quot; FILENAME &quot;:&quot; FNR RS $0;} else {print $0;}}' &quot;$file&quot;
+    awk '/^alias '&quot;$query&quot;'=/,/$/ {print &quot;# &quot; FILENAME &quot;:&quot; FNR RS $0 RS;}' &quot;$file&quot;
+  done | $pp
+  complete -p &quot;$query&quot; 2&gt; /dev/null
+}
+</code></pre>
+
+<p>So after looking at what helpers I have available using <code>halp</code> I can use <code>wat</code>
+to show me exactly where it&rsquo;s defined, what it looks like and how it&rsquo;s
+auto completed. A sample output would look like this:</p>
+
+<pre><code class="language-bash">$&gt; wat list_aliases
+# /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:66
+function list_aliases() { # List all sourced aliases
+  for f in $(sourced_files); do
+    sed -n &quot;s/^alias \(.*\)=['|\&quot;].*#\(.*\)$/\1 #\2/p&quot; &quot;$f&quot; | sed &quot;s/list_aliases=.*#/list_aliases #/&quot;
+  done | sort
+}
+
+$&gt; wat list_functions
+# /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:60
+function list_functions() { # List all sourced functions
+  for f in $(sourced_files); do
+    sed -n &quot;s/^function \(.*\)() { \(.*\)$/\1 \2/p&quot; &lt;(cat &quot;$f&quot;) | grep -v &quot;^_&quot;
+  done | sort
+}
+</code></pre>
+
+<p>Oh, and this output is pretty printed using <code>bat</code>, it&rsquo;s super nice :)
+Unfortunately I haven&rsquo;t found a great way of pretty printing code on this blog though :/</p>
+
+<p>So since I tend to write a bunch of shell helpers this setup let&rsquo;s me know
+what&rsquo;s going on, where things are defined and what they do.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

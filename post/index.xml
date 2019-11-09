@@ -6,18 +6,19 @@
     <description>Recent content in Posts on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 Nov 2019 11:32:39 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 09 Nov 2019 15:13:36 +0100</lastBuildDate>
     
 	<atom:link href="https://blog.brujordet.no/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Okay</title>
-      <link>https://blog.brujordet.no/post/testing/okay/</link>
-      <pubDate>Sat, 09 Nov 2019 11:32:39 +0100</pubDate>
+      <title>What&#39;s going on in my shell?</title>
+      <link>https://blog.brujordet.no/post/bash/whats-going-on-in-my-shell/</link>
+      <pubDate>Sat, 09 Nov 2019 15:13:36 +0100</pubDate>
       
-      <guid>https://blog.brujordet.no/post/testing/okay/</guid>
-      <description>This is a test And another one</description>
+      <guid>https://blog.brujordet.no/post/bash/whats-going-on-in-my-shell/</guid>
+      <description>To help me figure this out, I use a few shell functions. Firstly, I need to know what configuration file that was used.
+function shell_init_file() { # Returns what would be your initfile if [[ $- == *i* ]]; then echo ~/.bashrc elif [[ -f ~/.bash_profile ]]; then echo ~/.bash_profile elif [[ -f ~/.bash_login ]]; then echo ~/.bash_login elif [[ -f ~/.profile ]]; then echo ~/.profile else echo &amp;quot;Could not find any config files.</description>
     </item>
     
   </channel>

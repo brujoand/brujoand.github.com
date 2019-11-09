@@ -6,10 +6,20 @@
     <description>Recent content on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 09 Nov 2019 12:43:45 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 09 Nov 2019 15:13:36 +0100</lastBuildDate>
     
 	<atom:link href="https://blog.brujordet.no/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>What&#39;s going on in my shell?</title>
+      <link>https://blog.brujordet.no/post/bash/whats-going-on-in-my-shell/</link>
+      <pubDate>Sat, 09 Nov 2019 15:13:36 +0100</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/bash/whats-going-on-in-my-shell/</guid>
+      <description>To help me figure this out, I use a few shell functions. Firstly, I need to know what configuration file that was used.
+function shell_init_file() { # Returns what would be your initfile if [[ $- == *i* ]]; then echo ~/.bashrc elif [[ -f ~/.bash_profile ]]; then echo ~/.bash_profile elif [[ -f ~/.bash_login ]]; then echo ~/.bash_login elif [[ -f ~/.profile ]]; then echo ~/.profile else echo &amp;quot;Could not find any config files.</description>
+    </item>
     
     <item>
       <title>About</title>
@@ -19,15 +29,6 @@
       <guid>https://blog.brujordet.no/about/</guid>
       <description>I&amp;rsquo;m a Norwegian Software Engineer, weight lifter, hobby psychologist, metal head and I love to automate things. For the last few years I&amp;rsquo;ve been helping Tech companies implement DevOps best practices. At home I&amp;rsquo;m a husband, a dad and I build things for fun and not so much profit.
 For this blog I&amp;rsquo;ll be keeping things short and to the point. There will be no ads, because who has time for that anyway.</description>
-    </item>
-    
-    <item>
-      <title>Okay</title>
-      <link>https://blog.brujordet.no/post/testing/okay/</link>
-      <pubDate>Sat, 09 Nov 2019 11:32:39 +0100</pubDate>
-      
-      <guid>https://blog.brujordet.no/post/testing/okay/</guid>
-      <description>This is a test And another one</description>
     </item>
     
   </channel>

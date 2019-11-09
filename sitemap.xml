@@ -3,23 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://blog.brujordet.no/about/</loc>
-    <lastmod>2019-11-09T12:43:45+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.brujordet.no/</loc>
-    <lastmod>2019-11-09T12:43:45+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/post/testing/okay/</loc>
-    <lastmod>2019-11-09T11:32:39+01:00</lastmod>
+    <lastmod>2019-11-09T15:13:36+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.brujordet.no/post/</loc>
-    <lastmod>2019-11-09T11:32:39+01:00</lastmod>
+    <lastmod>2019-11-09T15:13:36+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/post/bash/whats-going-on-in-my-shell/</loc>
+    <lastmod>2019-11-09T15:13:36+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/about/</loc>
+    <lastmod>2019-11-09T12:43:45+02:00</lastmod>
   </url>
   
   <url>
