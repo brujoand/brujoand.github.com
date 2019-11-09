@@ -98,7 +98,7 @@ what configuration file that was used.</p>
     echo ~/.profile
   else
     echo &quot;Could not find any config files..&quot;
-    exit 1
+    return 1
   fi
 }
 </code></pre>
@@ -125,8 +125,8 @@ function sourced_files() { # Lists files which (s/w)hould have been sourced to t
 </code></pre>
 
 <p>The function <code>sourced_files</code> is just a wrapper that checks the initial config
-file, and then calls <code>_sourced_files</code> to recursively check what files are then
-being sourced.</p>
+file, and then calls <code>_sourced_files</code> to check what files are then
+being sourced etc..</p>
 
 <p>Now we have some kind of idea about what is being configured in our shell. You
 might have noticed that I add <code># some description</code> after my function definitions?
