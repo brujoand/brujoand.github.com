@@ -77,7 +77,7 @@ function shell_init_file() { # Returns what would be your initfile if [[ $- == *
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          3 min read
+          4 min read
         </div></div>
     </header>
     <div class="post-content">
@@ -171,6 +171,28 @@ $&gt; wat list_functions
 Unfortunately I haven&rsquo;t found a great way of pretty printing code on this blog though :/
 (ha, finally figured it out. Pygments powered syntax highlighting)</p>
 
+<p>Now, the final touch. I can figure out what helpers I have, where they are
+defined, and what they do. Now I&rsquo;d like to edit the config file containing some
+helper. Enter <code>esc</code>, which auto completes to my sourced files, and opens it with
+whatever I&rsquo;ve set as my <code>$EDITOR</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> esc<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Edit a shell config file</span>
+  local file
+  file<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>grep <span style="color:#e6db74">&#34;/</span>$1$<span style="color:#e6db74">&#34;</span> &lt;<span style="color:#f92672">(</span>sourced_files<span style="color:#66d9ef">)</span><span style="color:#f92672">)</span>
+  <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>EDITOR<span style="color:#66d9ef">:-</span>vi<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">function</span> _esc<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Fuzzy tabcompletion for esc</span>
+  local cur config_files
+  _get_comp_words_by_ref cur
+  config_files<span style="color:#f92672">=</span><span style="color:#66d9ef">$(for</span> file in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span> echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>file##*/<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">done)</span>
+
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -z <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+    COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span> compgen -W <span style="color:#e6db74">&#34;</span>$config_files<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">else</span>
+    COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(for</span> file in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span> echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>file##*/<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">done</span> | grep -i <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">fi</span>
+<span style="color:#f92672">}</span>
+complete -o nospace -F _esc esc</code></pre></div>
 <p>So since I tend to write a bunch of shell helpers this setup let&rsquo;s me know
 what&rsquo;s going on, where things are defined and what they do.</p>
 
