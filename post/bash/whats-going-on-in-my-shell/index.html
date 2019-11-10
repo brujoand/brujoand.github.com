@@ -196,7 +196,7 @@ whatever I&rsquo;ve set as my <code>$EDITOR</code>.</p>
   <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -z <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
     COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span> compgen -W <span style="color:#e6db74">&#34;</span>$config_files<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
   <span style="color:#66d9ef">else</span>
-    COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(for</span> file in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span> echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>file##*/<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">done</span> | grep -i <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
+    COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span>grep -i <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$config_files<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
   <span style="color:#66d9ef">fi</span>
 <span style="color:#f92672">}</span>
 complete -o nospace -F _esc esc</code></pre></div>
