@@ -26,19 +26,16 @@ if (!doNotTrack) {
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="What&#39;s going on in my shell?"/>
 <meta name="twitter:description" content="To help me figure this out, I use a few shell functions. Firstly, I need to know what configuration file that was used.
-function shell_init_file() { # Returns what would be your initfile if [[ $- == *i* ]]; then echo ~/.bashrc elif [[ -f ~/.bash_profile ]]; then echo ~/.bash_profile elif [[ -f ~/.bash_login ]]; then echo ~/.bash_login elif [[ -f ~/.profile ]]; then echo ~/.profile else echo &quot;Could not find any config files."/>
+function shell_init_file() { # Returns what would be your initfile if [[ $- == *i* ]]; then echo ~/.bashrc elif [[ -f ~/.bash_profile ]]; then echo ~/.bash_profile elif [[ -f ~/.bash_login ]]; then echo ~/.bash_login elif [[ -f ~/.profile ]]; then echo ~/.profile else echo &#34;Could not find any config files."/>
 
     <meta property="og:title" content="What&#39;s going on in my shell?" />
 <meta property="og:description" content="To help me figure this out, I use a few shell functions. Firstly, I need to know what configuration file that was used.
-function shell_init_file() { # Returns what would be your initfile if [[ $- == *i* ]]; then echo ~/.bashrc elif [[ -f ~/.bash_profile ]]; then echo ~/.bash_profile elif [[ -f ~/.bash_login ]]; then echo ~/.bash_login elif [[ -f ~/.profile ]]; then echo ~/.profile else echo &quot;Could not find any config files." />
+function shell_init_file() { # Returns what would be your initfile if [[ $- == *i* ]]; then echo ~/.bashrc elif [[ -f ~/.bash_profile ]]; then echo ~/.bash_profile elif [[ -f ~/.bash_login ]]; then echo ~/.bash_login elif [[ -f ~/.profile ]]; then echo ~/.profile else echo &#34;Could not find any config files." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.brujordet.no/post/bash/whats-going-on-in-my-shell/" />
 <meta property="article:published_time" content="2019-11-09T15:13:36+01:00" />
 <meta property="article:modified_time" content="2019-11-09T15:13:36+01:00" />
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
 
 
   </head>
@@ -86,44 +83,38 @@ function shell_init_file() { # Returns what would be your initfile if [[ $- == *
     <div class="post-content">
       <p>To help me figure this out, I use a few shell functions. Firstly, I need to know
 what configuration file that was used.</p>
-
-<pre><code class="language-bash">function shell_init_file() { # Returns what would be your initfile
-  if [[ $- == *i* ]]; then
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> shell_init_file<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Returns what would be your initfile</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $- <span style="color:#f92672">==</span> *i* <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
     echo ~/.bashrc
-  elif [[ -f ~/.bash_profile ]]; then
+  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> -f ~/.bash_profile <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
     echo ~/.bash_profile
-  elif [[ -f ~/.bash_login ]]; then
+  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> -f ~/.bash_login <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
     echo ~/.bash_login
-  elif [[ -f ~/.profile ]]; then
+  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> -f ~/.profile <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
     echo ~/.profile
-  else
-    echo &quot;Could not find any config files..&quot;
-    return 1
-  fi
-}
-</code></pre>
-
+  <span style="color:#66d9ef">else</span>
+    echo <span style="color:#e6db74">&#34;Could not find any config files..&#34;</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+  <span style="color:#66d9ef">fi</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p>This function checks if we&rsquo;re in an interactive shell or not, and returns bashrc
 if we are. If not it checks for the various login files.</p>
 
 <p>Thats all great, but now we need to figure out what files have been sourced from
 that first file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> _sourced_files<span style="color:#f92672">(){</span> <span style="color:#75715e"># Helper for sourced_files</span>
+  sed -En <span style="color:#e6db74">&#39;s/^[.|source]+ (.*)/\1/p&#39;</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> | <span style="color:#66d9ef">while</span> IFS<span style="color:#f92672">=</span> read -r f; <span style="color:#66d9ef">do</span>
+    expanded<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>f/#<span style="color:#ae81ff">\~</span>/$HOME<span style="color:#e6db74">}</span> | envsubst | tr -d <span style="color:#e6db74">&#39;&#34;&#39;</span><span style="color:#66d9ef">)</span>
+    echo <span style="color:#e6db74">&#34;</span>$expanded<span style="color:#e6db74">&#34;</span>
+    _sourced_files <span style="color:#e6db74">&#34;</span>$expanded<span style="color:#e6db74">&#34;</span>
+  <span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
 
-<pre><code class="language-bash">function _sourced_files(){ # Helper for sourced_files
-  sed -En 's/^[.|source]+ (.*)/\1/p' &quot;$1&quot; | while IFS= read -r f; do
-    expanded=$(echo ${f/#\~/$HOME} | envsubst | tr -d '&quot;')
-    echo &quot;$expanded&quot;
-    _sourced_files &quot;$expanded&quot;
-  done
-}
-
-function sourced_files() { # Lists files which (s/w)hould have been sourced to this shell
-  init_file=$(shell_init_file)
-  echo &quot;$init_file&quot;
-  _sourced_files &quot;$init_file&quot;
-}
-</code></pre>
-
+<span style="color:#66d9ef">function</span> sourced_files<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Lists files which (s/w)hould have been sourced to this shell</span>
+  init_file<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>shell_init_file<span style="color:#66d9ef">)</span>
+  echo <span style="color:#e6db74">&#34;</span>$init_file<span style="color:#e6db74">&#34;</span>
+  _sourced_files <span style="color:#e6db74">&#34;</span>$init_file<span style="color:#e6db74">&#34;</span>
+<span style="color:#f92672">}</span></code></pre></div>
 <p>The function <code>sourced_files</code> is just a wrapper that checks the initial config
 file, and then calls <code>_sourced_files</code> to check what files are then
 being sourced etc..</p>
@@ -131,62 +122,54 @@ being sourced etc..</p>
 <p>Now we have some kind of idea about what is being configured in our shell. You
 might have noticed that I add <code># some description</code> after my function definitions?
 This is so I can get these two nifty helpers:</p>
-
-<pre><code class="language-bash">alias halp='echo -e &quot;Sourced files:\n$(sourced_files | sed &quot;s#$HOME/#~/#&quot;)\n # \nFunctions:\n$(list_functions)\n # \nAliases:\n\n$(list_aliases)&quot; | column -t -s &quot;#&quot;' # Show all custom aliases and functions
-</code></pre>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias halp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;echo -e &#34;Sourced files:\n$(sourced_files | sed &#34;s#$HOME/#~/#&#34;)\n # \nFunctions:\n$(list_functions)\n # \nAliases:\n\n$(list_aliases)&#34; | column -t -s &#34;#&#34;&#39;</span> <span style="color:#75715e"># Show all custom aliases and functions</span></code></pre></div>
 <p>This is simply an alias that will list my sourced files, and show all functions,
 aliases and their description.</p>
-
-<pre><code class="language-bash">function _wat() { # Completion for wat
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> _wat<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Completion for wat</span>
   local cur words
   _get_comp_words_by_ref cur
-  words=$(list_aliases; list_functions | cut -d ' ' -f 1)
-  COMPREPLY=( $( compgen -W &quot;$words&quot; -- &quot;$cur&quot;) )
-}
+  words<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>list_aliases; list_functions | cut -d <span style="color:#e6db74">&#39; &#39;</span> -f <span style="color:#ae81ff">1</span><span style="color:#66d9ef">)</span>
+  COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span> compgen -W <span style="color:#e6db74">&#34;</span>$words<span style="color:#e6db74">&#34;</span> -- <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
+<span style="color:#f92672">}</span>
 
 complete -o nospace -F _wat wat
 
-function wat() { # show help and location of a custom function or alias
+<span style="color:#66d9ef">function</span> wat<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># show help and location of a custom function or alias</span>
   local query pp
-  query=&quot;$1&quot;
-  pp=&quot;cat&quot;
-  if [[ -n &quot;$(type bat 2&gt; /dev/null)&quot; ]]; then
-    pp=&quot;bat -l bash -p&quot;
-  fi
+  query<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+  pp<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cat&#34;</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -n <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>type bat <span style="color:#ae81ff">2</span>&gt; /dev/null<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+    pp<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bat -l bash -p&#34;</span>
+  <span style="color:#66d9ef">fi</span>
 
-  for file in $(sourced_files); do
-    awk '/^function '&quot;$query&quot;'\(\)/,/^}/ { i++; if(i==1){print &quot;# &quot; FILENAME &quot;:&quot; FNR RS $0;} else {print $0;}}' &quot;$file&quot;
-    awk '/^function \_'&quot;$query&quot;'\(\)/,/^}/ { i++; if(i==1){print &quot;# &quot; FILENAME &quot;:&quot; FNR RS $0;} else {print $0;}}' &quot;$file&quot;
-    awk '/^alias '&quot;$query&quot;'=/,/$/ {print &quot;# &quot; FILENAME &quot;:&quot; FNR RS $0 RS;}' &quot;$file&quot;
-  done | $pp
-  complete -p &quot;$query&quot; 2&gt; /dev/null
-}
-</code></pre>
-
+  <span style="color:#66d9ef">for</span> file in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
+    awk <span style="color:#e6db74">&#39;/^function &#39;</span><span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;\(\)/,/^}/ { i++; if(i==1){print &#34;# &#34; FILENAME &#34;:&#34; FNR RS $0;} else {print $0;}}&#39;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
+    awk <span style="color:#e6db74">&#39;/^function \_&#39;</span><span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;\(\)/,/^}/ { i++; if(i==1){print &#34;# &#34; FILENAME &#34;:&#34; FNR RS $0;} else {print $0;}}&#39;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
+    awk <span style="color:#e6db74">&#39;/^alias &#39;</span><span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;=/,/$/ {print &#34;# &#34; FILENAME &#34;:&#34; FNR RS $0 RS;}&#39;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
+  <span style="color:#66d9ef">done</span> | $pp
+  complete -p <span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">2</span>&gt; /dev/null
+<span style="color:#f92672">}</span></code></pre></div>
 <p>So after looking at what helpers I have available using <code>halp</code> I can use <code>wat</code>
 to show me exactly where it&rsquo;s defined, what it looks like and how it&rsquo;s
 auto completed. <code>wat</code> also has auto completion through the <code>_wat</code> function. A sample output would look like this:</p>
-
-<pre><code class="language-bash">$&gt; wat list_aliases
-# /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:66
-function list_aliases() { # List all sourced aliases
-  for f in $(sourced_files); do
-    sed -n &quot;s/^alias \(.*\)=['|\&quot;].*#\(.*\)$/\1 #\2/p&quot; &quot;$f&quot; | sed &quot;s/list_aliases=.*#/list_aliases #/&quot;
-  done | sort
-}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; wat list_aliases
+<span style="color:#75715e"># /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:66</span>
+<span style="color:#66d9ef">function</span> list_aliases<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># List all sourced aliases</span>
+  <span style="color:#66d9ef">for</span> f in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
+    sed -n <span style="color:#e6db74">&#34;s/^alias \(.*\)=[&#39;|\&#34;].*#\(.*\)</span>$<span style="color:#e6db74">/\1 #\2/p&#34;</span> <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74">&#34;</span> | sed <span style="color:#e6db74">&#34;s/list_aliases=.*#/list_aliases #/&#34;</span>
+  <span style="color:#66d9ef">done</span> | sort
+<span style="color:#f92672">}</span>
 
 $&gt; wat list_functions
-# /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:60
-function list_functions() { # List all sourced functions
-  for f in $(sourced_files); do
-    sed -n &quot;s/^function \(.*\)() { \(.*\)$/\1 \2/p&quot; &lt;(cat &quot;$f&quot;) | grep -v &quot;^_&quot;
-  done | sort
-}
-</code></pre>
-
+<span style="color:#75715e"># /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:60</span>
+<span style="color:#66d9ef">function</span> list_functions<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># List all sourced functions</span>
+  <span style="color:#66d9ef">for</span> f in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
+    sed -n <span style="color:#e6db74">&#34;s/^function \(.*\)() { \(.*\)</span>$<span style="color:#e6db74">/\1 \2/p&#34;</span> &lt;<span style="color:#f92672">(</span>cat <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span> | grep -v <span style="color:#e6db74">&#34;^_&#34;</span>
+  <span style="color:#66d9ef">done</span> | sort
+<span style="color:#f92672">}</span></code></pre></div>
 <p>Oh, and this output is pretty printed using <code>bat</code>, it&rsquo;s super nice :)
-Unfortunately I haven&rsquo;t found a great way of pretty printing code on this blog though :/</p>
+Unfortunately I haven&rsquo;t found a great way of pretty printing code on this blog though :/
+(ha, finally figured it out. Pygments powered syntax highlighting)</p>
 
 <p>So since I tend to write a bunch of shell helpers this setup let&rsquo;s me know
 what&rsquo;s going on, where things are defined and what they do.</p>

@@ -18,7 +18,7 @@
       
       <guid>https://blog.brujordet.no/post/bash/whats-going-on-in-my-shell/</guid>
       <description>To help me figure this out, I use a few shell functions. Firstly, I need to know what configuration file that was used.
-function shell_init_file() { # Returns what would be your initfile if [[ $- == *i* ]]; then echo ~/.bashrc elif [[ -f ~/.bash_profile ]]; then echo ~/.bash_profile elif [[ -f ~/.bash_login ]]; then echo ~/.bash_login elif [[ -f ~/.profile ]]; then echo ~/.profile else echo &amp;quot;Could not find any config files.</description>
+function shell_init_file() { # Returns what would be your initfile if [[ $- == *i* ]]; then echo ~/.bashrc elif [[ -f ~/.bash_profile ]]; then echo ~/.bash_profile elif [[ -f ~/.bash_login ]]; then echo ~/.bash_login elif [[ -f ~/.profile ]]; then echo ~/.profile else echo &amp;#34;Could not find any config files.</description>
     </item>
     
     <item>
