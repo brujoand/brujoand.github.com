@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Nov 2019 13:48:03 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 16 Nov 2019 10:45:44 +0100</lastBuildDate>
     
 	<atom:link href="https://blog.brujordet.no/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>bash</title>
       <link>https://blog.brujordet.no/categories/bash/</link>
-      <pubDate>Sun, 10 Nov 2019 13:48:03 +0100</pubDate>
+      <pubDate>Sat, 16 Nov 2019 10:45:44 +0100</pubDate>
       
       <guid>https://blog.brujordet.no/categories/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>productivity</title>
+      <link>https://blog.brujordet.no/categories/productivity/</link>
+      <pubDate>Sat, 16 Nov 2019 10:45:44 +0100</pubDate>
+      
+      <guid>https://blog.brujordet.no/categories/productivity/</guid>
       <description></description>
     </item>
     

@@ -4,36 +4,56 @@
   
   <url>
     <loc>https://blog.brujordet.no/</loc>
-    <lastmod>2019-11-10T13:48:03+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/categories/bash/</loc>
-    <lastmod>2019-11-10T13:48:03+01:00</lastmod>
+    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.brujordet.no/tags/bash/</loc>
-    <lastmod>2019-11-10T13:48:03+01:00</lastmod>
+    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/categories/bash/</loc>
+    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.brujordet.no/categories/</loc>
-    <lastmod>2019-11-10T13:48:03+01:00</lastmod>
+    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.brujordet.no/post/bash/how-can-i-move-faster/</loc>
-    <lastmod>2019-11-10T13:48:03+01:00</lastmod>
+    <loc>https://blog.brujordet.no/tags/gtd/</loc>
+    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/post/bash/poor-mans-todo-list/</loc>
+    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.brujordet.no/post/</loc>
-    <lastmod>2019-11-10T13:48:03+01:00</lastmod>
+    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/categories/productivity/</loc>
+    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://blog.brujordet.no/tags/</loc>
+    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/tags/vim/</loc>
+    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/post/bash/how-can-i-move-faster/</loc>
     <lastmod>2019-11-10T13:48:03+01:00</lastmod>
   </url>
   
