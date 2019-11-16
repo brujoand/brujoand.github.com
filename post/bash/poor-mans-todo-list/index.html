@@ -165,7 +165,7 @@ And it looks pretty awesome to me, but I&rsquo;m no front end wiz.</p>
 
 <h2 id="making-the-most-of-the-time-at-hand">Making the most of the time at hand</h2>
 
-<p>I like music, but sometimes it&rsquo;s just in the way because what I really want is
+<p>I like music, but sometimes its just in the way because what I really want is to
 block everything out. My noise canceling headphones do help, but I also like to
 spin up some white noise. From the terminal.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias noise<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;play -q -c 2 --null synth brownnoise band -n 2500 4000 tremolo 20 .1 reverb 50&#39;</span></code></pre></div>
@@ -192,7 +192,7 @@ So I use this simple timer.</p>
   shift
   message<span style="color:#f92672">=</span>$*
   <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -z <span style="color:#e6db74">&#34;</span>$message<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-    pritnf <span style="color:#e6db74">&#39;%s&#39;</span> <span style="color:#e6db74">&#34;error: ne need a message as well &#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>; <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    printf <span style="color:#e6db74">&#39;%s&#39;</span> <span style="color:#e6db74">&#34;error: ne need a message as well&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>; <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
   <span style="color:#66d9ef">fi</span>
 
   <span style="color:#f92672">(</span>nohup terminal-notifier -title <span style="color:#e6db74">&#34;Timer: </span>$message<span style="color:#e6db74">&#34;</span> -message <span style="color:#e6db74">&#34;Waiting for </span><span style="color:#e6db74">${</span>time_hm<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /dev/null &amp;<span style="color:#f92672">)</span>
@@ -209,6 +209,8 @@ Oh, and the <code>&gt;&amp;2</code> is for writing to <code>stderr</code></p>
 
 <p>I did plan to add a sound to this timer, but I don&rsquo;t seem to need it, so maybe
 some other time.</p>
+
+<p>Discussion: <a href="https://www.reddit.com/r/bash/comments/dx6w5r/5min_blogpost_a_poor_mans_todo_list_and_white/">reddit.com/r/bash - post</a></p>
 
     </div>
     <div class="post-footer">
