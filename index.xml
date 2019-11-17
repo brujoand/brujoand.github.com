@@ -46,8 +46,8 @@ function shell_init_file() { # Returns what would be your initfile if [[ $- == *
       <pubDate>Sat, 09 Nov 2019 12:43:45 +0200</pubDate>
       
       <guid>https://blog.brujordet.no/about/</guid>
-      <description>I&amp;rsquo;m a Norwegian Software Engineer, weight lifter, hobby psychologist, metal head and I love to automate things. For the last few years I&amp;rsquo;ve been helping Tech companies implement DevOps best practices. At home I&amp;rsquo;m a husband, a dad and I build things for fun and not so much profit.
-For this blog I&amp;rsquo;ll be keeping things short and to the point. There will be no ads, because who has time for that anyway.</description>
+      <description>I&amp;rsquo;m a Norwegian Software Engineer, weight lifter, hobby psychologist, metal head and I love to automate things. For the last few years I&amp;rsquo;ve been helping Tech companies implement DevOps best practices. At home I&amp;rsquo;m a husband, a dad and I build things for fun and not so much profit. I love working with Bash, so there will probably be a lot of that.
+For this blog I&amp;rsquo;ll be keeping things short and to the point.</description>
     </item>
     
   </channel>
