@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>devops on Automate attention</title>
+    <link>https://blog.brujordet.no/tags/devops/</link>
+    <description>Recent content in devops on Automate attention</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Jan 2020 20:28:11 +0100</lastBuildDate>
+    
+	<atom:link href="https://blog.brujordet.no/tags/devops/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Building a Delivery Platform</title>
+      <link>https://blog.brujordet.no/post/devops/building-a-delivery-platform/</link>
+      <pubDate>Sun, 19 Jan 2020 20:28:11 +0100</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/devops/building-a-delivery-platform/</guid>
+      <description>Almost 10 years ago I finished my Masters degree in Computer Science and started working as a consultant at KnowIt in Oslo. My team was in charge of developing the integration bus for the local municipality, and we had earned a lot of freedom with the client. We ran our own Hudson build server, we were early adopters of self hosted Github enterprise, and we deployed to production at will using a suite of in house ruby scripts.</description>
+    </item>
+    
+  </channel>
+</rss>

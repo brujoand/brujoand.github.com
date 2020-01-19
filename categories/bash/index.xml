@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bash on Automate attention</title>
@@ -17,7 +17,7 @@
       <pubDate>Sat, 16 Nov 2019 10:45:44 +0100</pubDate>
       
       <guid>https://blog.brujordet.no/post/bash/poor-mans-todo-list/</guid>
-      <description>I have two modes, completely distracted and dead focused. So naturally I need some help getting things done. I&amp;rsquo;ve tried expensive apps like Omnifocus, cli apps like Todo.txt or TaskWarrior and everything in between. In the end I realized that these apps are not for people like me. What works for me is big heavy tools for long term planning and collaboration like Jira or Trello. For my day to day stuff, the things I actually check regularly a simple checklist is more than enough.</description>
+      <description>I have two modes, completely distracted and dead focused. So naturally I need some help getting things done. I&#39;ve tried expensive apps like Omnifocus, cli apps like Todo.txt or TaskWarrior and everything in between. In the end I realized that these apps are not for people like me. What works for me is big heavy tools for long term planning and collaboration like Jira or Trello. For my day to day stuff, the things I actually check regularly a simple checklist is more than enough.</description>
     </item>
     
     <item>
@@ -26,8 +26,8 @@
       <pubDate>Sun, 10 Nov 2019 13:48:03 +0100</pubDate>
       
       <guid>https://blog.brujordet.no/post/bash/how-can-i-move-faster/</guid>
-      <description>I&amp;rsquo;m horrible at waiting, so when things are slow or repetitive I tend to automate them. So when I started working on my first Java project I quickly got fed up by navigating in and out of these crazy paths. For instance moving from src/main/java/com/example/application/package/ to the test path, or back to the root of the project got boring real quick.
-function backto() { # Go back to folder in path local path=${PWD%/*} while [[ $path ]]; do if [[ &amp;#34;${path##*/}&amp;#34; == &amp;#34;$1&amp;#34; ]]; then cd &amp;#34;$path&amp;#34; || return 1 break else path=${path%/*} fi done } function _backto() { # completion for backto local cur dir all _get_comp_words_by_ref cur all=$(cut -c 2- &amp;lt;&amp;lt;&amp;lt; &amp;#34;${PWD%/*}&amp;#34; | tr &amp;#39;/&amp;#39; &amp;#39;\n&amp;#39;) if [[ -z &amp;#34;$cur&amp;#34; ]]; then COMPREPLY=( $( compgen -W &amp;#34;$all&amp;#34;) ) else COMPREPLY=( $(grep -i &amp;#34;^$cur&amp;#34; &amp;lt;(echo &amp;#34;${all}&amp;#34;) | sort -u) ) fi } complete -o nospace -F _backto backto The function backto and it&amp;rsquo;s auto completion counterpart, will let me chose one of the directories in my current path to jump back to.</description>
+      <description>I&#39;m horrible at waiting, so when things are slow or repetitive I tend to automate them. So when I started working on my first Java project I quickly got fed up by navigating in and out of these crazy paths. For instance moving from src/main/java/com/example/application/package/ to the test path, or back to the root of the project got boring real quick.
+function backto() { # Go back to folder in path local path=${PWD%/*} while [[ $path ]]; do if [[ &amp;#34;${path##*/}&amp;#34; == &amp;#34;$1&amp;#34; ]]; then cd &amp;#34;$path&amp;#34; || return 1 break else path=${path%/*} fi done } function _backto() { # completion for backto local cur dir all _get_comp_words_by_ref cur all=$(cut -c 2- &amp;lt;&amp;lt;&amp;lt; &amp;#34;${PWD%/*}&amp;#34; | tr &amp;#39;/&amp;#39; &amp;#39;\n&amp;#39;) if [[ -z &amp;#34;$cur&amp;#34; ]]; then COMPREPLY=( $( compgen -W &amp;#34;$all&amp;#34;) ) else COMPREPLY=( $(grep -i &amp;#34;^$cur&amp;#34; &amp;lt;(echo &amp;#34;${all}&amp;#34;) | sort -u) ) fi } complete -o nospace -F _backto backto The function backto and it&#39;s auto completion counterpart, will let me chose one of the directories in my current path to jump back to.</description>
     </item>
     
     <item>

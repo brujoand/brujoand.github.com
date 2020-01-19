@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>vim on Automate attention</title>
@@ -17,7 +17,7 @@
       <pubDate>Sat, 16 Nov 2019 10:45:44 +0100</pubDate>
       
       <guid>https://blog.brujordet.no/post/bash/poor-mans-todo-list/</guid>
-      <description>I have two modes, completely distracted and dead focused. So naturally I need some help getting things done. I&amp;rsquo;ve tried expensive apps like Omnifocus, cli apps like Todo.txt or TaskWarrior and everything in between. In the end I realized that these apps are not for people like me. What works for me is big heavy tools for long term planning and collaboration like Jira or Trello. For my day to day stuff, the things I actually check regularly a simple checklist is more than enough.</description>
+      <description>I have two modes, completely distracted and dead focused. So naturally I need some help getting things done. I&#39;ve tried expensive apps like Omnifocus, cli apps like Todo.txt or TaskWarrior and everything in between. In the end I realized that these apps are not for people like me. What works for me is big heavy tools for long term planning and collaboration like Jira or Trello. For my day to day stuff, the things I actually check regularly a simple checklist is more than enough.</description>
     </item>
     
   </channel>

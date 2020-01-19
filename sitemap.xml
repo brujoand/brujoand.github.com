@@ -1,10 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://blog.brujordet.no/</loc>
-    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
+    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/post/devops/building-a-delivery-platform/</loc>
+    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/categories/</loc>
+    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/categories/devops/</loc>
+    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/tags/devops/</loc>
+    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/tags/infrastructure/</loc>
+    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/tags/paas/</loc>
+    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/post/</loc>
+    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/tags/</loc>
+    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
   </url>
   
   <url>
@@ -14,11 +54,6 @@
   
   <url>
     <loc>https://blog.brujordet.no/tags/bash/</loc>
-    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/categories/</loc>
     <lastmod>2019-11-16T10:45:44+01:00</lastmod>
   </url>
   
@@ -33,17 +68,7 @@
   </url>
   
   <url>
-    <loc>https://blog.brujordet.no/post/</loc>
-    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.brujordet.no/categories/productivity/</loc>
-    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/tags/</loc>
     <lastmod>2019-11-16T10:45:44+01:00</lastmod>
   </url>
   
