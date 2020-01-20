@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>My Simple Bash Prompt // Automate attention</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://blog.brujordet.no/css/main.min.4c68b05cd7072e94a56c3a8acdd6f6e73fb7a62ba6e1bb047413ce09c4fea7a8.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="My Simple Bash Prompt"/>
+<meta name="twitter:description" content="For the last 6 years or so, my simple bash prompt has grown from a short bash function to a 1k loc project. This holiday I&#39;ve spent a lot of time improving it, and adding support for true colors and themes. But my biggest crux has been speed, or lack there of.
+The color scheme, and layout features are pretty alpha, but I like the idea of being able to change the way my prompt is styled and the active segments depending on things like if I&#39;m in an SSH session, inside a Tmux pane or just on my laptop."/>
+
+    <meta property="og:title" content="My Simple Bash Prompt" />
+<meta property="og:description" content="For the last 6 years or so, my simple bash prompt has grown from a short bash function to a 1k loc project. This holiday I&#39;ve spent a lot of time improving it, and adding support for true colors and themes. But my biggest crux has been speed, or lack there of.
+The color scheme, and layout features are pretty alpha, but I like the idea of being able to change the way my prompt is styled and the active segments depending on things like if I&#39;m in an SSH session, inside a Tmux pane or just on my laptop." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.brujordet.no/post/bash/my-simple-bash-prompt/" />
+<meta property="article:published_time" content="2019-12-27T11:14:53+01:00" />
+<meta property="article:modified_time" content="2019-12-27T11:14:53+01:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.brujordet.no/"><img class="app-header-avatar" src="/avatar.png" alt="John Doe" /></a>
+      <h1>Automate attention</h1>
+      <p>Tools and techniques I use to make life easier</p>
+      <a href="https://blog.brujordet.no//about">About me</a>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://twitter.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://www.linkedin.com/in/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+          <a target="_blank" href="https://www.github.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">My Simple Bash Prompt</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Dec 27, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          3 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://blog.brujordet.no/tags/bash/">bash</a></div></div>
+    </header>
+    <div class="post-content">
+      <p>For the last 6 years or so, my simple bash prompt has grown from a short bash
+function to a 1k loc project. This holiday I've spent a lot of time improving
+it, and adding support for true colors and themes. But my biggest crux has been
+speed, or lack there of.</p>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<p>The color scheme, and layout features are pretty alpha, but I like the idea of
+being able to change the way my prompt is styled and the active segments
+depending on things like if I'm in an SSH session, inside a Tmux pane or just on
+my laptop. Optimizing is nice.</p>
+<h2 id="bash-and-clean-code">Bash and clean code</h2>
+<p>I've always felt that a Bash prompt should be written in Bash. My reasoning has
+been that Bash is everywhere, so the prompt should not need anything else. If it
+does, it's not as &lsquo;available&rsquo;, as Bash. Given this requirement, a trade-off
+is forced, because 1000 lines of Bash is not very readable. Every
+<code>variable=&quot;$(some_helper_function &quot;$my_var&quot;)&quot;</code> will create a subshell, and they
+are expensive. On my Macbook pro a subshell costs about 1 ms, on my raspberry
+pi the price is 4 times higher. This is made worse by avoiding repetitive code,
+a common best practice, which results in more subshells when using helper
+functions instead of just repeating the logic.</p>
+<p>Another cost is structuring code in separate files so that logically close
+functions live together. This is again a &lsquo;clean code&rsquo; practice that will incur a
+cost because now the file needs to sourced every time it's needed.</p>
+<h1 id="concurrency-in-bash">Concurrency in Bash</h1>
+<p>To be able to generate every segment of the
+prompt as quickly as possible, concurrency is needed. In bash concurrency is
+easy, but not so much if you want to keep the output of the concurrent tasks.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  execute_segment_script <span style="color:#e6db74">&#34;</span>$segment<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$direction<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$max_length<span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>tempdir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &amp; pids<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span><span style="color:#f92672">=</span>$!
+</code></pre></div><p>This obscurity is how I start a segment generation, output to a tempfile, and
+store the pid in an array.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  <span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>!pids[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
+    wait <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>pids[i]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+    <span style="color:#75715e"># Add it to the prompt</span>
+  <span style="color:#66d9ef">done</span>
+</code></pre></div><p>This way we are more or less only bound by the speed of the slowest segment.
+Ideally we would be able to wait on all pids and handle them one by one as they
+exit, but I haven't found a way to do that. I've tried using named pipes, and
+have each concurrent segment write to it on completion, while a second process reads from the
+pipe until all segments are done, but that was actually slower than the current
+implementation. <a href="https://stackoverflow.com/a/28358088/3503302">xargs</a> and
+<a href="https://www.gnu.org/software/parallel/">Parallel</a> could have potentially helped
+a bit by implementing a thread pool, but none of them really solves the
+optimized waiting and output handling. In addition, Parallel is not available
+everywhere.</p>
+<h2 id="avoiding-external-commands">Avoiding external commands</h2>
+<p>Another approach has been to remove the use of external programs in favor of
+Bash builtins. This has added a lot of speed in many places except for
+complicated search and replace like this sed to remove all color (and
+surrounding escape brackets)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  strip_escaped_colors<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    sed -E <span style="color:#e6db74">&#39;s/\\\[\\e\[[0123456789]([0123456789;])+m\\\]//g&#39;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div><p>For my entire <code>$PS1</code> this takes about 6ms on my Macbook Pro as opposed to 12
+seconds using bash parameter expansion.</p>
+<h2 id="solving-the-problem-of-speed">Solving the problem of speed</h2>
+<p>Ultimately my goal is for the prompt to load in less than 50ms, which the
+Internet claims is the threshold for what we can perceive as delay. And this
+fits pretty well with my own observations as SBP renders at around 40ms on my
+Ubuntu machine, and 100ms on my Macbook.</p>
+<p>So I've tried all the tricks I can think of, reducing the</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

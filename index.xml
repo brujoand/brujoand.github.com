@@ -21,6 +21,16 @@
     </item>
     
     <item>
+      <title>My Simple Bash Prompt</title>
+      <link>https://blog.brujordet.no/post/bash/my-simple-bash-prompt/</link>
+      <pubDate>Fri, 27 Dec 2019 11:14:53 +0100</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/bash/my-simple-bash-prompt/</guid>
+      <description>For the last 6 years or so, my simple bash prompt has grown from a short bash function to a 1k loc project. This holiday I&#39;ve spent a lot of time improving it, and adding support for true colors and themes. But my biggest crux has been speed, or lack there of.
+The color scheme, and layout features are pretty alpha, but I like the idea of being able to change the way my prompt is styled and the active segments depending on things like if I&#39;m in an SSH session, inside a Tmux pane or just on my laptop.</description>
+    </item>
+    
+    <item>
       <title>Poor man&#39;s todo list</title>
       <link>https://blog.brujordet.no/post/bash/poor-mans-todo-list/</link>
       <pubDate>Sat, 16 Nov 2019 10:45:44 +0100</pubDate>

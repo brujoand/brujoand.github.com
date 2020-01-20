@@ -18,12 +18,12 @@
   </url>
   
   <url>
-    <loc>https://blog.brujordet.no/categories/devops/</loc>
+    <loc>https://blog.brujordet.no/tags/devops/</loc>
     <lastmod>2020-01-19T20:28:11+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.brujordet.no/tags/devops/</loc>
+    <loc>https://blog.brujordet.no/categories/devops/</loc>
     <lastmod>2020-01-19T20:28:11+01:00</lastmod>
   </url>
   
@@ -48,13 +48,18 @@
   </url>
   
   <url>
-    <loc>https://blog.brujordet.no/categories/bash/</loc>
-    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
+    <loc>https://blog.brujordet.no/tags/bash/</loc>
+    <lastmod>2019-12-27T11:14:53+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.brujordet.no/tags/bash/</loc>
-    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
+    <loc>https://blog.brujordet.no/categories/bash/</loc>
+    <lastmod>2019-12-27T11:14:53+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/post/bash/my-simple-bash-prompt/</loc>
+    <lastmod>2019-12-27T11:14:53+01:00</lastmod>
   </url>
   
   <url>
