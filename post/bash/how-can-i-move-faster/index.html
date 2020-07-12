@@ -3,7 +3,7 @@
   <head>
     <title>How can I move faster around the shell? // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.60.1" />
+    <meta name="generator" content="Hugo 0.73.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -22,12 +22,12 @@
     
     <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="How can I move faster around the shell?"/>
-<meta name="twitter:description" content="I&#39;m horrible at waiting, so when things are slow or repetitive I tend to automate them. So when I started working on my first Java project I quickly got fed up by navigating in and out of these crazy paths. For instance moving from src/main/java/com/example/application/package/ to the test path, or back to the root of the project got boring real quick.
-function backto() { # Go back to folder in path local path=${PWD%/*} while [[ $path ]]; do if [[ &#34;${path##*/}&#34; == &#34;$1&#34; ]]; then cd &#34;$path&#34; || return 1 break else path=${path%/*} fi done } function _backto() { # completion for backto local cur dir all _get_comp_words_by_ref cur all=$(cut -c 2- &lt;&lt;&lt; &#34;${PWD%/*}&#34; | tr &#39;/&#39; &#39;\n&#39;) if [[ -z &#34;$cur&#34; ]]; then COMPREPLY=( $( compgen -W &#34;$all&#34;) ) else COMPREPLY=( $(grep -i &#34;^$cur&#34; &lt;(echo &#34;${all}&#34;) | sort -u) ) fi } complete -o nospace -F _backto backto The function backto and it&#39;s auto completion counterpart, will let me chose one of the directories in my current path to jump back to."/>
+<meta name="twitter:description" content="I&rsquo;m horrible at waiting, so when things are slow or repetitive I tend to automate them. So when I started working on my first Java project I quickly got fed up by navigating in and out of these crazy paths. For instance moving from src/main/java/com/example/application/package/ to the test path, or back to the root of the project got boring real quick.
+function backto() { # Go back to folder in path local path=${PWD%/*} while [[ $path ]]; do if [[ &#34;${path##*/}&#34; == &#34;$1&#34; ]]; then cd &#34;$path&#34; || return 1 break else path=${path%/*} fi done } function _backto() { # completion for backto local cur dir all _get_comp_words_by_ref cur all=$(cut -c 2- &lt;&lt;&lt; &#34;${PWD%/*}&#34; | tr &#39;/&#39; &#39;\n&#39;) if [[ -z &#34;$cur&#34; ]]; then COMPREPLY=( $( compgen -W &#34;$all&#34;) ) else COMPREPLY=( $(grep -i &#34;^$cur&#34; &lt;(echo &#34;${all}&#34;) | sort -u) ) fi } complete -o nospace -F _backto backto The function backto and it&rsquo;s auto completion counterpart, will let me chose one of the directories in my current path to jump back to."/>
 
     <meta property="og:title" content="How can I move faster around the shell?" />
-<meta property="og:description" content="I&#39;m horrible at waiting, so when things are slow or repetitive I tend to automate them. So when I started working on my first Java project I quickly got fed up by navigating in and out of these crazy paths. For instance moving from src/main/java/com/example/application/package/ to the test path, or back to the root of the project got boring real quick.
-function backto() { # Go back to folder in path local path=${PWD%/*} while [[ $path ]]; do if [[ &#34;${path##*/}&#34; == &#34;$1&#34; ]]; then cd &#34;$path&#34; || return 1 break else path=${path%/*} fi done } function _backto() { # completion for backto local cur dir all _get_comp_words_by_ref cur all=$(cut -c 2- &lt;&lt;&lt; &#34;${PWD%/*}&#34; | tr &#39;/&#39; &#39;\n&#39;) if [[ -z &#34;$cur&#34; ]]; then COMPREPLY=( $( compgen -W &#34;$all&#34;) ) else COMPREPLY=( $(grep -i &#34;^$cur&#34; &lt;(echo &#34;${all}&#34;) | sort -u) ) fi } complete -o nospace -F _backto backto The function backto and it&#39;s auto completion counterpart, will let me chose one of the directories in my current path to jump back to." />
+<meta property="og:description" content="I&rsquo;m horrible at waiting, so when things are slow or repetitive I tend to automate them. So when I started working on my first Java project I quickly got fed up by navigating in and out of these crazy paths. For instance moving from src/main/java/com/example/application/package/ to the test path, or back to the root of the project got boring real quick.
+function backto() { # Go back to folder in path local path=${PWD%/*} while [[ $path ]]; do if [[ &#34;${path##*/}&#34; == &#34;$1&#34; ]]; then cd &#34;$path&#34; || return 1 break else path=${path%/*} fi done } function _backto() { # completion for backto local cur dir all _get_comp_words_by_ref cur all=$(cut -c 2- &lt;&lt;&lt; &#34;${PWD%/*}&#34; | tr &#39;/&#39; &#39;\n&#39;) if [[ -z &#34;$cur&#34; ]]; then COMPREPLY=( $( compgen -W &#34;$all&#34;) ) else COMPREPLY=( $(grep -i &#34;^$cur&#34; &lt;(echo &#34;${all}&#34;) | sort -u) ) fi } complete -o nospace -F _backto backto The function backto and it&rsquo;s auto completion counterpart, will let me chose one of the directories in my current path to jump back to." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://blog.brujordet.no/post/bash/how-can-i-move-faster/" />
 <meta property="article:published_time" content="2019-11-10T13:48:03+01:00" />
@@ -87,15 +87,15 @@ function backto() { # Go back to folder in path local path=${PWD%/*} while [[ $p
           <a class="tag" href="https://blog.brujordet.no/tags/bash/">bash</a></div></div>
     </header>
     <div class="post-content">
-      <p>I'm horrible at waiting, so when things are slow or repetitive I tend to
+      <p>I&rsquo;m horrible at waiting, so when things are slow or repetitive I tend to
 automate them. So when I started working on my first Java project I quickly got
 fed up by navigating in and out of these crazy paths. For instance moving from
 <code>src/main/java/com/example/application/package/</code> to the test path, or back to the
 root of the project got boring real quick.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> backto<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Go back to folder in path</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> backto<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Go back to folder in path</span>
   local path<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PWD%/*<span style="color:#e6db74">}</span>
-  <span style="color:#66d9ef">while</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> $path <span style="color:#f92672">]</span><span style="color:#f92672">]</span>; <span style="color:#66d9ef">do</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>path##*/<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span><span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+  <span style="color:#66d9ef">while</span> <span style="color:#f92672">[[</span> $path <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">do</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>path##*/<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
       cd <span style="color:#e6db74">&#34;</span>$path<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
       break
     <span style="color:#66d9ef">else</span>
@@ -104,85 +104,85 @@ root of the project got boring real quick.</p>
   <span style="color:#66d9ef">done</span>
 <span style="color:#f92672">}</span>
 
-<span style="color:#66d9ef">function</span> _backto<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># completion for backto</span>
+<span style="color:#66d9ef">function</span> _backto<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># completion for backto</span>
   local cur dir all
   _get_comp_words_by_ref cur
   all<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>cut -c 2- <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>PWD%/*<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> | tr <span style="color:#e6db74">&#39;/&#39;</span> <span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#66d9ef">)</span>
-  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span><span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-    COMPREPLY<span style="color:#f92672">=</span><span style="color:#f92672">(</span> <span style="color:#66d9ef">$(</span> compgen -W <span style="color:#e6db74">&#34;</span>$all<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -z <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+    COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span> compgen -W <span style="color:#e6db74">&#34;</span>$all<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
   <span style="color:#66d9ef">else</span>
-    COMPREPLY<span style="color:#f92672">=</span><span style="color:#f92672">(</span> <span style="color:#66d9ef">$(</span>grep -i <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">^</span>$cur<span style="color:#e6db74">&#34;</span> &lt;<span style="color:#f92672">(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>all<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span> | sort -u<span style="color:#f92672">)</span> <span style="color:#f92672">)</span>
+    COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span>grep -i <span style="color:#e6db74">&#34;^</span>$cur<span style="color:#e6db74">&#34;</span> &lt;<span style="color:#f92672">(</span>echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>all<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span> | sort -u<span style="color:#f92672">)</span> <span style="color:#f92672">)</span>
   <span style="color:#66d9ef">fi</span>
 <span style="color:#f92672">}</span>
 complete -o nospace -F _backto backto
-</code></pre></div><p>The function <code>backto</code> and it's auto completion counterpart, will let me chose
+</code></pre></div><p>The function <code>backto</code> and it&rsquo;s auto completion counterpart, will let me chose
 one of the directories in my current path to jump back to. The only caveat is if
 there are duplicate names it will jump to the one closest to my current working
 directory.</p>
-<p>There are also some places I visit more often than others. For those I've
-created the <code>src</code> function. It let's me set a base directory and then I get
+<p>There are also some places I visit more often than others. For those I&rsquo;ve
+created the <code>src</code> function. It let&rsquo;s me set a base directory and then I get
 auto completion to cd into that path, no matter what my current
 working directory is.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> src<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># cd into $SRC</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> src<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># cd into $SRC</span>
   cd <span style="color:#e6db74">&#34;</span>$SRC_DIR<span style="color:#e6db74">/</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
 <span style="color:#f92672">}</span>
 
-<span style="color:#66d9ef">function</span> _src<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># completion for src</span>
+<span style="color:#66d9ef">function</span> _src<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># completion for src</span>
   local cur temp_compreply dir
 
   _get_comp_words_by_ref cur
   dir<span style="color:#f92672">=</span>$SRC_DIR/
 
-  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> $dir !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>cur:0:<span style="color:#e6db74">${#</span>dir<span style="color:#e6db74">}</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span><span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-    cur<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>dir<span style="color:#e6db74">}</span><span style="color:#e6db74">${</span>cur<span style="color:#e6db74">}</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $dir !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>cur:0:<span style="color:#e6db74">${#</span>dir<span style="color:#e6db74">}}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+    cur<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>dir<span style="color:#e6db74">}${</span>cur<span style="color:#e6db74">}</span>
   <span style="color:#66d9ef">fi</span>
 
   temp_compreply<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>compgen -d <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>cur<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
-  COMPREPLY<span style="color:#f92672">=</span><span style="color:#f92672">(</span> <span style="color:#e6db74">${</span>temp_compreply[*]//$dir/<span style="color:#e6db74">}</span> <span style="color:#f92672">)</span>
+  COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#e6db74">${</span>temp_compreply[*]//$dir/<span style="color:#e6db74">}</span> <span style="color:#f92672">)</span>
 <span style="color:#f92672">}</span>
 complete -o nospace -S <span style="color:#e6db74">&#34;/&#34;</span> -F _src src
 </code></pre></div><p>The function itself is quite simple, the main logic is in the auto completion.
-However, sometimes I want to jump to somewhere that's not my source dir. For those
+However, sometimes I want to jump to somewhere that&rsquo;s not my source dir. For those
 cases I use <a href="https://github.com/rupa/z">rupa/z</a>. After installing it, z will
 take notes on what directories you visit the most, and allow you to jump
 instantly by adding a query such as <code>z some_directory</code>.
 If there are several matches it will choose based
 and frequency and how well the path matches your query. Super useful.</p>
-<p>I've also become completely reliant on
-<a href="https://github.com/junegunn/fzf">junegunn/fzf</a>. It's a fuzzy
+<p>I&rsquo;ve also become completely reliant on
+<a href="https://github.com/junegunn/fzf">junegunn/fzf</a>. It&rsquo;s a fuzzy
 finder which can be used directly on the command line or in your interactive
 functions. It takes a list of strings as input, and while you type it filters the results.
 During installation it asks you if you would like to use fzf for reverse
 history search, and you definitely want to do this. <code>ctrl-r</code> has never been this
 useful, responsive and easy to use.</p>
-<p>One way I've used fzf to improve my helpers is with this alias to check out a
+<p>One way I&rsquo;ve used fzf to improve my helpers is with this alias to check out a
 git branch.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias gcb<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git co &#34;$(git branch -a | sed &#34;s/  //&#34; | grep -v &#34;^*&#34; | fzf)&#34;&#39;</span>
-</code></pre></div><script id="asciicast-42QCJBwOswJn4Anodvc8slZgU" src="https://asciinema.org/a/42QCJBwOswJn4Anodvc8slZgU.js" async></script>
+</code></pre></div><script id="asciicast-346970" src="https://asciinema.org/a/346970.js" async></script>
 <p>There are also some bash specific settings I like to set, to be able to move
 around faster. For instance:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bind <span style="color:#e6db74">&#39;set completion-ignore-case on&#39;</span> <span style="color:#75715e"># Case-insensitive autocompletion</span>
 shopt -s nocaseglob <span style="color:#75715e"># Case-insensitive globbing (used in pathname expansion)</span>
 shopt -s cdspell <span style="color:#75715e"># Autocorrect typos in path names when using `cd`</span>
-</code></pre></div><p>Now I don't need to bother with getting the case right for auto completion, and
+</code></pre></div><p>Now I don&rsquo;t need to bother with getting the case right for auto completion, and
 I can even be a bit sloppy and cd will adjust my input to match the available
 results.</p>
-<p>I'm also a big fan of vi, and as such my prompt should reflect that.</p>
+<p>I&rsquo;m also a big fan of vi, and as such my prompt should reflect that.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set -o vi
 bind <span style="color:#e6db74">&#39;set show-mode-in-prompt on&#39;</span>
 bind <span style="color:#e6db74">&#39;set vi-cmd-mode-string &#34;\1\e[38;5;4m\e[49m\2 ➜ \1\e[39m\e[00m\2&#34;&#39;</span>
 bind <span style="color:#e6db74">&#39;set vi-ins-mode-string &#34;\1\e[38;5;8m\e[49m\2 ➜ \1\e[39m\e[00m\2&#34;&#39;</span>
 </code></pre></div><p>With these settings I get vi mode enabled, and at the end of my prompt bash will
 insert an arrow, which is light green when in normal mode, and gray in insert
-mode. But the vi-mode does remove a few useful key bindings I've gotten used to,
-so to remedy that, I've got these defined.</p>
+mode. But the vi-mode does remove a few useful key bindings I&rsquo;ve gotten used to,
+so to remedy that, I&rsquo;ve got these defined.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bind -m vi-insert <span style="color:#e6db74">&#34;\C-l&#34;</span>:clear-screen
 bind -m vi-insert <span style="color:#e6db74">&#34;\C-a&#34;</span>:beginning-of-line
 bind -m vi-insert <span style="color:#e6db74">&#34;\C-e&#34;</span>:end-of-line
 bind -m vi-insert <span style="color:#e6db74">&#34;\C-w&#34;</span>:delete-word
 </code></pre></div><p>I should probably add that all of the above settings are set in my bash config,
 even the bind commands which should probably be set in <code>~/.inputrc</code>. One day
-I'll read up on the best practices for this, but not today.</p>
+I&rsquo;ll read up on the best practices for this, but not today.</p>
 <p>Also, a proper keyboard will speed things up :D</p>
 <img src="/iris.jpeg" alt="drawing" width="75%"/>
 <p>Discussion: <a href="https://www.reddit.com/r/bash/comments/dug79a/4min_how_can_i_move_faster_around_the_shell/">reddit.com/r/bash - post</a></p>
