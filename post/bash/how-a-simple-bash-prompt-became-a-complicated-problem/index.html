@@ -304,7 +304,7 @@ simple, stupid.</p>
 <h1 id="figuring-out-how-long-the-previous-user-command-took">Figuring out how long the previous user command took</h1>
 <p>So this was a tricky one and I started out doing something like so:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">command_start<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>HISTTIMEFORMAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%s &#39;</span> history <span style="color:#ae81ff">1</span> | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-command_end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date %s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+command_end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 command_duration<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> command_end <span style="color:#f92672">-</span> command_start <span style="color:#66d9ef">))</span>
 </code></pre></div><p>This works pretty well as long as the previous command is actually committed to
 history. In bash 4.4 we got the brand new ´PS0´ variable which is expanded right
