@@ -6,10 +6,20 @@
     <description>Recent content in bash on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Nov 2019 10:45:44 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 17 Jul 2020 09:42:21 +0200</lastBuildDate>
     
 	<atom:link href="https://blog.brujordet.no/tags/bash/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How a Simple Bash Prompt Became a Complicated Problem</title>
+      <link>https://blog.brujordet.no/post/bash/how-a-simple-bash-prompt-became-a-complicated-problem/</link>
+      <pubDate>Fri, 17 Jul 2020 09:42:21 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/bash/how-a-simple-bash-prompt-became-a-complicated-problem/</guid>
+      <description>tl;dr: This is a ´problem -&amp;gt; solution´ type post, reflecting on problems I encountered while writing a bash prompt generator.
+ A small need for a more informative prompt This all started about 10 years ago when I was working as a Java consultant in Oslo. We had just moved from SVN to git, and the concept of feature branches was suddenly a thing. I hadn&amp;rsquo;t really been very involved with VCS before git, but now I felt like I understood it.</description>
+    </item>
     
     <item>
       <title>Poor man&#39;s todo list</title>

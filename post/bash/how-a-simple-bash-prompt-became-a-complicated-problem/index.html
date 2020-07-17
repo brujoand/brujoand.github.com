@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>How a Simple Bash Prompt Became a Complicated Problem // Automate attention</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.73.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://blog.brujordet.no/css/main.min.4c68b05cd7072e94a56c3a8acdd6f6e73fb7a62ba6e1bb047413ce09c4fea7a8.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How a Simple Bash Prompt Became a Complicated Problem"/>
+<meta name="twitter:description" content="tl;dr: This is a ´problem -&gt; solution´ type post, reflecting on problems I encountered while writing a bash prompt generator.
+ A small need for a more informative prompt This all started about 10 years ago when I was working as a Java consultant in Oslo. We had just moved from SVN to git, and the concept of feature branches was suddenly a thing. I hadn&rsquo;t really been very involved with VCS before git, but now I felt like I understood it."/>
+
+    <meta property="og:title" content="How a Simple Bash Prompt Became a Complicated Problem" />
+<meta property="og:description" content="tl;dr: This is a ´problem -&gt; solution´ type post, reflecting on problems I encountered while writing a bash prompt generator.
+ A small need for a more informative prompt This all started about 10 years ago when I was working as a Java consultant in Oslo. We had just moved from SVN to git, and the concept of feature branches was suddenly a thing. I hadn&rsquo;t really been very involved with VCS before git, but now I felt like I understood it." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.brujordet.no/post/bash/how-a-simple-bash-prompt-became-a-complicated-problem/" />
+<meta property="article:published_time" content="2020-07-17T09:42:21+02:00" />
+<meta property="article:modified_time" content="2020-07-17T09:42:21+02:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.brujordet.no/"><img class="app-header-avatar" src="/avatar.png" alt="John Doe" /></a>
+      <h1>Automate attention</h1>
+      <p>Tools and techniques I use to make life easier</p>
+      <a href="https://blog.brujordet.no//about">About me</a>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://twitter.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://www.linkedin.com/in/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+          <a target="_blank" href="https://www.github.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">How a Simple Bash Prompt Became a Complicated Problem</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 17, 2020
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          11 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://blog.brujordet.no/tags/bash/">bash</a><a class="tag" href="https://blog.brujordet.no/tags/productivity/">productivity</a><a class="tag" href="https://blog.brujordet.no/tags/zsh/">zsh</a><a class="tag" href="https://blog.brujordet.no/tags/1337/">1337</a></div></div>
+    </header>
+    <div class="post-content">
+      <img src="https://raw.githubusercontent.com/brujoand/sbp/master/resources/sbp_screenshot.png" alt="the simple bash prompt" width="75%"/>
+<blockquote>
+<p>tl;dr: This is a ´problem -&gt; solution´ type post, reflecting on problems I
+encountered while writing a bash prompt generator.</p>
+</blockquote>
+<h1 id="a-small-need-for-a-more-informative-prompt">A small need for a more informative prompt</h1>
+<p>This all started about 10 years ago when I was working as a Java consultant in
+Oslo. We had just moved from SVN to git, and the concept of feature branches
+was suddenly a thing. I hadn&rsquo;t really been very involved with VCS before git,
+but now I felt like I understood it. (I didn&rsquo;t).
+So I wanted to add the current git branch to my prompt. I quickly ended
+up with something like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">PS1<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\u@\h:\w$(git status 2&gt;/dev/null | sed -n &#34;s/On branch \(.*\)/ [\1]/p&#34;) &#39;</span>
+</code></pre></div><p>This basically says that my prompt should be my &lsquo;my_user@my_host:my_working_dir&rsquo;
+and if the git status command gives us data, insert the branch in [brackets].
+Pretty simple, but with one gotcha. Notice that the value of the ´PS1´ variable is
+enclosed in single quotes. This is because the ´PS1´ variable is evaluated when
+printing the prompt. If I had used single quotes the subshell expression ´$()´
+would have been evaluated only once and my git status would never have changed.</p>
+<p>Anyway, I was quite content with this until one of my colleagues installed
+<a href="https://ohmyz.sh/">oh-my-zsh</a> and I was blown away by how great it looked. I
+quickly ditched my old prompt, installed zsh and installed one of the powerline
+themes. It looked great, but I just didn&rsquo;t like zsh. To me it felt like moving
+from Python to Ruby, everything was similar, but felt different in a fundamental
+way. So everything that I&rsquo;d learned about Bash, suddenly didn&rsquo;t work the same anymore.
+Every 3 years or so I try moving to zsh but always come back after a day or so.
+I guess I&rsquo;m stuck here with Bash.</p>
+<h1 id="the-quest-for-a-powerline-prompt-in-bash">The quest for a Powerline prompt in Bash</h1>
+<p>I started searching for a bash equivalent of the powerline prompt and I
+stumbled upon <a href="https://github.com/b-ryan/powerline-shell">powerline-shell</a>,
+which looked perfect, but it was quite slow. It was also written in python,
+which I found to be suboptimal as I wanted to be able to quickly add new
+segments by just relying on the cli tools already available. Bash is great for
+this.</p>
+<p>After a while I gave up my search and tried making my own
+<a href="https://github.com/brujoand/sbp">Simple Bash Prompt</a>. The first version was a
+500 line shell script which was meant to be evaluated at the prompt draw time
+like so ´PS1='$(generate_prompt $?)&lsquo;´. Basically call my ´generate_prompt´
+function with the exit code of the last command as the only parameter. This
+allowed me to change the appearance of the prompt based on the success or
+failure of the previous command. As the project grew I added configuration
+options, color schemes and predefined layouts. Below are some of the challenges
+I&rsquo;ve been pulling my hair out over and how I solved them.</p>
+<h1 id="the-sbp-requirements">The SBP requirements</h1>
+<ul>
+<li>It must render in less than 100ms (Preferably 50ms, less is more etc)</li>
+<li>The code must be easy to read and test</li>
+<li>The prompt must be easy to extend and adapt</li>
+<li>The prompt should be reactive, meaning the layout could change if the screen
+size shrinks.</li>
+</ul>
+<h1 id="writing-clean-and-fast-code-in-bash">Writing clean and fast code in Bash</h1>
+<p>A Bash prompt written in Bash makes sense if you want it to be portable and easy
+to use. But 1000 lines of Bash is not very readable, and hard to maintain. So
+you end up splitting logic up into re-usable functions and files that become small
+libraries for functions with a similar use cases.</p>
+<p>But every <code>variable=&quot;$(some_helper_function &quot;$my_var&quot;)&quot;</code> will create a subshell, and they
+are expensive. On my Macbook Pro a subshell costs about 1 ms, on my raspberry
+pi the price is 4 times higher. This is made worse by avoiding repetitive code,
+a common best practice, which results in more subshells when using helper
+functions instead of just repeating the logic.</p>
+<p>So I ended up relying on pass by reference for returning values without spawing
+a subshell. Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># The function</span>
+add_numbers<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  local -n add_numbers_result<span style="color:#f92672">=</span>$1
+  local first_number<span style="color:#f92672">=</span>$2
+  local second_number<span style="color:#f92672">=</span>$3
+
+  add_numbers_result<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> first_number <span style="color:#f92672">+</span> second_number <span style="color:#66d9ef">))</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e"># The usage</span>
+local my_added_numbers
+add_numbers <span style="color:#e6db74">&#39;my_added_numbers&#39;</span> <span style="color:#ae81ff">22</span> <span style="color:#ae81ff">33</span>
+
+<span style="color:#75715e"># The variable &#39;my_added_numbers&#39; now has the value &#39;55&#39;</span>
+
+</code></pre></div><p>So to avoid making the code more magic than necessary a few conventions are
+used. The first argument is always the name of the return value, and the return
+variable is always called ´${name_of_function}_result´. The ´-n´ flag was added to
+´local´ in Bash 4.3 and basically says &ldquo;create this variable and have it point to the variable
+who&rsquo;s name is on the right hand side of the equal sign&rdquo;. It does make the code
+less readable, and harder to follow, but this change alone reduced the execution
+time from ~180ms to ~50ms. A substantial reduction in execution time.</p>
+<p>Another cost is structuring code in separate files so that logically close
+functions live together. This is again a &lsquo;clean code&rsquo; practice that will incur a
+cost because now the file needs to be sourced every time it&rsquo;s needed, however this
+cost is a lot lower and mainly affects readability as they file is read from
+disk once and usually kept in memory. There already exists a
+common best practice for this which I&rsquo;ve adopted. In a script file called
+´execution.bash´ the function names will be prefixed with
+´execution::${name_of_function}´. This makes it much easier to track down where
+a function is defined, and it also avoids problems with naming collisions.</p>
+<h1 id="concurrency-in-bash">Concurrency in Bash</h1>
+<p>To be able to generate every segment of the prompt as quickly as possible,
+concurrency is needed as just evaluating a simple function that checks some
+environment variables and returns a string will hit 10ms easily. 10 of those and
+we&rsquo;ve already hit our roof of 100ms.</p>
+<p>Concurrency in Bash is easy if you just want to run a
+bunch of jobs in the background and wait until they&rsquo;re finished. But if you care
+about their exit status and output it becomes a bit more tricky.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  execute_segment_script <span style="color:#e6db74">&#34;</span>$segment<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$direction<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$max_length<span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>tempdir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &amp; pids<span style="color:#f92672">[</span>i<span style="color:#f92672">]=</span>$!
+</code></pre></div><p>This obscurity is how I start a segment generation, output to a tempfile, and
+store the pid in an array.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  <span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>!pids[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
+    wait <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>pids[i]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+    <span style="color:#75715e"># Add it to the prompt</span>
+  <span style="color:#66d9ef">done</span>
+</code></pre></div><p>This way we are more or less only bound by the speed of the slowest segment.
+Ideally we would be able to wait on all pids and handle them one by one as they
+exit, but I haven&rsquo;t found a way to do that. I&rsquo;ve tried using named pipes, and
+have each concurrent segment write to it on completion, while a second process reads from the
+pipe until all segments are done, but that was actually slower than the current
+implementation. <a href="https://stackoverflow.com/a/28358088/3503302">xargs</a> and
+<a href="https://www.gnu.org/software/parallel/">Parallel</a> could have potentially helped
+a bit by implementing a thread pool, but none of them really solves the
+optimized waiting and output handling. In addition, Parallel is not available
+everywhere. We also have
+<a href="https://www.gnu.org/software/bash/manual/html_node/Coprocesses.html">Coproc</a>
+but in our case it doesn&rsquo;t really add anything that we don&rsquo;t already have in the
+above solution.</p>
+<h1 id="using-nohup-for-functions-you-want-to-fire-and-forget">Using nohup for functions you want to fire and forget</h1>
+<p>So you might have seen someone do something like this ´nohup my_command &amp;´. The
+command ´my_command´ is executed in the background and no longer attached to the
+current shell, so it will live on even if our shell exits. This is great for
+executing scripts, but as it will create a new bash process it will not have the
+sourced functions from SBP available. Instead I found a neat trick on
+<a href="https://stackoverflow.com/a/54688673/3503302">StackOverflow</a> which lead to
+this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">execute::nohup_function<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  <span style="color:#f92672">(</span>trap <span style="color:#e6db74">&#39;&#39;</span> HUP INT
+    <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span>
+  <span style="color:#f92672">)</span> &lt;/dev/null &amp;&gt;&gt;<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SBP_CONFIG<span style="color:#e6db74">}</span><span style="color:#e6db74">/hook.log&#34;</span> &amp;
+<span style="color:#f92672">}</span>
+
+</code></pre></div><p>This function will execute the command in a subshell, meaning our environment
+and functions are still available. The trap signal will catch the SIGHUB and
+SIGINT signals and ignore them. We disconnect our forked process from stdin by
+pointing stdin to /dev/null. We point stderr and stdout to
+´${SBP_CONFIG}/nohup.log´ and we mark this command to be executed
+asynchronously with ´&amp;´. Pretty nifty.</p>
+<h1 id="avoiding-external-commands">Avoiding external commands</h1>
+<p>Another approach has been to remove the use of external programs in favor of
+Bash builtins. This has added a lot of speed in many places as you can
+usually replace most grep/sed/awk expressions with parameter expansion.
+As an example consider replacing ´$HOME´ with ´~´ in your ´$PWD´:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> ➜ time sed <span style="color:#e6db74">&#34;s|</span>$HOME<span style="color:#e6db74">|\~|&#34;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> $PWD
+~/src/sbp
+
+real 0m0.005s
+user 0m0.001s
+sys  0m0.003s
+
+ ➜ time echo <span style="color:#e6db74">${</span>PWD/<span style="color:#e6db74">${</span>HOME<span style="color:#e6db74">}</span>/<span style="color:#ae81ff">\~</span><span style="color:#e6db74">}</span>
+~/src/sbp
+
+real 0m0.000s
+user 0m0.000s
+sys  0m0.000s
+</code></pre></div><p>I&rsquo;d argue that this is both faster and more readable, although I&rsquo;ll admit that
+parameter expansion is not always easy to read if you&rsquo;re not familiar with the
+syntax. Note that I had to use ´|´ instead of ´/´ in the sed expression as my
+´$HOME´ variable contains ´/´ slash which would have broken the sed syntax.
+Also I&rsquo;ve used double quotes around the sed expression to allow for the use of
+a shell variable and the ´&laquo;&lt; $variable´ expression let&rsquo;s sed treat our
+variable as a file.</p>
+<p>But for complicated search and replace like this sed to remove all color (and
+surrounding escape brackets) it wasn&rsquo;t as straight forward.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  strip_escaped_colors<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    sed -E <span style="color:#e6db74">&#39;s/\\\[\\e\[[0123456789]([0123456789;])+m\\\]//g&#39;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div><p>For my entire <code>$PS1</code> this takes about 6ms on my Macbook Pro as opposed to 12
+seconds using bash parameter expansion.</p>
+<h1 id="breaking-readline-by-accident-when-adding-colors">Breaking readline by accident when adding colors</h1>
+<p>The above sed expression was necessary because I like having prompt segments
+both on the left and right hand side of the screen. To do this I need to know
+the length of the left and right segment strings and the width of the screen.
+The problem though, is that if you try to calculate the length of a string which
+contains escape sequences, strange things start to happen.</p>
+<img src="/length_of_ps1.png" alt="length_of_ps1" width="75%"/>
+<p>As you can see our ´PS1´ has a length of 746 which should be more than 7 rows
+divided on our 103 character screen width. Obviously this is not what&rsquo;s
+happening and when we print ´PS1´ we see that there are a bunch of escape
+characters here. The expression ´\e[38;2;213;196;161m´ should be fairly
+recognizable to most. The ´\e[´ (escape + bracket open) is called a &lsquo;Control
+Sequence Introducer&rsquo; and tells the terminal that here comes a command where the
+arguments are separated by &lsquo;;&rsquo;. The first number 38 means &lsquo;set foreground
+color&rsquo;, 48 would be background color. The second number is 2 and means that we will
+be printing an rgb color, a 5 would mean regular ansi color.
+The three next values are the respective rgb values, or single ansi color value
+if the previous value was 5. The sequence is terminated by the letter ´m´.</p>
+<p>When we try to print the ´PS1´ variable with ´echo -e´ we will get the evaluated
+values of the colors, but still there are unevaluated escapes in our output.
+This is actually how
+<a href="https://tiswww.case.edu/php/chet/readline/rltop.html">readline</a> keeps control
+over the current cursor position on the screen when printing color sequences.
+Every color definition needs to be surrounded by escapes so that readline
+doesn&rsquo;t count it as a &lsquo;printed character&rsquo;. This means we need to print our color
+like this: ´[\e[38;2;213;196;161m]´. Failing to take this into account will
+cause weird problems like not being able to erase a command or suddenly have a
+new line appear in the middle of tying.</p>
+<p>The sed in the above section to remove escape sequences was slow, and had to be
+executed on every generated segment to be able to calculate the size of the
+segments and the distances between the left and right hand side. To avoid this
+all together I ended up adding colors as the last step, after checking the
+length of the uncolored segments. Much less magic, and much faster. Keep it
+simple, stupid.</p>
+<h1 id="figuring-out-how-long-the-previous-user-command-took">Figuring out how long the previous user command took</h1>
+<p>So this was a tricky one and I started out doing something like so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">command_start<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>HISTTIMEFORMAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%s &#39;</span> history <span style="color:#ae81ff">1</span> | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+command_end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date %s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+command_duration<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> command_end <span style="color:#f92672">-</span> command_start <span style="color:#66d9ef">))</span>
+</code></pre></div><p>This works pretty well as long as the previous command is actually committed to
+history. In bash 4.4 we got the brand new ´PS0´ variable which is expanded right
+before executing a command. So in SBP I added this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  _sbp_pre_exec<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    date +%s &gt; <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SBP_TMP<span style="color:#e6db74">}</span><span style="color:#e6db74">/execution&#34;</span>
+  <span style="color:#f92672">}</span>
+
+  PS0<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;\$(_sbp_pre_exec)&#34;</span>
+</code></pre></div><p>We are basically just taking a timestamp and storing it, and we read it back
+when we are about to draw the prompt. Here instead of using single quotes I
+escaped the ´&amp;´ sign. This means the string will not contain the evaluated
+value, but evaluating the string will execute the command. Just two ways of
+doing the same thing.</p>
+<h1 id="so-is-sbp-perfect-now">So is SBP perfect now?</h1>
+<p>Probably not. SBP has improved as my understanding of Bash has improved,
+greatly helped by <a href="https://www.shellcheck.net/">ShellCheck</a> btw which not only
+tells me when I&rsquo;m wrong, but also <em>how</em> I&rsquo;m wrong and how to be right. My focus
+now though is on getting more segments and making it easy to use. If you see
+something that could have been done in a better, cleaner or more efficient way,
+please send a PR or create an issue. :)</p>
+<p>PS: If you however want to stick with zsh, and still want powerline and speed, I
+suggest you checkout <a href="https://github.com/romkatv/powerlevel10k">Powerlevel10k</a>.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
