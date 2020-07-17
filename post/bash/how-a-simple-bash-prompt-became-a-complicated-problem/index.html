@@ -3,7 +3,7 @@
   <head>
     <title>How a Simple Bash Prompt became a complicated problem // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.73.0" />
+    <meta name="generator" content="Hugo 0.74.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -150,7 +150,8 @@ a common best practice, which results in more subshells when using helper
 functions instead of just repeating the logic.</p>
 <p>So I ended up relying on pass by reference for returning values without spawing
 a subshell. Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># The function</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+<span style="color:#75715e"># Returning value by referencing the $1 variable</span>
 add_numbers<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
   local -n add_numbers_result<span style="color:#f92672">=</span>$1
   local first_number<span style="color:#f92672">=</span>$2
@@ -159,11 +160,16 @@ add_numbers<span style="color:#f92672">()</span> <span style="color:#f92672">{</
   add_numbers_result<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> first_number <span style="color:#f92672">+</span> second_number <span style="color:#66d9ef">))</span>
 <span style="color:#f92672">}</span>
 
-<span style="color:#75715e"># The usage</span>
-local my_added_numbers
-add_numbers <span style="color:#e6db74">&#39;my_added_numbers&#39;</span> <span style="color:#ae81ff">22</span> <span style="color:#ae81ff">33</span>
+<span style="color:#75715e"># Passing a variable for the return value</span>
+print_numbers<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  local my_added_numbers
+  add_numbers <span style="color:#e6db74">&#39;my_added_numbers&#39;</span> <span style="color:#ae81ff">22</span> <span style="color:#ae81ff">33</span>
+  echo <span style="color:#e6db74">&#34;</span>$my_added_numbers<span style="color:#e6db74">&#34;</span>
+<span style="color:#f92672">}</span>
 
-<span style="color:#75715e"># The variable &#39;my_added_numbers&#39; now has the value &#39;55&#39;</span>
+print_numbers
+
+<span style="color:#75715e"># The output will now be: 55</span>
 
 </code></pre></div><p>So to avoid making the code more magic than necessary a few conventions are
 used. The first argument is always the name of the return value, and the return
