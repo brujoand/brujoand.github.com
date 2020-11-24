@@ -3,12 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://blog.brujordet.no/tags/1337/</loc>
-    <lastmod>2020-07-17T09:42:21+02:00</lastmod>
+    <loc>https://blog.brujordet.no/</loc>
+    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.brujordet.no/</loc>
+    <loc>https://blog.brujordet.no/categories/</loc>
+    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/tags/keyboard/</loc>
+    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/tags/linux/</loc>
+    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/post/</loc>
+    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/categories/productivity/</loc>
+    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/tags/</loc>
+    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/post/productivity/unlocking-my-keyboard/</loc>
+    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/tags/vim/</loc>
+    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.brujordet.no/tags/1337/</loc>
     <lastmod>2020-07-17T09:42:21+02:00</lastmod>
   </url>
   
@@ -23,27 +63,12 @@
   </url>
   
   <url>
-    <loc>https://blog.brujordet.no/categories/</loc>
-    <lastmod>2020-07-17T09:42:21+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.brujordet.no/post/bash/how-a-simple-bash-prompt-became-a-complicated-problem/</loc>
     <lastmod>2020-07-17T09:42:21+02:00</lastmod>
   </url>
   
   <url>
-    <loc>https://blog.brujordet.no/post/</loc>
-    <lastmod>2020-07-17T09:42:21+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://blog.brujordet.no/tags/productivity/</loc>
-    <lastmod>2020-07-17T09:42:21+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/tags/</loc>
     <lastmod>2020-07-17T09:42:21+02:00</lastmod>
   </url>
   
@@ -84,16 +109,6 @@
   
   <url>
     <loc>https://blog.brujordet.no/post/bash/poor-mans-todo-list/</loc>
-    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/categories/productivity/</loc>
-    <lastmod>2019-11-16T10:45:44+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/tags/vim/</loc>
     <lastmod>2019-11-16T10:45:44+01:00</lastmod>
   </url>
   

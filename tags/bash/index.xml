@@ -6,11 +6,7 @@
     <description>Recent content in bash on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Jul 2020 09:42:21 +0200</lastBuildDate>
-    
-	<atom:link href="https://blog.brujordet.no/tags/bash/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 17 Jul 2020 09:42:21 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/tags/bash/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How a Simple Bash Prompt became a complicated problem</title>
       <link>https://blog.brujordet.no/post/bash/how-a-simple-bash-prompt-became-a-complicated-problem/</link>

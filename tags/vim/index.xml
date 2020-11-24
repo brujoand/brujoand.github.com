@@ -6,10 +6,16 @@
     <description>Recent content in vim on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 16 Nov 2019 10:45:44 +0100</lastBuildDate>
-    
-	<atom:link href="https://blog.brujordet.no/tags/vim/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Tue, 24 Nov 2020 21:27:29 +0100</lastBuildDate><atom:link href="https://blog.brujordet.no/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Unlocking My Keyboard</title>
+      <link>https://blog.brujordet.no/post/productivity/unlocking-my-keyboard/</link>
+      <pubDate>Tue, 24 Nov 2020 21:27:29 +0100</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/productivity/unlocking-my-keyboard/</guid>
+      <description>tl;dr Remapping caps lock to control and escape on Linux
+The elephant on the keyboard Nothing good has ever come from pressing the CAPS LOCK key, either accidentally or intentionally during a heated discussion on IRC. As a long time user of Macbooks I&amp;rsquo;ve used Karabiner to improve the way my keyboard works. My most critical customization is to let the CAPS LOCK key die. Instead it will send escape if pressed alone, and control if pressed with any other key.</description>
+    </item>
     
     <item>
       <title>Poor man&#39;s todo list</title>
