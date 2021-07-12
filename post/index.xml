@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 24 Nov 2020 21:27:29 +0100</lastBuildDate><atom:link href="https://blog.brujordet.no/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 12 Jul 2021 09:58:00 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Proper auto-completion for bash aliases</title>
+      <link>https://blog.brujordet.no/post/bash/proper-autocompletion-for-bash-alias/</link>
+      <pubDate>Mon, 12 Jul 2021 09:58:00 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/bash/proper-autocompletion-for-bash-alias/</guid>
+      <description>Kevin in The Office once said &amp;lsquo;Why waste time say lot word when few word do trick&amp;rsquo;. These are words to live by, and this is why I love aliases. Lately though I&amp;rsquo;ve been getting really tired of writing out stuff like:
+kubectl get pods -n network I was saying too many words. Step one was to start using contexts with kubectl which let&amp;rsquo;s me omit the -n network part. I used fzf to make a handy little function that would let me switch contexts quickly.</description>
+    </item>
+    
     <item>
       <title>Unlocking My Keyboard</title>
       <link>https://blog.brujordet.no/post/productivity/unlocking-my-keyboard/</link>

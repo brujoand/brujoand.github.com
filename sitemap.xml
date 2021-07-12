@@ -1,135 +1,86 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://blog.brujordet.no/</loc>
-    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-07-12T09:58:00+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/bash/</loc>
+    <lastmod>2021-07-12T09:58:00+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/categories/bash/</loc>
+    <lastmod>2021-07-12T09:58:00+02:00</lastmod>
+  </url><url>
     <loc>https://blog.brujordet.no/categories/</loc>
-    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-07-12T09:58:00+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/post/</loc>
+    <lastmod>2021-07-12T09:58:00+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/post/bash/proper-autocompletion-for-bash-alias/</loc>
+    <lastmod>2021-07-12T09:58:00+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/</loc>
+    <lastmod>2021-07-12T09:58:00+02:00</lastmod>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/keyboard/</loc>
     <lastmod>2020-11-24T21:27:29+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/linux/</loc>
     <lastmod>2020-11-24T21:27:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/post/</loc>
-    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/categories/productivity/</loc>
     <lastmod>2020-11-24T21:27:29+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/tags/</loc>
-    <lastmod>2020-11-24T21:27:29+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/post/productivity/unlocking-my-keyboard/</loc>
     <lastmod>2020-11-24T21:27:29+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/vim/</loc>
     <lastmod>2020-11-24T21:27:29+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/1337/</loc>
     <lastmod>2020-07-17T09:42:21+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/tags/bash/</loc>
-    <lastmod>2020-07-17T09:42:21+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://blog.brujordet.no/categories/bash/</loc>
-    <lastmod>2020-07-17T09:42:21+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/post/bash/how-a-simple-bash-prompt-became-a-complicated-problem/</loc>
     <lastmod>2020-07-17T09:42:21+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/productivity/</loc>
     <lastmod>2020-07-17T09:42:21+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/zsh/</loc>
     <lastmod>2020-07-17T09:42:21+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/post/devops/building-a-delivery-platform/</loc>
     <lastmod>2020-01-19T20:28:11+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/devops/</loc>
     <lastmod>2020-01-19T20:28:11+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/categories/devops/</loc>
     <lastmod>2020-01-19T20:28:11+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/infrastructure/</loc>
     <lastmod>2020-01-19T20:28:11+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/paas/</loc>
     <lastmod>2020-01-19T20:28:11+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/gtd/</loc>
     <lastmod>2019-11-16T10:45:44+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/post/bash/poor-mans-todo-list/</loc>
     <lastmod>2019-11-16T10:45:44+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/post/bash/how-can-i-move-faster/</loc>
     <lastmod>2019-11-10T13:48:03+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/automation/</loc>
     <lastmod>2019-11-09T15:13:36+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/post/bash/whats-going-on-in-my-shell/</loc>
     <lastmod>2019-11-09T15:13:36+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://blog.brujordet.no/about/</loc>
     <lastmod>2019-11-09T12:43:45+02:00</lastmod>
   </url>
-  
 </urlset>

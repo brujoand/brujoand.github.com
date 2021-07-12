@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Proper auto-completion for bash aliases // Automate attention</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.85.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://blog.brujordet.no/css/main.min.4c68b05cd7072e94a56c3a8acdd6f6e73fb7a62ba6e1bb047413ce09c4fea7a8.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Proper auto-completion for bash aliases"/>
+<meta name="twitter:description" content="Kevin in The Office once said &lsquo;Why waste time say lot word when few word do trick&rsquo;. These are words to live by, and this is why I love aliases. Lately though I&rsquo;ve been getting really tired of writing out stuff like:
+kubectl get pods -n network I was saying too many words. Step one was to start using contexts with kubectl which let&rsquo;s me omit the -n network part. I used fzf to make a handy little function that would let me switch contexts quickly."/>
+
+    <meta property="og:title" content="Proper auto-completion for bash aliases" />
+<meta property="og:description" content="Kevin in The Office once said &lsquo;Why waste time say lot word when few word do trick&rsquo;. These are words to live by, and this is why I love aliases. Lately though I&rsquo;ve been getting really tired of writing out stuff like:
+kubectl get pods -n network I was saying too many words. Step one was to start using contexts with kubectl which let&rsquo;s me omit the -n network part. I used fzf to make a handy little function that would let me switch contexts quickly." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.brujordet.no/post/bash/proper-autocompletion-for-bash-alias/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-07-12T09:58:00+02:00" />
+<meta property="article:modified_time" content="2021-07-12T09:58:00+02:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.brujordet.no/"><img class="app-header-avatar" src="/avatar.png" alt="John Doe" /></a>
+      <h1>Automate attention</h1>
+      <p>Tools and techniques I use to make life easier</p>
+      <a href="https://blog.brujordet.no//about">About me</a>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://twitter.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://www.linkedin.com/in/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+          <a target="_blank" href="https://www.github.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Proper auto-completion for bash aliases</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Jul 12, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://blog.brujordet.no/tags/bash/">bash</a></div></div>
+    </header>
+    <div class="post-content">
+      <p>Kevin in The Office once said &lsquo;Why waste time say lot word when few word do
+trick&rsquo;. These are words to live by, and this is why I love aliases.
+Lately though I&rsquo;ve been getting really tired of writing out stuff like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  kubectl get pods -n network
+</code></pre></div><p>I was saying too many words.
+Step one was to start using contexts with kubectl which let&rsquo;s me omit the <code>-n network</code> part. I used <a href="https://github.com/junegunn/fzf">fzf</a> to make a handy
+little function that would let me switch contexts quickly. But I&rsquo;ve got a full
+post coming on more of these nice functions so let&rsquo;s save that for later.</p>
+<p>But my trouble began when I created the alias for getting pods</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  alias kgp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;kubectl get pods&#39;</span>
+</code></pre></div><p>Since I&rsquo;ve got auto completion setup for <code>kubectl</code> naturally I wanted that for
+<code>kgp</code> too. But this wasn&rsquo;t trivial. I tried looking at the helper script shipped
+with <code>kubectl</code> to see if I could tap into that, but it&rsquo;s using functions that
+are shipped with bash to extract the word under the cursor for instance. And
+since <code>kgp</code> isn&rsquo;t something the default completion script would understand this
+was a dead end.</p>
+<p>A helpful redditor suggested that I look at how sudo does this, since it&rsquo;s able
+to autocomplete commands it knows nothing about. Unfortunately sudo just checks
+if it should complete any sudo specific things and if not it passes the ball to
+the registered completion function for the command, which again doesn&rsquo;t work
+because the word we are completing <code>kgp</code> is unknown to that function.</p>
+<p>After reading through a lot of these magic completion functions being used I
+noticed that the truth is written in these variables:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  COMP_WORDS<span style="color:#f92672">=([</span>0<span style="color:#f92672">]=</span><span style="color:#e6db74">&#34;kgp&#34;</span> <span style="color:#f92672">[</span>1<span style="color:#f92672">]=</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
+  COMP_LINE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;kgp &#34;</span>
+  COMP_CWORD<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+  COMP_POINT<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+</code></pre></div><p>So the <code>COMP_WORDS</code> is just an array of a command and it&rsquo;s arguments.
+<code>COMP_LINE</code> is simply the full line being completed. <code>COMP_CWORD</code> is the index
+in the words array of the work currently being completed,
+and finally <code>COMP_POINT</code> is the index in the string where our cursor is at.</p>
+<p>I created a simple function which takes an alias name and returns the exact
+command the alias would execute:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  _expand_alias<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    local alias_name alias_definition
+    alias_name<span style="color:#f92672">=</span>$1
+    <span style="color:#f92672">[[</span> -z $alias_name <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    type <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span> &amp;&gt;/dev/null <span style="color:#f92672">||</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+    alias_definition<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>alias <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+    dequote <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>alias_definition//alias <span style="color:#e6db74">${</span>alias_name<span style="color:#e6db74">}</span>=<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div><p>If the alias name is empty or the alias doesn&rsquo;t exist we just return, but if it
+does we use the alias command to get it&rsquo;s definition and some variable expansion
+along with <code>dequote</code> to extract only the command.</p>
+<p>Next we need to update the <code>COMP_WORDS</code> array with our expanded alias:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  _update_comp_words<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    local alias_name alias_value
+    alias_name<span style="color:#f92672">=</span>$1
+    alias_value<span style="color:#f92672">=</span>$2
+    <span style="color:#f92672">[[</span> -z $alias_name <span style="color:#f92672">||</span> -z $alias_value <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+
+    local alias_value_array
+    read -r -a alias_value_array <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$alias_value<span style="color:#e6db74">&#34;</span>
+    local comp_words<span style="color:#f92672">=()</span>
+
+    <span style="color:#66d9ef">for</span> word in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>COMP_WORDS[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
+      <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $word <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+        comp_words<span style="color:#f92672">+=(</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>alias_value_array[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+      <span style="color:#66d9ef">else</span>
+        comp_words<span style="color:#f92672">+=(</span><span style="color:#e6db74">&#34;</span>$word<span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+      <span style="color:#66d9ef">fi</span>
+    <span style="color:#66d9ef">done</span>
+
+    COMP_WORDS<span style="color:#f92672">=(</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>comp_words[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div><p>This function parses our expanded alias into an array and simply substitutes the
+alias with it&rsquo;s expanded form and updates the <code>COMP_WORDS</code> array directly. I
+would have preferred to use a subshell for this but passing arrays around isn&rsquo;t
+very nice, and in this case speed is probably more important than readability.</p>
+<p>With these two functions we basically just need to update the rest of the
+<code>COMP_*</code> variables. This is handled by the full wrapper script which also uses
+the two functions above:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  <span style="color:#66d9ef">function</span> _alias_completion_wrapper<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    local alias_name alias_definition alias_value
+    alias_name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[0]<span style="color:#e6db74">}</span>
+    alias_value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>_expand_alias <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+    <span style="color:#f92672">[[</span> -z $alias_value <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+
+    _update_comp_words <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$alias_value<span style="color:#e6db74">&#34;</span>
+    <span style="color:#75715e"># Update other COMP variables</span>
+    COMP_LINE<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_LINE//<span style="color:#e6db74">${</span>alias_name<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>alias_value<span style="color:#e6db74">}}</span>
+    COMP_CWORD<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> <span style="color:#e6db74">${#</span>COMP_WORDS[@]<span style="color:#e6db74">}</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span>
+    COMP_POINT<span style="color:#f92672">=</span><span style="color:#e6db74">${#</span>COMP_LINE<span style="color:#e6db74">}</span>
+
+    local previous_word current_word
+    current_word<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[$COMP_CWORD]<span style="color:#e6db74">}</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">${#</span>COMP_WORDS[@]<span style="color:#e6db74">}</span> -ge <span style="color:#ae81ff">2</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+      previous_word<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[<span style="color:#66d9ef">$((</span> COMP_CWORD <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span>]<span style="color:#e6db74">}</span>
+    <span style="color:#66d9ef">fi</span>
+    local command<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[0]<span style="color:#e6db74">}</span>
+    comp_definition<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>complete -p <span style="color:#e6db74">&#34;</span>$command<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+    comp_function<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>sed -n <span style="color:#e6db74">&#34;s/^complete .* -F \(.*\) </span><span style="color:#e6db74">${</span>command<span style="color:#e6db74">}</span><span style="color:#e6db74">/\1/p&#34;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$comp_definition<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+
+    <span style="color:#75715e"># Call the original completion script with our expanded alias</span>
+    <span style="color:#e6db74">&#34;</span>$comp_function<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>command<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>current_word<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>previous_word<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+  <span style="color:#f92672">}</span>
+</code></pre></div><p>So to set this up all we need is to add the completion hook:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  alias kgp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;kubectl get pods&#39;</span>
+  complete -o default -F _alias_completion_wrapper kgp
+</code></pre></div><p>Now when bash wants to provide completion options for our alias it will first
+call <code>_alias_completion_wrapper</code> which expands the alias and updates the values of
+<code>COMP_WORDS</code>. Then we update the other <code>COMP_*</code> variables with their new values.
+Finally we find the completion function for our original command and we then
+execute that function passing along the current and previous word to get our
+proper auto completion.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
