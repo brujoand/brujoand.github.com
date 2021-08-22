@@ -3,7 +3,7 @@
   <head>
     <title>Poor man&#39;s todo list // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.85.0" />
+    <meta name="generator" content="Hugo 0.87.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -96,9 +96,9 @@ more than enough.</p>
 <h2 id="a-poor-mans-todo-list">A poor man&rsquo;s todo list</h2>
 <p>First off I need somewhere to store my todo lists. Dropbox is currently what I
 use for this.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export TDY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/Dropbox/tdy&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export TDY_PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/Dropbox/tdy&#34;</span>
 </code></pre></div><p>Then we need a function to create and open the file</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> tdy<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># The today todo list</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> tdy<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># The today todo list</span>
   category<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>1<span style="color:#66d9ef">:-</span>work<span style="color:#e6db74">}</span>
   tdy_folder<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TDY_PATH<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>category<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
   tdy_current_file<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>tdy_folder<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#66d9ef">$(</span>date +<span style="color:#e6db74">&#39;%Y/%m/%Y.%m.%d&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">.wiki&#34;</span>
@@ -139,7 +139,7 @@ this. It looks good and works very well for me.</p>
 <img src="/todolist.png" alt="drawing" width="75%"/>
 <p>Since I now know where my task are defined, and what format they have, I can
 easily search for them, to figure out when they were completed.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> tdy_done<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Search for done tasks</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> tdy_done<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Search for done tasks</span>
   grep -R -i <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">${</span>TDY_PATH<span style="color:#e6db74">}</span> | grep <span style="color:#e6db74">&#39;\- \[X\]&#39;</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><h2 id="visualizing-the-todo-list">Visualizing the todo list</h2>
@@ -155,13 +155,13 @@ And it looks pretty awesome to me, but I&rsquo;m no front end wiz.</p>
 <p>I like music, but sometimes its just in the way because what I really want is to
 block everything out. My noise canceling headphones do help, but I also like to
 spin up some white noise. From the terminal.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias noise<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;play -q -c 2 --null synth brownnoise band -n 2500 4000 tremolo 20 .1 reverb 50&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias noise<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;play -q -c 2 --null synth brownnoise band -n 2500 4000 tremolo 20 .1 reverb 50&#39;</span>
 </code></pre></div><p>I found this somewhere once, and just adapted it. I don&rsquo;t really understand it
 all that well, but I like the sound it makes.</p>
 <p>I&rsquo;m also a big fan of setting timers. For everything. Being deeply focused means that
 you&rsquo;ll forget about moving on to other important stuff, or going to lunch.
 So I use this simple timer.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> timer<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># takes number of hours and minutes + message and notifies you</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> timer<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># takes number of hours and minutes + message and notifies you</span>
   time_string<span style="color:#f92672">=</span>$1
   <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span>$time_string<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span>~ ^<span style="color:#f92672">[</span>0-9<span style="color:#f92672">]</span>+<span style="color:#f92672">[</span>:<span style="color:#f92672">][</span>0-9<span style="color:#f92672">]</span>+$ <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
     hours<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>time_string/:*/<span style="color:#e6db74">}</span>

@@ -3,7 +3,7 @@
   <head>
     <title>How can I move faster around the shell? // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.85.0" />
+    <meta name="generator" content="Hugo 0.87.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -93,7 +93,7 @@ automate them. So when I started working on my first Java project I quickly got
 fed up by navigating in and out of these crazy paths. For instance moving from
 <code>src/main/java/com/example/application/package/</code> to the test path, or back to the
 root of the project got boring real quick.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> backto<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Go back to folder in path</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> backto<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Go back to folder in path</span>
   local path<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>PWD%/*<span style="color:#e6db74">}</span>
   <span style="color:#66d9ef">while</span> <span style="color:#f92672">[[</span> $path <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">do</span>
     <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>path##*/<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
@@ -124,7 +124,7 @@ directory.</p>
 created the <code>src</code> function. It let&rsquo;s me set a base directory and then I get
 auto completion to cd into that path, no matter what my current
 working directory is.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> src<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># cd into $SRC</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> src<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># cd into $SRC</span>
   cd <span style="color:#e6db74">&#34;</span>$SRC_DIR<span style="color:#e6db74">/</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
 <span style="color:#f92672">}</span>
 
@@ -158,18 +158,18 @@ history search, and you definitely want to do this. <code>ctrl-r</code> has neve
 useful, responsive and easy to use.</p>
 <p>One way I&rsquo;ve used fzf to improve my helpers is with this alias to check out a
 git branch.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias gcb<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git co &#34;$(git branch -a | sed &#34;s/  //&#34; | grep -v &#34;^*&#34; | fzf)&#34;&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias gcb<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git co &#34;$(git branch -a | sed &#34;s/  //&#34; | grep -v &#34;^*&#34; | fzf)&#34;&#39;</span>
 </code></pre></div><script id="asciicast-346970" src="https://asciinema.org/a/346970.js" async></script>
 <p>There are also some bash specific settings I like to set, to be able to move
 around faster. For instance:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bind <span style="color:#e6db74">&#39;set completion-ignore-case on&#39;</span> <span style="color:#75715e"># Case-insensitive autocompletion</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bind <span style="color:#e6db74">&#39;set completion-ignore-case on&#39;</span> <span style="color:#75715e"># Case-insensitive autocompletion</span>
 shopt -s nocaseglob <span style="color:#75715e"># Case-insensitive globbing (used in pathname expansion)</span>
 shopt -s cdspell <span style="color:#75715e"># Autocorrect typos in path names when using `cd`</span>
 </code></pre></div><p>Now I don&rsquo;t need to bother with getting the case right for auto completion, and
 I can even be a bit sloppy and cd will adjust my input to match the available
 results.</p>
 <p>I&rsquo;m also a big fan of vi, and as such my prompt should reflect that.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set -o vi
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set -o vi
 bind <span style="color:#e6db74">&#39;set show-mode-in-prompt on&#39;</span>
 bind <span style="color:#e6db74">&#39;set vi-cmd-mode-string &#34;\1\e[38;5;4m\e[49m\2 ➜ \1\e[39m\e[00m\2&#34;&#39;</span>
 bind <span style="color:#e6db74">&#39;set vi-ins-mode-string &#34;\1\e[38;5;8m\e[49m\2 ➜ \1\e[39m\e[00m\2&#34;&#39;</span>
@@ -177,7 +177,7 @@ bind <span style="color:#e6db74">&#39;set vi-ins-mode-string &#34;\1\e[38;5;8m\e
 insert an arrow, which is light green when in normal mode, and gray in insert
 mode. But the vi-mode does remove a few useful key bindings I&rsquo;ve gotten used to,
 so to remedy that, I&rsquo;ve got these defined.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bind -m vi-insert <span style="color:#e6db74">&#34;\C-l&#34;</span>:clear-screen
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">bind -m vi-insert <span style="color:#e6db74">&#34;\C-l&#34;</span>:clear-screen
 bind -m vi-insert <span style="color:#e6db74">&#34;\C-a&#34;</span>:beginning-of-line
 bind -m vi-insert <span style="color:#e6db74">&#34;\C-e&#34;</span>:end-of-line
 bind -m vi-insert <span style="color:#e6db74">&#34;\C-w&#34;</span>:delete-word

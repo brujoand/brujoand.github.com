@@ -3,7 +3,7 @@
   <head>
     <title>What&#39;s going on in my shell? // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.85.0" />
+    <meta name="generator" content="Hugo 0.87.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -90,7 +90,7 @@ function shell_init_file() { # Returns what would be your initfile if [[ $- == *
     <div class="post-content">
       <p>To help me figure this out, I use a few shell functions. Firstly, I need to know
 what configuration file that was used.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> shell_init_file<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Returns what would be your initfile</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> shell_init_file<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Returns what would be your initfile</span>
   <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $- <span style="color:#f92672">==</span> *i* <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
     echo ~/.bashrc
   <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> -f ~/.bash_profile <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
@@ -108,7 +108,7 @@ what configuration file that was used.</p>
 if we are. If not it checks for the various login files.</p>
 <p>Thats all great, but now we need to figure out what files have been sourced from
 that first file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> _sourced_files<span style="color:#f92672">(){</span> <span style="color:#75715e"># Helper for sourced_files</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> _sourced_files<span style="color:#f92672">(){</span> <span style="color:#75715e"># Helper for sourced_files</span>
   sed -En <span style="color:#e6db74">&#39;s/^[.|source]+ (.*)/\1/p&#39;</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> | <span style="color:#66d9ef">while</span> IFS<span style="color:#f92672">=</span> read -r f; <span style="color:#66d9ef">do</span>
     expanded<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>f/#<span style="color:#ae81ff">\~</span>/$HOME<span style="color:#e6db74">}</span> | envsubst | tr -d <span style="color:#e6db74">&#39;&#34;&#39;</span><span style="color:#66d9ef">)</span>
     echo <span style="color:#e6db74">&#34;</span>$expanded<span style="color:#e6db74">&#34;</span>
@@ -127,10 +127,10 @@ being sourced etc..</p>
 <p>Now we have some kind of idea about what is being configured in our shell. You
 might have noticed that I add <code># some description</code> after my function definitions?
 This is so I can get these two nifty helpers:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias halp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;echo -e &#34;Sourced files:\n$(sourced_files | sed &#34;s#$HOME/#~/#&#34;)\n # \nFunctions:\n$(list_functions)\n # \nAliases:\n\n$(list_aliases)&#34; | column -t -s &#34;#&#34;&#39;</span> <span style="color:#75715e"># Show all custom aliases and functions</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias halp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;echo -e &#34;Sourced files:\n$(sourced_files | sed &#34;s#$HOME/#~/#&#34;)\n # \nFunctions:\n$(list_functions)\n # \nAliases:\n\n$(list_aliases)&#34; | column -t -s &#34;#&#34;&#39;</span> <span style="color:#75715e"># Show all custom aliases and functions</span>
 </code></pre></div><p>This is simply an alias that will list my sourced files, and show all functions,
 aliases and their description.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> _wat<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Completion for wat</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> _wat<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Completion for wat</span>
   local cur words
   _get_comp_words_by_ref cur
   words<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>list_aliases; list_functions | cut -d <span style="color:#e6db74">&#39; &#39;</span> -f 1<span style="color:#66d9ef">)</span>
@@ -157,7 +157,7 @@ complete -o nospace -F _wat wat
 </code></pre></div><p>So after looking at what helpers I have available using <code>halp</code> I can use <code>wat</code>
 to show me exactly where it&rsquo;s defined, what it looks like and how it&rsquo;s
 auto completed. <code>wat</code> also has auto completion through the <code>_wat</code> function. A sample output would look like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; wat list_aliases
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; wat list_aliases
 <span style="color:#75715e"># /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:66</span>
 <span style="color:#66d9ef">function</span> list_aliases<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># List all sourced aliases</span>
   <span style="color:#66d9ef">for</span> f in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
@@ -179,7 +179,7 @@ Unfortunately I haven&rsquo;t found a great way of pretty printing code on this 
 defined, and what they do. Now I&rsquo;d like to edit the config file containing some
 helper. Enter <code>esc</code>, which auto completes to my sourced files, and opens it with
 whatever I&rsquo;ve set as my <code>$EDITOR</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> esc<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Edit a shell config file</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> esc<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Edit a shell config file</span>
   local file
   file<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>grep <span style="color:#e6db74">&#34;/</span>$1$<span style="color:#e6db74">&#34;</span> &lt;<span style="color:#f92672">(</span>sourced_files<span style="color:#66d9ef">)</span><span style="color:#f92672">)</span>
   <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>EDITOR<span style="color:#66d9ef">:-</span>vi<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>

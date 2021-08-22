@@ -3,7 +3,7 @@
   <head>
     <title>How a Simple Bash Prompt became a complicated problem // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.85.0" />
+    <meta name="generator" content="Hugo 0.87.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -100,7 +100,7 @@ was suddenly a thing. I hadn&rsquo;t really been very involved with VCS before g
 but now I felt like I understood it. (I didn&rsquo;t).
 So I wanted to add the current git branch to my prompt. I quickly ended
 up with something like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">PS1<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\u@\h:\w$(git status 2&gt;/dev/null | sed -n &#34;s/On branch \(.*\)/ [\1]/p&#34;) &#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">PS1<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\u@\h:\w$(git status 2&gt;/dev/null | sed -n &#34;s/On branch \(.*\)/ [\1]/p&#34;) &#39;</span>
 </code></pre></div><p>This basically says that my prompt should be my &lsquo;my_user@my_host:my_working_dir&rsquo;
 and if the git status command gives us data, insert the branch in [brackets].
 Pretty simple, but with one gotcha. Notice that the value of the ´PS1´ variable is
@@ -151,7 +151,7 @@ a common best practice, which results in more subshells when using helper
 functions instead of just repeating the logic.</p>
 <p>So I ended up relying on pass by reference for returning values without spawing
 a subshell. Example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">
 <span style="color:#75715e"># Returning value by referencing the $1 variable</span>
 add_numbers<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
   local -n add_numbers_result<span style="color:#f92672">=</span>$1
@@ -196,10 +196,10 @@ we&rsquo;ve already hit our roof of 100ms.</p>
 <p>Concurrency in Bash is easy if you just want to run a
 bunch of jobs in the background and wait until they&rsquo;re finished. But if you care
 about their exit status and output it becomes a bit more tricky.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  execute_segment_script <span style="color:#e6db74">&#34;</span>$segment<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$direction<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$max_length<span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>tempdir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &amp; pids<span style="color:#f92672">[</span>i<span style="color:#f92672">]=</span>$!
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  execute_segment_script <span style="color:#e6db74">&#34;</span>$segment<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$direction<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$max_length<span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>tempdir<span style="color:#e6db74">}</span><span style="color:#e6db74">/</span><span style="color:#e6db74">${</span>i<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &amp; pids<span style="color:#f92672">[</span>i<span style="color:#f92672">]=</span>$!
 </code></pre></div><p>This obscurity is how I start a segment generation, output to a tempfile, and
 store the pid in an array.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  <span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>!pids[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  <span style="color:#66d9ef">for</span> i in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>!pids[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
     wait <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>pids[i]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
     <span style="color:#75715e"># Add it to the prompt</span>
   <span style="color:#66d9ef">done</span>
@@ -224,7 +224,7 @@ executing scripts, but as it will create a new bash process it will not have the
 sourced functions from SBP available. Instead I found a neat trick on
 <a href="https://stackoverflow.com/a/54688673/3503302">StackOverflow</a> which lead to
 this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">execute::nohup_function<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">execute::nohup_function<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
   <span style="color:#f92672">(</span>trap <span style="color:#e6db74">&#39;&#39;</span> HUP INT
     <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span>
   <span style="color:#f92672">)</span> &lt;/dev/null &amp;&gt;&gt;<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SBP_CONFIG<span style="color:#e6db74">}</span><span style="color:#e6db74">/hook.log&#34;</span> &amp;
@@ -241,7 +241,7 @@ asynchronously with ´&amp;´. Pretty nifty.</p>
 Bash builtins. This has added a lot of speed in many places as you can
 usually replace most grep/sed/awk expressions with parameter expansion.
 As an example consider replacing ´$HOME´ with ´~´ in your ´$PWD´:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> ➜ time sed <span style="color:#e6db74">&#34;s|</span>$HOME<span style="color:#e6db74">|\~|&#34;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> $PWD
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"> ➜ time sed <span style="color:#e6db74">&#34;s|</span>$HOME<span style="color:#e6db74">|\~|&#34;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> $PWD
 ~/src/sbp
 
 real 0m0.005s
@@ -263,7 +263,7 @@ a shell variable and the ´&laquo;&lt; $variable´ expression let&rsquo;s sed tr
 variable as a file.</p>
 <p>But for complicated search and replace like this sed to remove all color (and
 surrounding escape brackets) it wasn&rsquo;t as straight forward.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  strip_escaped_colors<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Bash" data-lang="Bash">  strip_escaped_colors<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     sed -E <span style="color:#e6db74">&#39;s/\\\[\\e\[[0123456789]([0123456789;])+m\\\]//g&#39;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
   <span style="color:#f92672">}</span>
 </code></pre></div><p>For my entire <code>$PS1</code> this takes about 6ms on my Macbook Pro as opposed to 12
@@ -304,13 +304,13 @@ length of the uncolored segments. Much less magic, and much faster. Keep it
 simple, stupid.</p>
 <h1 id="figuring-out-how-long-the-previous-user-command-took">Figuring out how long the previous user command took</h1>
 <p>So this was a tricky one and I started out doing something like so:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">command_start<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>HISTTIMEFORMAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%s &#39;</span> history <span style="color:#ae81ff">1</span> | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">command_start<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>HISTTIMEFORMAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%s &#39;</span> history <span style="color:#ae81ff">1</span> | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 command_end<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 command_duration<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> command_end <span style="color:#f92672">-</span> command_start <span style="color:#66d9ef">))</span>
 </code></pre></div><p>This works pretty well as long as the previous command is actually committed to
 history. In bash 4.4 we got the brand new ´PS0´ variable which is expanded right
 before executing a command. So in SBP I added this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  _sbp_pre_exec<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  _sbp_pre_exec<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     date +%s &gt; <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>SBP_TMP<span style="color:#e6db74">}</span><span style="color:#e6db74">/execution&#34;</span>
   <span style="color:#f92672">}</span>
 

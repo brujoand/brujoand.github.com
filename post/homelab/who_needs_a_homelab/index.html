@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Who_needs_a_homelab // Automate attention</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.87.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://blog.brujordet.no/css/main.min.4c68b05cd7072e94a56c3a8acdd6f6e73fb7a62ba6e1bb047413ce09c4fea7a8.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Who_needs_a_homelab"/>
+<meta name="twitter:description" content="In my second year at the Norwegian Tech &amp; Natural Science University (NTNU) in Trondheim I joined DotKom. A subcommittee in the student organization which maintained the infrastructure and web services. One of the perks was that we were allowed to place one server in the University server room which had a gigabit internet line. Pretty amazing speeds in 2008. I was a poor student though, and didn&rsquo;t have the cash to buy a server, so some of the more experienced DotKom members took me dumpster diving outside the various technical buildings."/>
+
+    <meta property="og:title" content="Who_needs_a_homelab" />
+<meta property="og:description" content="In my second year at the Norwegian Tech &amp; Natural Science University (NTNU) in Trondheim I joined DotKom. A subcommittee in the student organization which maintained the infrastructure and web services. One of the perks was that we were allowed to place one server in the University server room which had a gigabit internet line. Pretty amazing speeds in 2008. I was a poor student though, and didn&rsquo;t have the cash to buy a server, so some of the more experienced DotKom members took me dumpster diving outside the various technical buildings." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.brujordet.no/post/homelab/who_needs_a_homelab/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-08-22T10:13:22+02:00" />
+<meta property="article:modified_time" content="2021-08-22T10:13:22+02:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.brujordet.no/"><img class="app-header-avatar" src="/avatar.png" alt="John Doe" /></a>
+      <h1>Automate attention</h1>
+      <p>Tools and techniques I use to make life easier</p>
+      <a href="https://blog.brujordet.no//about">About me</a>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://twitter.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://www.linkedin.com/in/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+          <a target="_blank" href="https://www.github.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Who_needs_a_homelab</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 22, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          4 min read
+        </div></div>
+    </header>
+    <div class="post-content">
+      <p>In my second year at the Norwegian Tech &amp; Natural Science University (NTNU) in
+Trondheim I joined DotKom. A subcommittee in the student organization which
+maintained the infrastructure and web services. One of the perks was that we
+were allowed to place one server in the University server room which had a gigabit
+internet line. Pretty amazing speeds in 2008. I was a poor student though,
+and didn&rsquo;t have the cash to buy a server, so some of the more experienced DotKom
+members took me dumpster diving outside the various technical buildings. We
+found a surprising amount of hardware, but the best stuff were usually broken in
+some way and the rest was pretty old. Eventually I was able to re-purpose a
+Dell tower with a Pentium 4 processor and a staggering 4 GB of RAM.
+Four or five HDD were set up in RAID and an unhealthy amount
+of torrents were leeched and seeded. I took quite a lot of pride in managing a
+bash script which would scrape my favorite trackers, download interesting
+content, unpack it and finally alert me that new content had arrived. Due to all
+the various formats, trackers and quirks though it very much resembled the <a href="https://xkcd.com/1654/">xkcd universal installer
+script</a></p>
+<p>This server naturally also ran a number of other services like an IRC bouncer
+(chat), my personal webpage which never got new content, various selfhosted tooling I
+was experimenting with etc. Since I got a static public ip from the University
+I would usually ssh
+into my server to do any kind of heavy duty school work as my laptop was much weaker.
+It was like having a cool big brother that was always there to help. But as
+anyone who has hosted anything on the public web knows, eventually you&rsquo;ll learn
+how to secure your machine from the constant attempts to attack them.</p>
+<p>After finishing university I could finally afford some new hardware and bought a top
+spec&rsquo;ed mac mini with a quad core multithreaded i7 processor and a ReadyNAS Pro
+6 with 24 TB of disks. To top it all off I bought an Airport Extreme since I was
+already going all in an Apple hardware. Everything was great for a while, until
+these Raspberry Pi boards started making an appearance.</p>
+<p>A tiny computer the size of a credit card for around $5 was mind blowing to me.
+Sure it was pretty weak but when version 2 showed up, I jumped all in and bought
+5 of them because I wanted to learn about this fancy Kubernetes thing people
+were talking about. I&rsquo;ll spare you the details, but compiling custom binaries
+for all the needed components was a perilous adventure. When I finally got it
+running kubernetes was using most of the available resources, and I started
+longing towards more machine power. It looked amazing though, in a custom house
+built of Lego!</p>
+<img src="/lego_k8s.png" alt="Lego kubernetes" width="75%"/>
+<p>At this point I had transitioned from being a programmer with a fetish for
+servers and automation to being a &ldquo;DevOps engineer&rdquo; building a delivery platform
+of internal tooling.
+This really fueled my curiosity for new tools as this space is always
+growing and changing. So I did the only reasonable thing, I started buying used
+enterprise workstation off of Finn, Norways leading marketplace.</p>
+<p>Eventually I ended up with 8 machines running kubernetes, 5 Raspberry Pi boards
+running various services, a dedicated firewall running OPNsense and a nice big
+28 port switch supporting my Power over Ethernet wifi access points and
+security cameras.</p>
+<img src="/homelab.png" alt="Homelab Diagram" width="75%"/>
+<p>You might notice that my old mac mini and macbook pro are still going strong.
+Since I&rsquo;m realizing that this diagram creates more questions than answers I
+thought I&rsquo;d start a blog series going through some of the things I find most
+interesting. I&rsquo;ll update this post with links as they&rsquo;re available.</p>
+<ul>
+<li>Network
+<ul>
+<li>Separation for untrusted devices while allowing remote access</li>
+<li>Traffic monitoring, analysis and alerting through Loki</li>
+<li>Getting metrics from a managed switch into Prometheus</li>
+</ul>
+</li>
+<li>Kubernetes
+<ul>
+<li>Persistent storage on bare metal, Longhorn and NFS</li>
+<li>Oauth, Certificates and loadbalancing in and out of the cluster</li>
+<li>VPN gateway for pods with sensitive data</li>
+<li>Utilizing specialized hardware like GPUs or Zigbee dongles in specific pods</li>
+</ul>
+</li>
+<li>Home automation
+<ul>
+<li>Automating everything with Home Assistant</li>
+<li>Making dumb cameras smart with Frigate and Google Coral</li>
+<li>Radiohacking for to find weather and water data</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

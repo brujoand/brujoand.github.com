@@ -6,7 +6,16 @@
     <description>Recent content on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 12 Jul 2021 09:58:00 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 22 Aug 2021 10:13:22 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Who_needs_a_homelab</title>
+      <link>https://blog.brujordet.no/post/homelab/who_needs_a_homelab/</link>
+      <pubDate>Sun, 22 Aug 2021 10:13:22 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/homelab/who_needs_a_homelab/</guid>
+      <description>In my second year at the Norwegian Tech &amp;amp; Natural Science University (NTNU) in Trondheim I joined DotKom. A subcommittee in the student organization which maintained the infrastructure and web services. One of the perks was that we were allowed to place one server in the University server room which had a gigabit internet line. Pretty amazing speeds in 2008. I was a poor student though, and didn&amp;rsquo;t have the cash to buy a server, so some of the more experienced DotKom members took me dumpster diving outside the various technical buildings.</description>
+    </item>
+    
     <item>
       <title>Proper auto-completion for bash aliases</title>
       <link>https://blog.brujordet.no/post/bash/proper-autocompletion-for-bash-alias/</link>

@@ -3,7 +3,7 @@
   <head>
     <title>Unlocking My Keyboard // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.85.0" />
+    <meta name="generator" content="Hugo 0.87.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -105,7 +105,7 @@ tools</a> and install it, and while
 you&rsquo;re there you should also grab the <a href="https://gitlab.com/interception/linux/plugins/dual-function-keys">Dual Function
 Keys</a> plugin.</p>
 <p>First we create a systemd service in <code>/etc/systemd/system/udevmon.service</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
 Description<span style="color:#f92672">=</span>udevmon
 Wants<span style="color:#f92672">=</span>systemd-udev-settle.service
 After<span style="color:#f92672">=</span>systemd-udev-settle.service
@@ -118,7 +118,7 @@ Nice<span style="color:#f92672">=</span>-20
 WantedBy<span style="color:#f92672">=</span>multi-user.target
 </code></pre></div><p>Note that the udevmon location might vary depending on how you installed it.</p>
 <p>Then we should define the referenced <code>/etc/udevmon.yaml</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">- JOB: <span style="color:#e6db74">&#34;intercept -g `DEVNODE | dual-function-keys -c /etc/builtin-keyboard-modifications.yaml | uinput -d `DEVNODE&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">- JOB: <span style="color:#e6db74">&#34;intercept -g `DEVNODE | dual-function-keys -c /etc/builtin-keyboard-modifications.yaml | uinput -d `DEVNODE&#34;</span>
   DEVICE:
     NAME: <span style="color:#e6db74">&#34;Apple Inc. Apple Internal Keyboard / Trackpad&#34;</span>
     EVENTS:
@@ -127,13 +127,13 @@ WantedBy<span style="color:#f92672">=</span>multi-user.target
 the KEY_CAPSLOCK and do whatever is defined in
 <code>/etc/builtin-keyboard-modifications.yaml</code>. So you might want to run something
 similar to the following to find the name of your keyboard:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo uinput -p -d /dev/input/by-id/X
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo uinput -p -d /dev/input/by-id/X
 </code></pre></div><p>Where &lsquo;X&rsquo; is whatever seems to be your keyboard.
 There can be a bunch of different ones laying around so make sure that it has at
 least the KEY_CAPSLOCK which we want to remap.</p>
 <p>When that&rsquo;s all done we can finally create the actual mapping in
 <code>/etc/builtin-keyboard-modifications.yaml</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">TIMING:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">TIMING:
   TAP_MILLISEC: <span style="color:#ae81ff">200</span>
   DOUBLE_TAP_MILLISEC: <span style="color:#ae81ff">150</span>
 
