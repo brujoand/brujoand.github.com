@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Aug 2021 10:13:22 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Sep 2021 08:59:30 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sniffing water out of thin air</title>
+      <link>https://blog.brujordet.no/post/homelab/sniffing_water_out_of_thin_air/</link>
+      <pubDate>Fri, 10 Sep 2021 08:59:30 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/homelab/sniffing_water_out_of_thin_air/</guid>
+      <description>I don&amp;rsquo;t like having to relying on other peoples computers, aka the cloud, so when I can I selfhost the tools and services I need. But sometimes there isn&amp;rsquo;t a service to selfhost. This was the case with my mysterious smart water meter which is now enforced by my municipality. After some research I found out that I might be able to get to my precious water data by using a radio dongle.</description>
+    </item>
+    
     <item>
       <title>Who needs a homelab</title>
       <link>https://blog.brujordet.no/post/homelab/who_needs_a_homelab/</link>

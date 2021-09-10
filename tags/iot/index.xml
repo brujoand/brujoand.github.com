@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>iot on Automate attention</title>
+    <link>https://blog.brujordet.no/tags/iot/</link>
+    <description>Recent content in iot on Automate attention</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Sep 2021 08:59:30 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/tags/iot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sniffing water out of thin air</title>
+      <link>https://blog.brujordet.no/post/homelab/sniffing_water_out_of_thin_air/</link>
+      <pubDate>Fri, 10 Sep 2021 08:59:30 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/homelab/sniffing_water_out_of_thin_air/</guid>
+      <description>I don&amp;rsquo;t like having to relying on other peoples computers, aka the cloud, so when I can I selfhost the tools and services I need. But sometimes there isn&amp;rsquo;t a service to selfhost. This was the case with my mysterious smart water meter which is now enforced by my municipality. After some research I found out that I might be able to get to my precious water data by using a radio dongle.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>homelab on Automate attention</title>
+    <link>https://blog.brujordet.no/tags/homelab/</link>
+    <description>Recent content in homelab on Automate attention</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 10 Sep 2021 08:59:30 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/tags/homelab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sniffing water out of thin air</title>
+      <link>https://blog.brujordet.no/post/homelab/sniffing_water_out_of_thin_air/</link>
+      <pubDate>Fri, 10 Sep 2021 08:59:30 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/homelab/sniffing_water_out_of_thin_air/</guid>
+      <description>I don&amp;rsquo;t like having to relying on other peoples computers, aka the cloud, so when I can I selfhost the tools and services I need. But sometimes there isn&amp;rsquo;t a service to selfhost. This was the case with my mysterious smart water meter which is now enforced by my municipality. After some research I found out that I might be able to get to my precious water data by using a radio dongle.</description>
+    </item>
+    
+    <item>
+      <title>Who needs a homelab</title>
+      <link>https://blog.brujordet.no/post/homelab/who_needs_a_homelab/</link>
+      <pubDate>Sun, 22 Aug 2021 10:13:22 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/homelab/who_needs_a_homelab/</guid>
+      <description>In my second year at the Norwegian Tech &amp;amp; Natural Science University (NTNU) in Trondheim I joined DotKom. A subcommittee in the student organization which maintained the infrastructure and web services. One of the perks was that we were allowed to place one server in the University server room which had a gigabit internet line. Pretty amazing speeds in 2008. I was a poor student though, and didn&amp;rsquo;t have the cash to buy a server, so some of the more experienced DotKom members took me dumpster diving outside the various technical buildings.</description>
+    </item>
+    
+  </channel>
+</rss>
