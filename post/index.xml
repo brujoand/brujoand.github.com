@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Sep 2021 08:59:30 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 11 Sep 2021 08:55:15 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using custom hardware in kubernetes</title>
+      <link>https://blog.brujordet.no/post/homelab/using_custom_hardware_in_kubernetes/</link>
+      <pubDate>Sat, 11 Sep 2021 08:55:15 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/homelab/using_custom_hardware_in_kubernetes/</guid>
+      <description>One major difference between running k8s in a corporate setting vs running in a homelab is the extreme amount of custom hardware you end up wanting to put into the cluster. But this isn&amp;rsquo;t really how k8s was meant to be used. Any workload should be able to run anywhere, and be killed at any time and pop back up again. At least, for the most part. But I wanted to do some machine learning in my cluster using Google Coral TPU.</description>
+    </item>
+    
     <item>
       <title>Sniffing water out of thin air</title>
       <link>https://blog.brujordet.no/post/homelab/sniffing_water_out_of_thin_air/</link>
