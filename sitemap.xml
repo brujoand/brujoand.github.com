@@ -20,9 +20,6 @@
     <loc>https://blog.brujordet.no/tags/iot/</loc>
     <lastmod>2021-09-17T10:12:01+02:00</lastmod>
   </url><url>
-    <loc>https://blog.brujordet.no/tags/kubernetes/</loc>
-    <lastmod>2021-09-17T10:12:01+02:00</lastmod>
-  </url><url>
     <loc>https://blog.brujordet.no/post/</loc>
     <lastmod>2021-09-17T10:12:01+02:00</lastmod>
   </url><url>
@@ -31,6 +28,9 @@
   </url><url>
     <loc>https://blog.brujordet.no/tags/</loc>
     <lastmod>2021-09-17T10:12:01+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/kubernetes/</loc>
+    <lastmod>2021-09-11T08:55:15+02:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/post/homelab/using_custom_hardware_in_kubernetes/</loc>
     <lastmod>2021-09-11T08:55:15+02:00</lastmod>

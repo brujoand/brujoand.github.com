@@ -6,17 +6,7 @@
     <description>Recent content in kubernetes on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Sep 2021 10:12:01 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Replacing my doorbell with a video camera</title>
-      <link>https://blog.brujordet.no/post/homelab/replacing_my_doorbell/</link>
-      <pubDate>Fri, 17 Sep 2021 10:12:01 +0200</pubDate>
-      
-      <guid>https://blog.brujordet.no/post/homelab/replacing_my_doorbell/</guid>
-      <description>So my door bell ran out of battery, and I started wondering if I could use my security camera instead. In retrospect I could have gotten some batteries from the battery drawer, but wheres the fun in that!?
-So a while back I bought a bunch of Hikvision and Reolink Power over Ethernet (PoE) 4K security cameras. I like them because they only need one wire and have great quality builds for the price.</description>
-    </item>
-    
+    <lastBuildDate>Sat, 11 Sep 2021 08:55:15 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Using custom hardware in kubernetes</title>
       <link>https://blog.brujordet.no/post/homelab/using_custom_hardware_in_kubernetes/</link>
