@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <title>Replacing my doorbell with a video camera // Automate attention</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.87.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="http://localhost:1313/css/main.min.4c68b05cd7072e94a56c3a8acdd6f6e73fb7a62ba6e1bb047413ce09c4fea7a8.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Replacing my doorbell with a video camera"/>
+<meta name="twitter:description" content="So my door bell ran out of battery, and I started wondering if I could use my security camera instead. In retrospect I could have gotten some batteries from the battery drawer, but wheres the fun in that!?
+So a while back I bought a bunch of Hikvision and Reolink Power over Ethernet (PoE) 4K security cameras. I like them because they only need one wire and have great quality builds for the price."/>
+
+    <meta property="og:title" content="Replacing my doorbell with a video camera" />
+<meta property="og:description" content="So my door bell ran out of battery, and I started wondering if I could use my security camera instead. In retrospect I could have gotten some batteries from the battery drawer, but wheres the fun in that!?
+So a while back I bought a bunch of Hikvision and Reolink Power over Ethernet (PoE) 4K security cameras. I like them because they only need one wire and have great quality builds for the price." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/homelab/get_off_my_lawn/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-09-17T10:19:58+02:00" />
+<meta property="article:modified_time" content="2021-09-17T10:19:58+02:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="http://localhost:1313/"><img class="app-header-avatar" src="/avatar.png" alt="John Doe" /></a>
+      <h1>Automate attention</h1>
+      <p>Tools and techniques I use to make life easier</p>
+      <a href="http://localhost:1313//about">About me</a>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://twitter.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://www.linkedin.com/in/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+          <a target="_blank" href="https://www.github.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+      <a href="http://localhost:1313//index.xml">RSS</a>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Replacing my doorbell with a video camera</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Sep 17, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          6 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="http://localhost:1313/tags/homelab/">homelab</a><a class="tag" href="http://localhost:1313/tags/kubernetes/">kubernetes</a><a class="tag" href="http://localhost:1313/tags/iot/">iot</a><a class="tag" href="http://localhost:1313/tags/ai/">ai</a></div></div>
+    </header>
+    <div class="post-content">
+      <p>So my door bell ran out of
+battery, and I started wondering if I could use my security camera instead. In
+retrospect I could have gotten some batteries from the battery drawer, but
+wheres the fun in that!?</p>
+<p>So a while back I bought a bunch of Hikvision and Reolink Power over Ethernet (PoE)
+4K security cameras. I like them because they only need one wire and have great
+quality builds for the price. I don&rsquo;t trust them at all though, so they are
+completely sealed of from both my homelab network and the internet using a VLAN.
+Only my homelab can reach them, and nobody else.</p>
+<p>When I initially set these cameras up I tested a
+lot of different tools to capture and save video. In no particular order these
+were my findings:</p>
+<ul>
+<li>Blue Iris
+<ul>
+<li>Seems to be good software</li>
+<li>lots of features, even object detection</li>
+<li>But it requires a standalone Windows box, which I don&rsquo;t want to run</li>
+</ul>
+</li>
+<li>Zoneminder
+<ul>
+<li>Seems like decent software</li>
+<li>Again full of features, but often plugin based</li>
+<li>Felt a bit clunky to both run and configure</li>
+<li>Very active community</li>
+<li>But this is also a monolith and doesn&rsquo;t fit well in my kubernetes cluster</li>
+</ul>
+</li>
+<li>MotionEye:
+<ul>
+<li>Frontend for &lsquo;Motion&rsquo;</li>
+<li>Nice and small compared to the others</li>
+<li>I almost went for this one</li>
+</ul>
+</li>
+</ul>
+<p>There were a huge number of other options, many free, some with restrictions and
+even more paid solutions. But what I did notice was that they were all pretty
+much doing the same thing. Transcoding using GPU, some type of motion
+dectection, and many of them where now starting to do object detection using the
+<a href="https://coral.ai/">Google Coral TPU</a>. So I started searching Github (sorry
+Gitlab) for mentions of &ldquo;Coral&rdquo; and &ldquo;<a href="https://www.onvif.org/">Onvif</a>&rdquo; a standard
+many security cameras rely on which makes using them with different tooling much
+easier. That&rsquo;s when I found
+<a href="https://github.com/blakeblackshear/frigate">Frigate</a>.</p>
+<h2 id="frigate">Frigate</h2>
+<p>At the time the project was fairly new, but it had everything I wanted. It could
+do GPU offloading for transcoding of video, so less CPU usage. There was super
+fast object detection using the Coral, again much less CPU usage. And finally it
+had a good Home Assistant integration via MQTT so I could easily set it up in my
+existing system and I could use the Home Assistant app to view my cameras.
+Score!</p>
+<p>Since I had <a href="https://blog.brujordet.no/post/homelab/using_custom_hardware_in_kubernetes/">already setup 4 google
+corals</a>
+in my kubernetes cluster, I was ready to start playing with these right away. (You might
+have forgotten, but my mission here was to replace my door bell)</p>
+<p>The author of Frigate has a <a href="https://github.com/blakeblackshear/blakeshome-charts/">helm
+chart</a> which I use to
+deploy and the <a href="https://blakeblackshear.github.io/frigate/">documentation</a> is
+actually really good, so that should cover all your needs. But in summary, you
+need to define your cameras and tell Frigate if it should record everything, or
+just certain objects. You can also specify a low quality stream for the object
+detection, and a full quality stream for the recording.</p>
+<p>For my doorbell replacement though, I had to define some zones within the
+camera, so that I could be notified if someone is coming to my house.
+So let&rsquo;s first look at my Garden/Driveway camera:</p>
+<img src="/hagen.png" alt="My garden and driveway" width="75%"/>
+<p>You might think that it&rsquo;s a bit weirdly angled, but that&rsquo;s intentional. I want to
+get both the parking area in front of the house, the beginning of the drive way,
+and the entrance to the veranda. You might also notice that there is a huge
+problem here with motion detection, the trampoline. So to stop the kids and the
+trees from triggering the motion detection I&rsquo;ve added a some masks:</p>
+<img src="/masks.png" alt="My garden and driveway" width="75%"/>
+<p>Now only things that are visible can trigger the motion detection. I did not
+anticipate that my wife would put a tree on the veranda there and plant more
+trees along the road, so I might have to deal with that soon.</p>
+<p>The final step is to add zones, so Frigate can tell me in what area an object
+has been detected.</p>
+<img src="/zones.png" alt="My garden and driveway" width="75%"/>
+<p>So the bluish zone to the left is &ldquo;parking&rdquo;, the orange zone on the top is
+&ldquo;road&rdquo; and finally at the yellow zone at the bottom is &ldquo;veranda&rdquo;. Now frigate will
+send MQTT messages every time it detects movement. It could be only
+movement and no objects, or multiple objects all at once. The JSON payload in
+the MQTT message will have two objects which are Before and After. So if a
+person walks into the &ldquo;road&rdquo; zone, I&rsquo;ll get an MQTT message with an event saying
+that &lsquo;Before&rsquo; there was nothing anywhere, but &lsquo;After&rsquo; there was a &lsquo;Person&rsquo; in
+the zone &lsquo;Road&rsquo;. This makes it very easy to write simple automations in Home
+Assistant like so:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">id</span>: <span style="color:#ae81ff">arrival_notification</span>
+  <span style="color:#f92672">alias</span>: <span style="color:#ae81ff">Notify that something has arrived</span>
+  <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#39;&#39;</span>
+  <span style="color:#f92672">trigger</span>:
+  - <span style="color:#f92672">platform</span>: <span style="color:#ae81ff">mqtt</span>
+    <span style="color:#f92672">topic</span>: <span style="color:#ae81ff">frigate/events</span>
+  <span style="color:#f92672">condition</span>:
+  - <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">template</span>
+    <span style="color:#f92672">value_template</span>: <span style="color:#e6db74">&#39;{{ trigger.payload_json[&#34;after&#34;][&#34;label&#34;] in [&#34;person&#34;,&#34;car&#34;]}}&#39;</span>
+  - <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">template</span>
+    <span style="color:#f92672">value_template</span>: <span style="color:#e6db74">&#39;{{ &#34;road&#34; in trigger.payload_json[&#34;before&#34;][&#34;current_zones&#34;]}}&#39;</span>
+  - <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">template</span>
+    <span style="color:#f92672">value_template</span>: <span style="color:#e6db74">&#39;{{ &#34;parking&#34; in trigger.payload_json[&#34;after&#34;][&#34;current_zones&#34;]}}&#39;</span>
+  <span style="color:#f92672">action</span>:
+  - <span style="color:#f92672">service</span>: <span style="color:#ae81ff">notify.notify</span>
+    <span style="color:#f92672">data_template</span>:
+      <span style="color:#f92672">message</span>: <span style="color:#ae81ff">A {{ trigger.payload_json[&#39;after&#39;][&#39;label&#39;] }} has arrived</span>
+      <span style="color:#f92672">data</span>:
+        <span style="color:#f92672">attachment</span>:
+          <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://hassio.example.com/api/frigate/notifications/{{trigger.payload_json[&#39;after&#39;][&#39;id&#39;]}}/thumbnail.jpg</span>
+          <span style="color:#f92672">content-type</span>: <span style="color:#ae81ff">png</span>
+          <span style="color:#f92672">hide-thumbnail</span>: <span style="color:#66d9ef">false</span>
+  - <span style="color:#f92672">service</span>: <span style="color:#ae81ff">tts.google_translate_say</span>
+    <span style="color:#f92672">data_template</span>:
+      <span style="color:#f92672">entity_id</span>: <span style="color:#ae81ff">media_player.livingroom_speaker</span>
+      <span style="color:#f92672">message</span>: <span style="color:#ae81ff">A {{trigger.payload_json[&#39;after&#39;][&#39;label&#39;]}} has arrived.</span>
+</code></pre></div><p>So this automation is triggered by an MQTT message on the &lsquo;frigate/events&rsquo;
+topic, and checks if a person or a car is detected in the &lsquo;After&rsquo; object. We
+also check if the object was first in the &lsquo;Road&rsquo; zone and later in the &lsquo;Parking&rsquo;
+zone. Meaning this object is actually coming towards the house. And finally, we
+send a notification to my phone, with a thumbnail of the object. I also have a
+speaker in the living room announcing these events, because I like robot voices
+:D</p>
+<p>I&rsquo;ve also written a reverse automation to alert me when something is leaving,
+but this pretty much fixes my whole &lsquo;doorbell ran out of battery&rsquo; situation I
+would say! No batteries needed, ever :)</p>
+<p>Frigate uses a pre-trained model for the object detection which works really
+well for most things I&rsquo;ve tried. It also has a lot of objects I haven&rsquo;t bothered
+testing, but I&rsquo;m still waiting for it to detect motion from
+a toaster though. It&rsquo;s probably an ominous sign.
+Let&rsquo;s instead finish off by watching an event unfold:</p>
+<img src="/frigate.gif" alt="My garden and driveway" width="75%"/>
+<p>I created this gif by piping a screencast into ffmpeg so it&rsquo;s a bit jittery but
+you get the idea.
+As I&rsquo;m walking in the &lsquo;Road&rsquo; zone Frigate quickly identifies me as a person with 77%
+accuracy. This event alone does nothing for my automation, but as I pop out behind those trees I&rsquo;m
+again identified now with 84% accuracy as I enter the &lsquo;Parking&rsquo; zone. This
+triggers my Home Assistant automation and a notification is sent to my phone:</p>
+<img src="/person.jpeg" alt="My person being detected" width="75%"/>
+<p>The notification is in Norwegian on the screenshot from my phone, but it says
+&ldquo;A person has arrived&rdquo;.</p>
+<p>Frigate has been rock solid for me for almost a year now, and
+there are lot&rsquo;s of cool features in the pipeline and on the drawing board. One
+thing I&rsquo;m particularly interested in is license plate detection on cars, so I
+can know if it&rsquo;s my wife that have just arrived or if it&rsquo;s the pizza delivery
+guy. Both are great, but one has pizza!</p>
+<p>Unfortunately that is a risky landscape with regards to privacy so it might
+be hard to get right.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
