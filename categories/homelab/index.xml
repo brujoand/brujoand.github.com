@@ -6,7 +6,17 @@
     <description>Recent content in homelab on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 17 Sep 2021 10:12:01 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/categories/homelab/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 04 Dec 2021 09:09:42 +0100</lastBuildDate><atom:link href="https://blog.brujordet.no/categories/homelab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Forcing Roelink cameras to play nice with the other kids</title>
+      <link>https://blog.brujordet.no/post/homelab/forcing_reolink_cameras_to_play_nice_with_the_other_kids/</link>
+      <pubDate>Sat, 04 Dec 2021 09:09:42 +0100</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/homelab/forcing_reolink_cameras_to_play_nice_with_the_other_kids/</guid>
+      <description>So from my post about replacing my doorbell with a security camera you might have noticed that I have a accumulated quite a few PoE security cameras that I use with Frigate to get object detection and fancy integrations with Home-Assistant. The part I didn&amp;rsquo;t go into detail about was the struggle with my latest cameras, the [Reolink 820a](https://reolink.com/product/rlc-820a/].
+So on the surface these cameras are great. They look nice, support power over Ethernet, doesn&amp;rsquo;t rely on a cloud service and are very simple to set up.</description>
+    </item>
+    
     <item>
       <title>Replacing my doorbell with a security camera</title>
       <link>https://blog.brujordet.no/post/homelab/replacing_my_doorbell/</link>

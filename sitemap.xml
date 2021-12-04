@@ -2,31 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.brujordet.no/</loc>
+    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/categories/</loc>
+    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/ffmpeg/</loc>
+    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/post/homelab/forcing_reolink_cameras_to_play_nice_with_the_other_kids/</loc>
+    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/homelab/</loc>
+    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/categories/homelab/</loc>
+    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/iot/</loc>
+    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/post/</loc>
+    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/</loc>
+    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/transcoding/</loc>
+    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/ai/</loc>
     <lastmod>2021-09-17T10:12:01+02:00</lastmod>
   </url><url>
-    <loc>https://blog.brujordet.no/</loc>
-    <lastmod>2021-09-17T10:12:01+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/categories/</loc>
-    <lastmod>2021-09-17T10:12:01+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/tags/homelab/</loc>
-    <lastmod>2021-09-17T10:12:01+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/categories/homelab/</loc>
-    <lastmod>2021-09-17T10:12:01+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/tags/iot/</loc>
-    <lastmod>2021-09-17T10:12:01+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/post/</loc>
-    <lastmod>2021-09-17T10:12:01+02:00</lastmod>
-  </url><url>
     <loc>https://blog.brujordet.no/post/homelab/replacing_my_doorbell/</loc>
-    <lastmod>2021-09-17T10:12:01+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/tags/</loc>
     <lastmod>2021-09-17T10:12:01+02:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/tags/kubernetes/</loc>
