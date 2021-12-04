@@ -139,7 +139,7 @@ this:</p>
 </span><span style="color:#ae81ff"></span>  -use_wallclock_as_timestamps <span style="color:#ae81ff">1</span> -fflags nobuffer -loglevel warning -hide_banner <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  -rtsp_transport tcp -hwaccel qsv -c:v hevc_qsv <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  -i <span style="color:#e6db74">&#39;rtsp://admin:password@10.20.1.14:554&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -vf <span style="color:#e6db74">&#39;fps=fps=20,scale_qsv=w=3841:h=2160&#39;</span> -c:v h264_qsv -timestamp now -g <span style="color:#ae81ff">100</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  -vf <span style="color:#e6db74">&#39;fps=fps=20,scale_qsv=w=3840:h=2160&#39;</span> -c:v h264_qsv -timestamp now -g <span style="color:#ae81ff">100</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  -profile main -b:v 6M -c:a copy -f rtsp -rtsp_transport tcp rtsp://0.0.0.0:8554/stua <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  -vf <span style="color:#e6db74">&#39;fps=fps=5,scale_qsv=w=1280:h=720&#39;</span> -c:v h264_qsv -timestamp now -g <span style="color:#ae81ff">25</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  -profile main -b:v 1M -an -f rtsp -rtsp_transport tcp rtsp://0.0.0.0:8554/stua_sub
@@ -160,7 +160,7 @@ me if you see something that&rsquo;s incorrectly explained.</p>
 </ul>
 <p>Output arguments for the main stream:</p>
 <ul>
-<li><code>'fps=fps=20,scale_qsv=w=3841:h=2160'</code>: Set it to 20fps and 4k resolution at 3841x2160</li>
+<li><code>'fps=fps=20,scale_qsv=w=3840:h=2160'</code>: Set it to 20fps and 4k resolution at 3840x2160</li>
 <li><code>-c:v h264_qsv</code>: Use the Intel QuickSync encoder to encode the output</li>
 <li><code>-timestamp now</code>: Create new timestamps for the output stream</li>
 <li><code>-g 100</code>: Set the picture group to (fps*5) to force every 5th frame to be an I-frame</li>
