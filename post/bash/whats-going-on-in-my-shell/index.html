@@ -3,7 +3,7 @@
   <head>
     <title>What&#39;s going on in my shell? // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.101.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -91,114 +91,114 @@ function shell_init_file() { # Returns what would be your initfile if [[ $- == *
     <div class="post-content">
       <p>To help me figure this out, I use a few shell functions. Firstly, I need to know
 what configuration file that was used.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> shell_init_file<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Returns what would be your initfile</span>
-  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $- <span style="color:#f92672">==</span> *i* <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-    echo ~/.bashrc
-  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> -f ~/.bash_profile <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-    echo ~/.bash_profile
-  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> -f ~/.bash_login <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-    echo ~/.bash_login
-  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> -f ~/.profile <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-    echo ~/.profile
-  <span style="color:#66d9ef">else</span>
-    echo <span style="color:#e6db74">&#34;Could not find any config files..&#34;</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-  <span style="color:#66d9ef">fi</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>This function checks if we&rsquo;re in an interactive shell or not, and returns bashrc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> shell_init_file<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Returns what would be your initfile</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $- <span style="color:#f92672">==</span> *i* <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo ~/.bashrc
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> -f ~/.bash_profile <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo ~/.bash_profile
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> -f ~/.bash_login <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo ~/.bash_login
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">elif</span> <span style="color:#f92672">[[</span> -f ~/.profile <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    echo ~/.profile
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Could not find any config files..&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>This function checks if we&rsquo;re in an interactive shell or not, and returns bashrc
 if we are. If not it checks for the various login files.</p>
 <p>Thats all great, but now we need to figure out what files have been sourced from
 that first file.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> _sourced_files<span style="color:#f92672">(){</span> <span style="color:#75715e"># Helper for sourced_files</span>
-  sed -En <span style="color:#e6db74">&#39;s/^[.|source]+ (.*)/\1/p&#39;</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> | <span style="color:#66d9ef">while</span> IFS<span style="color:#f92672">=</span> read -r f; <span style="color:#66d9ef">do</span>
-    expanded<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>f/#<span style="color:#ae81ff">\~</span>/$HOME<span style="color:#e6db74">}</span> | envsubst | tr -d <span style="color:#e6db74">&#39;&#34;&#39;</span><span style="color:#66d9ef">)</span>
-    echo <span style="color:#e6db74">&#34;</span>$expanded<span style="color:#e6db74">&#34;</span>
-    _sourced_files <span style="color:#e6db74">&#34;</span>$expanded<span style="color:#e6db74">&#34;</span>
-  <span style="color:#66d9ef">done</span>
-<span style="color:#f92672">}</span>
-
-<span style="color:#66d9ef">function</span> sourced_files<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Lists files which (s/w)hould have been sourced to this shell</span>
-  init_file<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>shell_init_file<span style="color:#66d9ef">)</span>
-  echo <span style="color:#e6db74">&#34;</span>$init_file<span style="color:#e6db74">&#34;</span>
-  _sourced_files <span style="color:#e6db74">&#34;</span>$init_file<span style="color:#e6db74">&#34;</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>The function <code>sourced_files</code> is just a wrapper that checks the initial config
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> _sourced_files<span style="color:#f92672">(){</span> <span style="color:#75715e"># Helper for sourced_files</span>
+</span></span><span style="display:flex;"><span>  sed -En <span style="color:#e6db74">&#39;s/^[.|source]+ (.*)/\1/p&#39;</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> | <span style="color:#66d9ef">while</span> IFS<span style="color:#f92672">=</span> read -r f; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    expanded<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>echo <span style="color:#e6db74">${</span>f/#<span style="color:#ae81ff">\~</span>/$HOME<span style="color:#e6db74">}</span> | envsubst | tr -d <span style="color:#e6db74">&#39;&#34;&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;</span>$expanded<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    _sourced_files <span style="color:#e6db74">&#34;</span>$expanded<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> sourced_files<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Lists files which (s/w)hould have been sourced to this shell</span>
+</span></span><span style="display:flex;"><span>  init_file<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>shell_init_file<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  echo <span style="color:#e6db74">&#34;</span>$init_file<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  _sourced_files <span style="color:#e6db74">&#34;</span>$init_file<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>The function <code>sourced_files</code> is just a wrapper that checks the initial config
 file, and then calls <code>_sourced_files</code> to check what files are then
 being sourced etc..</p>
 <p>Now we have some kind of idea about what is being configured in our shell. You
 might have noticed that I add <code># some description</code> after my function definitions?
 This is so I can get these two nifty helpers:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias halp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;echo -e &#34;Sourced files:\n$(sourced_files | sed &#34;s#$HOME/#~/#&#34;)\n # \nFunctions:\n$(list_functions)\n # \nAliases:\n\n$(list_aliases)&#34; | column -t -s &#34;#&#34;&#39;</span> <span style="color:#75715e"># Show all custom aliases and functions</span>
-</code></pre></div><p>This is simply an alias that will list my sourced files, and show all functions,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>alias halp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;echo -e &#34;Sourced files:\n$(sourced_files | sed &#34;s#$HOME/#~/#&#34;)\n # \nFunctions:\n$(list_functions)\n # \nAliases:\n\n$(list_aliases)&#34; | column -t -s &#34;#&#34;&#39;</span> <span style="color:#75715e"># Show all custom aliases and functions</span>
+</span></span></code></pre></div><p>This is simply an alias that will list my sourced files, and show all functions,
 aliases and their description.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> _wat<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Completion for wat</span>
-  local cur words
-  _get_comp_words_by_ref cur
-  words<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>list_aliases; list_functions | cut -d <span style="color:#e6db74">&#39; &#39;</span> -f 1<span style="color:#66d9ef">)</span>
-  COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span> compgen -W <span style="color:#e6db74">&#34;</span>$words<span style="color:#e6db74">&#34;</span> -- <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
-<span style="color:#f92672">}</span>
-
-complete -o nospace -F _wat wat
-
-<span style="color:#66d9ef">function</span> wat<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># show help and location of a custom function or alias</span>
-  local query pp
-  query<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
-  pp<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cat&#34;</span>
-  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -n <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>type bat 2&gt; /dev/null<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-    pp<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bat -l bash -p&#34;</span>
-  <span style="color:#66d9ef">fi</span>
-
-  <span style="color:#66d9ef">for</span> file in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
-    awk <span style="color:#e6db74">&#39;/^function &#39;</span><span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;\(\)/,/^}/ { i++; if(i==1){print &#34;# &#34; FILENAME &#34;:&#34; FNR RS $0;} else {print $0;}}&#39;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
-    awk <span style="color:#e6db74">&#39;/^function \_&#39;</span><span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;\(\)/,/^}/ { i++; if(i==1){print &#34;# &#34; FILENAME &#34;:&#34; FNR RS $0;} else {print $0;}}&#39;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
-    awk <span style="color:#e6db74">&#39;/^alias &#39;</span><span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;=/,/$/ {print &#34;# &#34; FILENAME &#34;:&#34; FNR RS $0 RS;}&#39;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
-  <span style="color:#66d9ef">done</span> | $pp
-  complete -p <span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span> 2&gt; /dev/null
-<span style="color:#f92672">}</span>
-</code></pre></div><p>So after looking at what helpers I have available using <code>halp</code> I can use <code>wat</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> _wat<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Completion for wat</span>
+</span></span><span style="display:flex;"><span>  local cur words
+</span></span><span style="display:flex;"><span>  _get_comp_words_by_ref cur
+</span></span><span style="display:flex;"><span>  words<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>list_aliases; list_functions | cut -d <span style="color:#e6db74">&#39; &#39;</span> -f 1<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>  COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span> compgen -W <span style="color:#e6db74">&#34;</span>$words<span style="color:#e6db74">&#34;</span> -- <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>complete -o nospace -F _wat wat
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> wat<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># show help and location of a custom function or alias</span>
+</span></span><span style="display:flex;"><span>  local query pp
+</span></span><span style="display:flex;"><span>  query<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  pp<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;cat&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -n <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>type bat 2&gt; /dev/null<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    pp<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bat -l bash -p&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> file in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    awk <span style="color:#e6db74">&#39;/^function &#39;</span><span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;\(\)/,/^}/ { i++; if(i==1){print &#34;# &#34; FILENAME &#34;:&#34; FNR RS $0;} else {print $0;}}&#39;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    awk <span style="color:#e6db74">&#39;/^function \_&#39;</span><span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;\(\)/,/^}/ { i++; if(i==1){print &#34;# &#34; FILENAME &#34;:&#34; FNR RS $0;} else {print $0;}}&#39;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    awk <span style="color:#e6db74">&#39;/^alias &#39;</span><span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;=/,/$/ {print &#34;# &#34; FILENAME &#34;:&#34; FNR RS $0 RS;}&#39;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">done</span> | $pp
+</span></span><span style="display:flex;"><span>  complete -p <span style="color:#e6db74">&#34;</span>$query<span style="color:#e6db74">&#34;</span> 2&gt; /dev/null
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>So after looking at what helpers I have available using <code>halp</code> I can use <code>wat</code>
 to show me exactly where it&rsquo;s defined, what it looks like and how it&rsquo;s
 auto completed. <code>wat</code> also has auto completion through the <code>_wat</code> function. A sample output would look like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$&gt; wat list_aliases
-<span style="color:#75715e"># /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:66</span>
-<span style="color:#66d9ef">function</span> list_aliases<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># List all sourced aliases</span>
-  <span style="color:#66d9ef">for</span> f in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
-    sed -n <span style="color:#e6db74">&#34;s/^alias \(.*\)=[&#39;|\&#34;].*#\(.*\)</span>$<span style="color:#e6db74">/\1 #\2/p&#34;</span> <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74">&#34;</span> | sed <span style="color:#e6db74">&#34;s/list_aliases=.*#/list_aliases #/&#34;</span>
-  <span style="color:#66d9ef">done</span> | sort
-<span style="color:#f92672">}</span>
-
-$&gt; wat list_functions
-<span style="color:#75715e"># /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:60</span>
-<span style="color:#66d9ef">function</span> list_functions<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># List all sourced functions</span>
-  <span style="color:#66d9ef">for</span> f in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
-    sed -n <span style="color:#e6db74">&#34;s/^function \(.*\)() { \(.*\)</span>$<span style="color:#e6db74">/\1 \2/p&#34;</span> &lt;<span style="color:#f92672">(</span>cat <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span> | grep -v <span style="color:#e6db74">&#34;^_&#34;</span>
-  <span style="color:#66d9ef">done</span> | sort
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Oh, and this output is pretty printed using <code>bat</code>, it&rsquo;s super nice :)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$&gt; wat list_aliases
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:66</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> list_aliases<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># List all sourced aliases</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> f in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    sed -n <span style="color:#e6db74">&#34;s/^alias \(.*\)=[&#39;|\&#34;].*#\(.*\)</span>$<span style="color:#e6db74">/\1 #\2/p&#34;</span> <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74">&#34;</span> | sed <span style="color:#e6db74">&#34;s/list_aliases=.*#/list_aliases #/&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">done</span> | sort
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$&gt; wat list_functions
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># /Users/brujoand/src/brujoand/dotfiles/bash/function.bash:60</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> list_functions<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># List all sourced functions</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> f in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>    sed -n <span style="color:#e6db74">&#34;s/^function \(.*\)() { \(.*\)</span>$<span style="color:#e6db74">/\1 \2/p&#34;</span> &lt;<span style="color:#f92672">(</span>cat <span style="color:#e6db74">&#34;</span>$f<span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span> | grep -v <span style="color:#e6db74">&#34;^_&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">done</span> | sort
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Oh, and this output is pretty printed using <code>bat</code>, it&rsquo;s super nice :)
 Unfortunately I haven&rsquo;t found a great way of pretty printing code on this blog though :/
 (ha, finally figured it out. Pygments powered syntax highlighting)</p>
 <p>Now, the final touch. I can figure out what helpers I have, where they are
 defined, and what they do. Now I&rsquo;d like to edit the config file containing some
 helper. Enter <code>esc</code>, which auto completes to my sourced files, and opens it with
 whatever I&rsquo;ve set as my <code>$EDITOR</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> esc<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Edit a shell config file</span>
-  local file
-  file<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>grep <span style="color:#e6db74">&#34;/</span>$1$<span style="color:#e6db74">&#34;</span> &lt;<span style="color:#f92672">(</span>sourced_files<span style="color:#66d9ef">)</span><span style="color:#f92672">)</span>
-  <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>EDITOR<span style="color:#66d9ef">:-</span>vi<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
-<span style="color:#f92672">}</span>
-
-<span style="color:#66d9ef">function</span> _esc<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Fuzzy tabcompletion for esc</span>
-  local cur config_files
-  _get_comp_words_by_ref cur
-  config_files<span style="color:#f92672">=</span><span style="color:#66d9ef">$(for</span> file in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span> echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>file##*/<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">done)</span>
-
-  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -z <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-    COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span> compgen -W <span style="color:#e6db74">&#34;</span>$config_files<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
-  <span style="color:#66d9ef">else</span>
-    COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span>grep -i <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$config_files<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
-  <span style="color:#66d9ef">fi</span>
-<span style="color:#f92672">}</span>
-complete -o nospace -F _esc esc
-</code></pre></div><p>Discussion: <a href="https://www.reddit.com/r/bash/comments/dtxaxu/3min_blogpost_whats_going_on_in_my_shell_helpers/">reddit.com/r/bash - post</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> esc<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Edit a shell config file</span>
+</span></span><span style="display:flex;"><span>  local file
+</span></span><span style="display:flex;"><span>  file<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>grep <span style="color:#e6db74">&#34;/</span>$1$<span style="color:#e6db74">&#34;</span> &lt;<span style="color:#f92672">(</span>sourced_files<span style="color:#66d9ef">)</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>EDITOR<span style="color:#66d9ef">:-</span>vi<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> _esc<span style="color:#f92672">()</span> <span style="color:#f92672">{</span> <span style="color:#75715e"># Fuzzy tabcompletion for esc</span>
+</span></span><span style="display:flex;"><span>  local cur config_files
+</span></span><span style="display:flex;"><span>  _get_comp_words_by_ref cur
+</span></span><span style="display:flex;"><span>  config_files<span style="color:#f92672">=</span><span style="color:#66d9ef">$(for</span> file in <span style="color:#66d9ef">$(</span>sourced_files<span style="color:#66d9ef">)</span>; <span style="color:#66d9ef">do</span> echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>file##*/<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">done)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> -z <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span> compgen -W <span style="color:#e6db74">&#34;</span>$config_files<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>    COMPREPLY<span style="color:#f92672">=(</span> <span style="color:#66d9ef">$(</span>grep -i <span style="color:#e6db74">&#34;</span>$cur<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$config_files<span style="color:#e6db74">&#34;</span> <span style="color:#66d9ef">)</span> <span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>complete -o nospace -F _esc esc
+</span></span></code></pre></div><p>Discussion: <a href="https://www.reddit.com/r/bash/comments/dtxaxu/3min_blogpost_whats_going_on_in_my_shell_helpers/">reddit.com/r/bash - post</a></p>
 
     </div>
     <div class="post-footer">

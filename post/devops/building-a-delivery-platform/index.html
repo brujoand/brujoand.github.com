@@ -3,7 +3,7 @@
   <head>
     <title>Building a Delivery Platform // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.101.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -166,30 +166,29 @@ easy to step outside when needed. In so doing, the teams should be aware
 however, that they own that extra mile until they are back on our path.</p>
 <p>An example is probably helpful. Let&rsquo;s say that to enroll in your golden path,
 all you need to do is to add a <code>paas.yml</code> to your git repo:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">version</span>: <span style="color:#ae81ff">2</span>
-<span style="color:#f92672">application_name</span>: <span style="color:#e6db74">&#39;dogfood-api&#39;</span>
-</code></pre></div><p>And that&rsquo;s it. This yaml file might actually just be an override to a default
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">application_name</span>: <span style="color:#e6db74">&#39;dogfood-api&#39;</span>
+</span></span></code></pre></div><p>And that&rsquo;s it. This yaml file might actually just be an override to a default
 shared configuration that holds all the default integrations like static code
 analysis, vulnerability scans and how to deploy the application. At Schibsted we
 used <a href="https://fiaas.github.io/">fiaas</a> for this. Usually the
 defaults wont be enough so you might want to override some of them like so:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">version</span>: <span style="color:#ae81ff">2</span>
-<span style="color:#f92672">application_name</span>: <span style="color:#e6db74">&#39;dogfood-api&#39;</span>
-<span style="color:#f92672">healthchecks</span>:
-  <span style="color:#f92672">liveness</span>:
-    <span style="color:#f92672">http</span>:
-      <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/_/my_unconventional_health_check_path</span>
-<span style="color:#f92672">ingress</span>:
-- <span style="color:#f92672">host</span>: <span style="color:#ae81ff">dogfood-api.ingress.local</span>
-<span style="color:#f92672">ports</span>:
-- <span style="color:#f92672">target_port</span>: <span style="color:#ae81ff">5678</span>
-<span style="color:#f92672">replicas</span>:
-  <span style="color:#f92672">maximum</span>: <span style="color:#ae81ff">10</span>
-  <span style="color:#f92672">minimum</span>: <span style="color:#ae81ff">20</span>
-<span style="color:#f92672">SonarQube</span>:
-- <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">false</span>
-
-</code></pre></div><p>This worked very well for us by providing a fully working pipeline with little
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">version</span>: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">application_name</span>: <span style="color:#e6db74">&#39;dogfood-api&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">healthchecks</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">liveness</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">http</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">path</span>: <span style="color:#ae81ff">/_/my_unconventional_health_check_path</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">ingress</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">host</span>: <span style="color:#ae81ff">dogfood-api.ingress.local</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">ports</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">target_port</span>: <span style="color:#ae81ff">5678</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">replicas</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">maximum</span>: <span style="color:#ae81ff">10</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">minimum</span>: <span style="color:#ae81ff">20</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">SonarQube</span>:
+</span></span><span style="display:flex;"><span>- <span style="color:#f92672">enabled</span>: <span style="color:#66d9ef">false</span>
+</span></span></code></pre></div><p>This worked very well for us by providing a fully working pipeline with little
 to no configuration, that takes your application all the way from source to
 running in production. But when needed the
 power of the underlying tools are readily available by using the k8s API for

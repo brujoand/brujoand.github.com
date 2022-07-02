@@ -3,7 +3,7 @@
   <head>
     <title>Sniffing water out of thin air // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.101.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -119,34 +119,34 @@ interested in my little project. Turns out they will have to learn how to do
 this exact same task to read off the water usage for houses around the
 municipality (that word is starting to annoy me).
 So I got my key and boom! Water data! :D</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;media&#34;</span>: <span style="color:#e6db74">&#34;cold water&#34;</span>,
-  <span style="color:#f92672">&#34;meter&#34;</span>: <span style="color:#e6db74">&#34;multical21&#34;</span>,
-  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;My Damn Pipes&#34;</span>,
-  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;123456789&#34;</span>,
-  <span style="color:#f92672">&#34;total_m3&#34;</span>: <span style="color:#ae81ff">463.286</span>,
-  <span style="color:#f92672">&#34;target_m3&#34;</span>: <span style="color:#ae81ff">456.264</span>,
-  <span style="color:#f92672">&#34;max_flow_m3h&#34;</span>: <span style="color:#ae81ff">0</span>,
-  <span style="color:#f92672">&#34;flow_temperature_c&#34;</span>: <span style="color:#ae81ff">11</span>,
-  <span style="color:#f92672">&#34;external_temperature_c&#34;</span>: <span style="color:#ae81ff">18</span>,
-  <span style="color:#f92672">&#34;current_status&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
-  <span style="color:#f92672">&#34;time_dry&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
-  <span style="color:#f92672">&#34;time_reversed&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
-  <span style="color:#f92672">&#34;time_leaking&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
-  <span style="color:#f92672">&#34;time_bursting&#34;</span>: <span style="color:#e6db74">&#34;1-8 hours&#34;</span>,
-  <span style="color:#f92672">&#34;timestamp&#34;</span>: <span style="color:#e6db74">&#34;2021-09-10T07:15:37Z&#34;</span>,
-  <span style="color:#f92672">&#34;device&#34;</span>: <span style="color:#e6db74">&#34;rtlwmbus[00000001]&#34;</span>,
-  <span style="color:#f92672">&#34;rssi_dbm&#34;</span>: <span style="color:#ae81ff">156</span>
-}
-</code></pre></div><p>I was pretty stoked about how simple this was, and immediately set out to deploy
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;media&#34;</span>: <span style="color:#e6db74">&#34;cold water&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;meter&#34;</span>: <span style="color:#e6db74">&#34;multical21&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;My Damn Pipes&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;123456789&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;total_m3&#34;</span>: <span style="color:#ae81ff">463.286</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;target_m3&#34;</span>: <span style="color:#ae81ff">456.264</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;max_flow_m3h&#34;</span>: <span style="color:#ae81ff">0</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;flow_temperature_c&#34;</span>: <span style="color:#ae81ff">11</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;external_temperature_c&#34;</span>: <span style="color:#ae81ff">18</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;current_status&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;time_dry&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;time_reversed&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;time_leaking&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;time_bursting&#34;</span>: <span style="color:#e6db74">&#34;1-8 hours&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;timestamp&#34;</span>: <span style="color:#e6db74">&#34;2021-09-10T07:15:37Z&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;device&#34;</span>: <span style="color:#e6db74">&#34;rtlwmbus[00000001]&#34;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">&#34;rssi_dbm&#34;</span>: <span style="color:#ae81ff">156</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>I was pretty stoked about how simple this was, and immediately set out to deploy
 this to my Kubernetes cluster, hoping I could push the data to Home-Assistant.
 The project has good docker support, but unfortunately no Helm chart, so I added one to
 <a href="https://github.com/k8s-at-home/charts/tree/master/charts/stable/wmbusmeters">k8s-at-home</a>,
 which is where I get most of my helm charts.</p>
 <p>The setup was fairly straight forward and with one extra configuration option I
 got all that sweet water data into home-assistant:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">    shell<span style="color:#f92672">=</span>/usr/bin/mosquitto_pub -h vernemq-0.vernemq-headless.data.svc.cluster.local -p <span style="color:#ae81ff">1883</span> -i wmbusmeters -t wmbusmeters/<span style="color:#e6db74">&#34;</span>$METER_ID<span style="color:#e6db74">&#34;</span> -m <span style="color:#e6db74">&#34;</span>$METER_JSON<span style="color:#e6db74">&#34;</span>
-</code></pre></div><p>This line is added to <code>Values.config</code> in the helm chart and basically tells
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>    shell<span style="color:#f92672">=</span>/usr/bin/mosquitto_pub -h vernemq-0.vernemq-headless.data.svc.cluster.local -p <span style="color:#ae81ff">1883</span> -i wmbusmeters -t wmbusmeters/<span style="color:#e6db74">&#34;</span>$METER_ID<span style="color:#e6db74">&#34;</span> -m <span style="color:#e6db74">&#34;</span>$METER_JSON<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>This line is added to <code>Values.config</code> in the helm chart and basically tells
 wmbusmeters to export the data using mosquitto, which passes it to my vernemq
 broker. Home assistant is setup to <a href="https://www.home-assistant.io/docs/mqtt/discovery/">autodiscover sensors over
 mqtt</a> and boom, I can make a
@@ -164,8 +164,8 @@ digging through their Github Issues I added another configuration line which
 let&rsquo;s me ignore the packet types I&rsquo;m not interested in and let&rsquo;s me be a little
 less precise when decoding packets. That cut the CPU usage in half, which is
 nice.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  rtlwmbus:CMD<span style="color:#f92672">(</span>rtl_sdr -f 868.95M -s <span style="color:#ae81ff">1600000</span> - 2&gt;/dev/null | rtl_wmbus -p s -a<span style="color:#f92672">)</span>
-</code></pre></div><p>I had a lot of fun with this, you should try it too! :D</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  rtlwmbus:CMD<span style="color:#f92672">(</span>rtl_sdr -f 868.95M -s <span style="color:#ae81ff">1600000</span> - 2&gt;/dev/null | rtl_wmbus -p s -a<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>I had a lot of fun with this, you should try it too! :D</p>
 
     </div>
     <div class="post-footer">

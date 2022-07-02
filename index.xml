@@ -6,7 +6,17 @@
     <description>Recent content on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 04 Dec 2021 09:09:42 +0100</lastBuildDate><atom:link href="https://blog.brujordet.no/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jul 2022 08:00:55 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Open_a_pull_request_to_merge_this_engineer</title>
+      <link>https://blog.brujordet.no/post/devops/open_a_pull_request_to_merge_this_engineer/</link>
+      <pubDate>Sat, 02 Jul 2022 08:00:55 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/devops/open_a_pull_request_to_merge_this_engineer/</guid>
+      <description>The year of interviews A few years ago the company I worked for had a period of intense hiring. Over the course of a year I conducted at least 1-2 interviews pr week, so I ended up taking an active part in shaping our process.
+My interviews were usually focused on technical skills for platform engineers or developers, and the main topic was often; &amp;ldquo;How do we know that they can code?</description>
+    </item>
+    
     <item>
       <title>Forcing my Reolink cameras to play nice with the other kids</title>
       <link>https://blog.brujordet.no/post/homelab/forcing_reolink_cameras_to_play_nice_with_the_other_kids/</link>
@@ -81,7 +91,7 @@ The elephant on the keyboard Nothing good has ever come from pressing the CAPS L
       
       <guid>https://blog.brujordet.no/post/bash/how-a-simple-bash-prompt-became-a-complicated-problem/</guid>
       <description>tl;dr: This is a ´problem -&amp;gt; solution´ type post, reflecting on problems I encountered while writing a bash prompt generator.
- A small need for a more informative prompt This all started about 10 years ago when I was working as a Java consultant in Oslo. We had just moved from SVN to git, and the concept of feature branches was suddenly a thing. I hadn&amp;rsquo;t really been very involved with VCS before git, but now I felt like I understood it.</description>
+A small need for a more informative prompt This all started about 10 years ago when I was working as a Java consultant in Oslo. We had just moved from SVN to git, and the concept of feature branches was suddenly a thing. I hadn&amp;rsquo;t really been very involved with VCS before git, but now I felt like I understood it.</description>
     </item>
     
     <item>

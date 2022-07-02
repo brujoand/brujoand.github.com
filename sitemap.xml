@@ -3,10 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://blog.brujordet.no/</loc>
-    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/categories/</loc>
-    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
+    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/devops/</loc>
+    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/categories/devops/</loc>
+    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/hiring/</loc>
+    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/interview/</loc>
+    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/post/devops/open_a_pull_request_to_merge_this_engineer/</loc>
+    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/post/</loc>
+    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/</loc>
+    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/tags/ffmpeg/</loc>
     <lastmod>2021-12-04T09:09:42+01:00</lastmod>
@@ -21,12 +42,6 @@
     <lastmod>2021-12-04T09:09:42+01:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/tags/iot/</loc>
-    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/post/</loc>
-    <lastmod>2021-12-04T09:09:42+01:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/tags/</loc>
     <lastmod>2021-12-04T09:09:42+01:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/tags/transcoding/</loc>
@@ -87,12 +102,6 @@
     <lastmod>2020-07-17T09:42:21+02:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/post/devops/building-a-delivery-platform/</loc>
-    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/tags/devops/</loc>
-    <lastmod>2020-01-19T20:28:11+01:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/categories/devops/</loc>
     <lastmod>2020-01-19T20:28:11+01:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/tags/infrastructure/</loc>

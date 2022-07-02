@@ -3,7 +3,7 @@
   <head>
     <title>Using custom hardware in kubernetes // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.101.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -104,72 +104,72 @@ project, deployed with a
 <a href="https://artifacthub.io/packages/helm/k8s-at-home/node-feature-discovery">k8s-at-home</a>
 helm chart. This tool basically let&rsquo;s you define hardware by creating some
 filters for it. Let&rsquo;s take a peak at my config.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">  <span style="color:#f92672">usb</span>:
-    <span style="color:#f92672">deviceClassWhitelist</span>:
-      - <span style="color:#e6db74">&#34;02&#34;</span>
-      - <span style="color:#e6db74">&#34;0e&#34;</span>
-      - <span style="color:#e6db74">&#34;ef&#34;</span>
-      - <span style="color:#e6db74">&#34;fe&#34;</span>
-      - <span style="color:#e6db74">&#34;ff&#34;</span>
-    <span style="color:#f92672">deviceLabelFields</span>:
-      - <span style="color:#e6db74">&#34;class&#34;</span>
-      - <span style="color:#e6db74">&#34;vendor&#34;</span>
-      - <span style="color:#e6db74">&#34;device&#34;</span>
-  <span style="color:#f92672">custom</span>:
-    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;conbee&#34;</span> <span style="color:#75715e"># Zigbee usb controller</span>
-      <span style="color:#f92672">matchOn</span>:
-        - <span style="color:#f92672">usbId</span>:
-            <span style="color:#f92672">vendor</span>: [<span style="color:#e6db74">&#34;1cf1&#34;</span>]
-            <span style="color:#f92672">device</span>: [<span style="color:#e6db74">&#34;0030&#34;</span>]
-    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;apc-ups&#34;</span> <span style="color:#75715e"># Uninterruptible power supply</span>
-      <span style="color:#f92672">matchOn</span>:
-        - <span style="color:#f92672">usbId</span>:
-            <span style="color:#f92672">vendor</span>: [<span style="color:#e6db74">&#34;051d&#34;</span>]
-            <span style="color:#f92672">device</span>: [<span style="color:#e6db74">&#34;0002&#34;</span>]
-    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;rtl&#34;</span> <span style="color:#75715e"># RTL2838 radio dongel</span>
-      <span style="color:#f92672">matchOn</span>:
-        - <span style="color:#f92672">usbId</span>:
-            <span style="color:#f92672">vendor</span>: [<span style="color:#e6db74">&#34;0bda&#34;</span>]
-            <span style="color:#f92672">device</span>: [<span style="color:#e6db74">&#34;2838&#34;</span>]
-    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;intel-gpu&#34;</span> <span style="color:#75715e"># Intel integrated GPU</span>
-      <span style="color:#f92672">matchOn</span>:
-        - <span style="color:#f92672">pciId</span>:
-            <span style="color:#f92672">class</span>: [<span style="color:#e6db74">&#34;0300&#34;</span>]
-            <span style="color:#f92672">vendor</span>: [<span style="color:#e6db74">&#34;8086&#34;</span>]
-    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;coral-tpu&#34;</span> <span style="color:#75715e"># Coral TPU &lt;--- This is the one</span>
-      <span style="color:#f92672">matchOn</span>:
-        - <span style="color:#f92672">pciId</span>:
-            <span style="color:#f92672">class</span>: [<span style="color:#e6db74">&#34;0880&#34;</span>]
-            <span style="color:#f92672">vendor</span>: [<span style="color:#e6db74">&#34;1ac1&#34;</span>]
-</code></pre></div><p>So the whitelist let&rsquo;s me add some standard devices automatically, but the juice
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>  <span style="color:#f92672">usb</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deviceClassWhitelist</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;02&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;0e&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;ef&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;fe&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;ff&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">deviceLabelFields</span>:
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;class&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;vendor&#34;</span>
+</span></span><span style="display:flex;"><span>      - <span style="color:#e6db74">&#34;device&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">custom</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;conbee&#34;</span> <span style="color:#75715e"># Zigbee usb controller</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">matchOn</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">usbId</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">vendor</span>: [<span style="color:#e6db74">&#34;1cf1&#34;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">device</span>: [<span style="color:#e6db74">&#34;0030&#34;</span>]
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;apc-ups&#34;</span> <span style="color:#75715e"># Uninterruptible power supply</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">matchOn</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">usbId</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">vendor</span>: [<span style="color:#e6db74">&#34;051d&#34;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">device</span>: [<span style="color:#e6db74">&#34;0002&#34;</span>]
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;rtl&#34;</span> <span style="color:#75715e"># RTL2838 radio dongel</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">matchOn</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">usbId</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">vendor</span>: [<span style="color:#e6db74">&#34;0bda&#34;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">device</span>: [<span style="color:#e6db74">&#34;2838&#34;</span>]
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;intel-gpu&#34;</span> <span style="color:#75715e"># Intel integrated GPU</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">matchOn</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">pciId</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">class</span>: [<span style="color:#e6db74">&#34;0300&#34;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">vendor</span>: [<span style="color:#e6db74">&#34;8086&#34;</span>]
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;coral-tpu&#34;</span> <span style="color:#75715e"># Coral TPU &lt;--- This is the one</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">matchOn</span>:
+</span></span><span style="display:flex;"><span>        - <span style="color:#f92672">pciId</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">class</span>: [<span style="color:#e6db74">&#34;0880&#34;</span>]
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">vendor</span>: [<span style="color:#e6db74">&#34;1ac1&#34;</span>]
+</span></span></code></pre></div><p>So the whitelist let&rsquo;s me add some standard devices automatically, but the juice
 is in the custom section. Here I&rsquo;m giving the vendor and device identifiers as reported by <code>lsusb</code> or
 <code>lspci</code>, and adding a label that makes sense to me. NFD will then add these labels to nodes which have
 the given device available. An example should give a good idea of what this
 looks like in real life.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  kubectl get nodes -o yaml | yq <span style="color:#e6db74">&#39;.items[].metadata.labels&#39;</span>
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">  {
-    <span style="color:#f92672">&#34;beta.kubernetes.io/arch&#34;: </span><span style="color:#e6db74">&#34;amd64&#34;</span>,
-    <span style="color:#f92672">&#34;beta.kubernetes.io/os&#34;: </span><span style="color:#e6db74">&#34;linux&#34;</span>,
-    <span style="color:#f92672">&#34;feature.node.kubernetes.io/custom-apc-ups&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
-    <span style="color:#f92672">&#34;feature.node.kubernetes.io/custom-coral-tpu&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
-    <span style="color:#f92672">&#34;feature.node.kubernetes.io/custom-intel-gpu&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
-    <span style="color:#f92672">&#34;feature.node.kubernetes.io/custom-rdma.available&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
-    <span style="color:#f92672">&#34;feature.node.kubernetes.io/custom-rtl&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
-    <span style="color:#f92672">&#34;feature.node.kubernetes.io/pci-0300_8086.present&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
-    <span style="color:#f92672">&#34;feature.node.kubernetes.io/usb-ff_0bda_2838.present&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
-    <span style="color:#f92672">&#34;kubernetes.io/arch&#34;: </span><span style="color:#e6db74">&#34;amd64&#34;</span>,
-    <span style="color:#f92672">&#34;kubernetes.io/hostname&#34;: </span><span style="color:#e6db74">&#34;example.local&#34;</span>,
-    <span style="color:#f92672">&#34;kubernetes.io/os&#34;: </span><span style="color:#e6db74">&#34;linux&#34;</span>
-  }
-</code></pre></div><p>Here we see my custom device labels added to this one node. For the most part my nodes
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  kubectl get nodes -o yaml | yq <span style="color:#e6db74">&#39;.items[].metadata.labels&#39;</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;beta.kubernetes.io/arch&#34;: </span><span style="color:#e6db74">&#34;amd64&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;beta.kubernetes.io/os&#34;: </span><span style="color:#e6db74">&#34;linux&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;feature.node.kubernetes.io/custom-apc-ups&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;feature.node.kubernetes.io/custom-coral-tpu&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;feature.node.kubernetes.io/custom-intel-gpu&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;feature.node.kubernetes.io/custom-rdma.available&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;feature.node.kubernetes.io/custom-rtl&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;feature.node.kubernetes.io/pci-0300_8086.present&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;feature.node.kubernetes.io/usb-ff_0bda_2838.present&#34;: </span><span style="color:#e6db74">&#34;true&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;kubernetes.io/arch&#34;: </span><span style="color:#e6db74">&#34;amd64&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;kubernetes.io/hostname&#34;: </span><span style="color:#e6db74">&#34;example.local&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;kubernetes.io/os&#34;: </span><span style="color:#e6db74">&#34;linux&#34;</span>
+</span></span><span style="display:flex;"><span>  }
+</span></span></code></pre></div><p>Here we see my custom device labels added to this one node. For the most part my nodes
 only have a subset of these but this is my experimentation box so it has
 everything.</p>
 <p>Now we know which nodes have a certain piece of hardware, the next step is to
 instruct k8s to schedule our pods on a node with the Google Coral.</p>
 <p>To do this I&rsquo;ve added a node-selector definition to my deployment.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">  <span style="color:#f92672">nodeSelector</span>:
-    <span style="color:#f92672">feature.node.kubernetes.io/custom-coral-tpu</span>: <span style="color:#e6db74">&#34;true&#34;</span>
-</code></pre></div><p>Now my deployment will be scheduled only on a node which has the Coral
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>  <span style="color:#f92672">nodeSelector</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">feature.node.kubernetes.io/custom-coral-tpu</span>: <span style="color:#e6db74">&#34;true&#34;</span>
+</span></span></code></pre></div><p>Now my deployment will be scheduled only on a node which has the Coral
 available. Neat!</p>
 <h2 id="intel-gpu-plugin">Intel GPU Plugin</h2>
 <p>For some hardware though we need some extra steps to get everything working. My cluster is
@@ -185,16 +185,16 @@ helm chart and deployed with a similar node-selector as the one above.</p>
 control how many pods can use the same GPU at the time, and even set
 requirements on the deployment itself regarding how much GPU power it needs, just like
 we can with CPU and Memory.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">  <span style="color:#f92672">resources</span>:
-    <span style="color:#f92672">limits</span>:
-      <span style="color:#f92672">gpu.intel.com/i915</span>: <span style="color:#ae81ff">1</span>
-      <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">200m</span>
-      <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">2000Mi</span>
-    <span style="color:#f92672">requests</span>:
-      <span style="color:#f92672">gpu.intel.com/i915</span>: <span style="color:#ae81ff">1</span>
-      <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">35m</span>
-      <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">500Mi</span>
-</code></pre></div><p>I spent quite a bit of time wrapping my head around this so hopefully I saved
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>  <span style="color:#f92672">resources</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">limits</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">gpu.intel.com/i915</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">200m</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">2000Mi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">requests</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">gpu.intel.com/i915</span>: <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">cpu</span>: <span style="color:#ae81ff">35m</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">memory</span>: <span style="color:#ae81ff">500Mi</span>
+</span></span></code></pre></div><p>I spent quite a bit of time wrapping my head around this so hopefully I saved
 you some effort! :)</p>
 
     </div>

@@ -3,7 +3,7 @@
   <head>
     <title>Replacing my doorbell with a security camera // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.101.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -151,33 +151,33 @@ person walks into the &ldquo;road&rdquo; zone, I&rsquo;ll get an MQTT message wi
 that &lsquo;Before&rsquo; there was nothing anywhere, but &lsquo;After&rsquo; there was a &lsquo;Person&rsquo; in
 the zone &lsquo;Road&rsquo;. This makes it very easy to write simple automations in Home
 Assistant like so:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">id</span>: <span style="color:#ae81ff">arrival_notification</span>
-  <span style="color:#f92672">alias</span>: <span style="color:#ae81ff">Notify that something has arrived</span>
-  <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#39;&#39;</span>
-  <span style="color:#f92672">trigger</span>:
-  - <span style="color:#f92672">platform</span>: <span style="color:#ae81ff">mqtt</span>
-    <span style="color:#f92672">topic</span>: <span style="color:#ae81ff">frigate/events</span>
-  <span style="color:#f92672">condition</span>:
-  - <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">template</span>
-    <span style="color:#f92672">value_template</span>: <span style="color:#e6db74">&#39;{{ trigger.payload_json[&#34;after&#34;][&#34;label&#34;] in [&#34;person&#34;,&#34;car&#34;]}}&#39;</span>
-  - <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">template</span>
-    <span style="color:#f92672">value_template</span>: <span style="color:#e6db74">&#39;{{ &#34;road&#34; in trigger.payload_json[&#34;before&#34;][&#34;current_zones&#34;]}}&#39;</span>
-  - <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">template</span>
-    <span style="color:#f92672">value_template</span>: <span style="color:#e6db74">&#39;{{ &#34;parking&#34; in trigger.payload_json[&#34;after&#34;][&#34;current_zones&#34;]}}&#39;</span>
-  <span style="color:#f92672">action</span>:
-  - <span style="color:#f92672">service</span>: <span style="color:#ae81ff">notify.notify</span>
-    <span style="color:#f92672">data_template</span>:
-      <span style="color:#f92672">message</span>: <span style="color:#ae81ff">A {{ trigger.payload_json[&#39;after&#39;][&#39;label&#39;] }} has arrived</span>
-      <span style="color:#f92672">data</span>:
-        <span style="color:#f92672">attachment</span>:
-          <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://hassio.example.com/api/frigate/notifications/{{trigger.payload_json[&#39;after&#39;][&#39;id&#39;]}}/thumbnail.jpg</span>
-          <span style="color:#f92672">content-type</span>: <span style="color:#ae81ff">png</span>
-          <span style="color:#f92672">hide-thumbnail</span>: <span style="color:#66d9ef">false</span>
-  - <span style="color:#f92672">service</span>: <span style="color:#ae81ff">tts.google_translate_say</span>
-    <span style="color:#f92672">data_template</span>:
-      <span style="color:#f92672">entity_id</span>: <span style="color:#ae81ff">media_player.livingroom_speaker</span>
-      <span style="color:#f92672">message</span>: <span style="color:#ae81ff">A {{trigger.payload_json[&#39;after&#39;][&#39;label&#39;]}} has arrived.</span>
-</code></pre></div><p>So this automation is triggered by an MQTT message on the &lsquo;frigate/events&rsquo;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#f92672">id</span>: <span style="color:#ae81ff">arrival_notification</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">alias</span>: <span style="color:#ae81ff">Notify that something has arrived</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#39;&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">trigger</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">platform</span>: <span style="color:#ae81ff">mqtt</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">topic</span>: <span style="color:#ae81ff">frigate/events</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">condition</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">template</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">value_template</span>: <span style="color:#e6db74">&#39;{{ trigger.payload_json[&#34;after&#34;][&#34;label&#34;] in [&#34;person&#34;,&#34;car&#34;]}}&#39;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">template</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">value_template</span>: <span style="color:#e6db74">&#39;{{ &#34;road&#34; in trigger.payload_json[&#34;before&#34;][&#34;current_zones&#34;]}}&#39;</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">condition</span>: <span style="color:#ae81ff">template</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">value_template</span>: <span style="color:#e6db74">&#39;{{ &#34;parking&#34; in trigger.payload_json[&#34;after&#34;][&#34;current_zones&#34;]}}&#39;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">action</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">service</span>: <span style="color:#ae81ff">notify.notify</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">data_template</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">message</span>: <span style="color:#ae81ff">A {{ trigger.payload_json[&#39;after&#39;][&#39;label&#39;] }} has arrived</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">data</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">attachment</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">url</span>: <span style="color:#ae81ff">https://hassio.example.com/api/frigate/notifications/{{trigger.payload_json[&#39;after&#39;][&#39;id&#39;]}}/thumbnail.jpg</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">content-type</span>: <span style="color:#ae81ff">png</span>
+</span></span><span style="display:flex;"><span>          <span style="color:#f92672">hide-thumbnail</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">service</span>: <span style="color:#ae81ff">tts.google_translate_say</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">data_template</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">entity_id</span>: <span style="color:#ae81ff">media_player.livingroom_speaker</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">message</span>: <span style="color:#ae81ff">A {{trigger.payload_json[&#39;after&#39;][&#39;label&#39;]}} has arrived.</span>
+</span></span></code></pre></div><p>So this automation is triggered by an MQTT message on the &lsquo;frigate/events&rsquo;
 topic, and checks if a person or a car is detected in the &lsquo;After&rsquo; object. We
 also check if the object was first in the &lsquo;Road&rsquo; zone and later in the &lsquo;Parking&rsquo;
 zone. Meaning this object is actually coming towards the house. And finally, we

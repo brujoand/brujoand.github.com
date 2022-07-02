@@ -3,7 +3,7 @@
   <head>
     <title>Proper auto-completion for bash aliases // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.101.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -92,14 +92,14 @@ kubectl get pods -n network I was saying too many words. Step one was to start u
       <p>Kevin in The Office once said &lsquo;Why waste time say lot word when few word do
 trick&rsquo;. These are words to live by, and this is why I love aliases.
 Lately though I&rsquo;ve been getting really tired of writing out stuff like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  kubectl get pods -n network
-</code></pre></div><p>I was saying too many words.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  kubectl get pods -n network
+</span></span></code></pre></div><p>I was saying too many words.
 Step one was to start using contexts with kubectl which let&rsquo;s me omit the <code>-n network</code> part. I used <a href="https://github.com/junegunn/fzf">fzf</a> to make a handy
 little function that would let me switch contexts quickly. But I&rsquo;ve got a full
 post coming on more of these nice functions so let&rsquo;s save that for later.</p>
 <p>But my trouble began when I created the alias for getting pods</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  alias kgp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;kubectl get pods&#39;</span>
-</code></pre></div><p>Since I&rsquo;ve got auto completion setup for <code>kubectl</code> naturally I wanted that for
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  alias kgp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;kubectl get pods&#39;</span>
+</span></span></code></pre></div><p>Since I&rsquo;ve got auto completion setup for <code>kubectl</code> naturally I wanted that for
 <code>kgp</code> too. But this wasn&rsquo;t trivial. I tried looking at the helper script shipped
 with <code>kubectl</code> to see if I could tap into that, but it&rsquo;s using functions that
 are shipped with bash to extract the word under the cursor for instance. And
@@ -112,83 +112,83 @@ the registered completion function for the command, which again doesn&rsquo;t wo
 because the word we are completing <code>kgp</code> is unknown to that function.</p>
 <p>After reading through a lot of these magic completion functions being used I
 noticed that the truth is written in these variables:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  COMP_WORDS<span style="color:#f92672">=([</span>0<span style="color:#f92672">]=</span><span style="color:#e6db74">&#34;kgp&#34;</span> <span style="color:#f92672">[</span>1<span style="color:#f92672">]=</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
-  COMP_LINE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;kgp &#34;</span>
-  COMP_CWORD<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
-  COMP_POINT<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
-</code></pre></div><p>So the <code>COMP_WORDS</code> is just an array of a command and it&rsquo;s arguments.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  COMP_WORDS<span style="color:#f92672">=([</span>0<span style="color:#f92672">]=</span><span style="color:#e6db74">&#34;kgp&#34;</span> <span style="color:#f92672">[</span>1<span style="color:#f92672">]=</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  COMP_LINE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;kgp &#34;</span>
+</span></span><span style="display:flex;"><span>  COMP_CWORD<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>  COMP_POINT<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+</span></span></code></pre></div><p>So the <code>COMP_WORDS</code> is just an array of a command and it&rsquo;s arguments.
 <code>COMP_LINE</code> is simply the full line being completed. <code>COMP_CWORD</code> is the index
 in the words array of the work currently being completed,
 and finally <code>COMP_POINT</code> is the index in the string where our cursor is at.</p>
 <p>I created a simple function which takes an alias name and returns the exact
 command the alias would execute:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  _expand_alias<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    local alias_name alias_definition
-    alias_name<span style="color:#f92672">=</span>$1
-    <span style="color:#f92672">[[</span> -z $alias_name <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-    type <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span> &amp;&gt;/dev/null <span style="color:#f92672">||</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-    alias_definition<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>alias <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
-    dequote <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>alias_definition//alias <span style="color:#e6db74">${</span>alias_name<span style="color:#e6db74">}</span>=<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-  <span style="color:#f92672">}</span>
-</code></pre></div><p>If the alias name is empty or the alias doesn&rsquo;t exist we just return, but if it
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  _expand_alias<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    local alias_name alias_definition
+</span></span><span style="display:flex;"><span>    alias_name<span style="color:#f92672">=</span>$1
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">[[</span> -z $alias_name <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    type <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span> &amp;&gt;/dev/null <span style="color:#f92672">||</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    alias_definition<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>alias <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    dequote <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>alias_definition//alias <span style="color:#e6db74">${</span>alias_name<span style="color:#e6db74">}</span>=<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>If the alias name is empty or the alias doesn&rsquo;t exist we just return, but if it
 does we use the alias command to get it&rsquo;s definition and some variable expansion
 along with <code>dequote</code> to extract only the command.</p>
 <p>Next we need to update the <code>COMP_WORDS</code> array with our expanded alias:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  _update_comp_words<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    local alias_name alias_value
-    alias_name<span style="color:#f92672">=</span>$1
-    alias_value<span style="color:#f92672">=</span>$2
-    <span style="color:#f92672">[[</span> -z $alias_name <span style="color:#f92672">||</span> -z $alias_value <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-
-    local alias_value_array
-    read -r -a alias_value_array <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$alias_value<span style="color:#e6db74">&#34;</span>
-    local comp_words<span style="color:#f92672">=()</span>
-
-    <span style="color:#66d9ef">for</span> word in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>COMP_WORDS[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
-      <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $word <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-        comp_words<span style="color:#f92672">+=(</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>alias_value_array[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
-      <span style="color:#66d9ef">else</span>
-        comp_words<span style="color:#f92672">+=(</span><span style="color:#e6db74">&#34;</span>$word<span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
-      <span style="color:#66d9ef">fi</span>
-    <span style="color:#66d9ef">done</span>
-
-    COMP_WORDS<span style="color:#f92672">=(</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>comp_words[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
-  <span style="color:#f92672">}</span>
-</code></pre></div><p>This function parses our expanded alias into an array and simply substitutes the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  _update_comp_words<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    local alias_name alias_value
+</span></span><span style="display:flex;"><span>    alias_name<span style="color:#f92672">=</span>$1
+</span></span><span style="display:flex;"><span>    alias_value<span style="color:#f92672">=</span>$2
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">[[</span> -z $alias_name <span style="color:#f92672">||</span> -z $alias_value <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    local alias_value_array
+</span></span><span style="display:flex;"><span>    read -r -a alias_value_array <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$alias_value<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    local comp_words<span style="color:#f92672">=()</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> word in <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>COMP_WORDS[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $word <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        comp_words<span style="color:#f92672">+=(</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>alias_value_array[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        comp_words<span style="color:#f92672">+=(</span><span style="color:#e6db74">&#34;</span>$word<span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    COMP_WORDS<span style="color:#f92672">=(</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>comp_words[@]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>This function parses our expanded alias into an array and simply substitutes the
 alias with it&rsquo;s expanded form and updates the <code>COMP_WORDS</code> array directly. I
 would have preferred to use a subshell for this but passing arrays around isn&rsquo;t
 very nice, and in this case speed is probably more important than readability.</p>
 <p>With these two functions we basically just need to update the rest of the
 <code>COMP_*</code> variables. This is handled by the full wrapper script which also uses
 the two functions above:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  <span style="color:#66d9ef">function</span> _alias_completion_wrapper<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    local alias_name alias_definition alias_value
-    alias_name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[0]<span style="color:#e6db74">}</span>
-    alias_value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>_expand_alias <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-    <span style="color:#f92672">[[</span> -z $alias_value <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
-
-    _update_comp_words <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$alias_value<span style="color:#e6db74">&#34;</span>
-    <span style="color:#75715e"># Update other COMP variables</span>
-    COMP_LINE<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_LINE//<span style="color:#e6db74">${</span>alias_name<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>alias_value<span style="color:#e6db74">}}</span>
-    COMP_CWORD<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> <span style="color:#e6db74">${#</span>COMP_WORDS[@]<span style="color:#e6db74">}</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span>
-    COMP_POINT<span style="color:#f92672">=</span><span style="color:#e6db74">${#</span>COMP_LINE<span style="color:#e6db74">}</span>
-
-    local previous_word current_word
-    current_word<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[$COMP_CWORD]<span style="color:#e6db74">}</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">${#</span>COMP_WORDS[@]<span style="color:#e6db74">}</span> -ge <span style="color:#ae81ff">2</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-      previous_word<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[<span style="color:#66d9ef">$((</span> COMP_CWORD <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span>]<span style="color:#e6db74">}</span>
-    <span style="color:#66d9ef">fi</span>
-    local command<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[0]<span style="color:#e6db74">}</span>
-    comp_definition<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>complete -p <span style="color:#e6db74">&#34;</span>$command<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
-    comp_function<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>sed -n <span style="color:#e6db74">&#34;s/^complete .* -F \(.*\) </span><span style="color:#e6db74">${</span>command<span style="color:#e6db74">}</span><span style="color:#e6db74">/\1/p&#34;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$comp_definition<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
-
-    <span style="color:#75715e"># Call the original completion script with our expanded alias</span>
-    <span style="color:#e6db74">&#34;</span>$comp_function<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>command<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>current_word<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>previous_word<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-  <span style="color:#f92672">}</span>
-</code></pre></div><p>So to set this up all we need is to add the completion hook:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">  alias kgp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;kubectl get pods&#39;</span>
-  complete -o default -F _alias_completion_wrapper kgp
-</code></pre></div><p>Now when bash wants to provide completion options for our alias it will first
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  <span style="color:#66d9ef">function</span> _alias_completion_wrapper<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    local alias_name alias_definition alias_value
+</span></span><span style="display:flex;"><span>    alias_name<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[0]<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    alias_value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>_expand_alias <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">[[</span> -z $alias_value <span style="color:#f92672">]]</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    _update_comp_words <span style="color:#e6db74">&#34;</span>$alias_name<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$alias_value<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Update other COMP variables</span>
+</span></span><span style="display:flex;"><span>    COMP_LINE<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_LINE//<span style="color:#e6db74">${</span>alias_name<span style="color:#e6db74">}</span>/<span style="color:#e6db74">${</span>alias_value<span style="color:#e6db74">}}</span>
+</span></span><span style="display:flex;"><span>    COMP_CWORD<span style="color:#f92672">=</span><span style="color:#66d9ef">$((</span> <span style="color:#e6db74">${#</span>COMP_WORDS[@]<span style="color:#e6db74">}</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span>
+</span></span><span style="display:flex;"><span>    COMP_POINT<span style="color:#f92672">=</span><span style="color:#e6db74">${#</span>COMP_LINE<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    local previous_word current_word
+</span></span><span style="display:flex;"><span>    current_word<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[$COMP_CWORD]<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#e6db74">${#</span>COMP_WORDS[@]<span style="color:#e6db74">}</span> -ge <span style="color:#ae81ff">2</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>      previous_word<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[<span style="color:#66d9ef">$((</span> COMP_CWORD <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#66d9ef">))</span>]<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>    local command<span style="color:#f92672">=</span><span style="color:#e6db74">${</span>COMP_WORDS[0]<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span>    comp_definition<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>complete -p <span style="color:#e6db74">&#34;</span>$command<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    comp_function<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>sed -n <span style="color:#e6db74">&#34;s/^complete .* -F \(.*\) </span><span style="color:#e6db74">${</span>command<span style="color:#e6db74">}</span><span style="color:#e6db74">/\1/p&#34;</span> <span style="color:#f92672">&lt;&lt;&lt;</span> <span style="color:#e6db74">&#34;</span>$comp_definition<span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Call the original completion script with our expanded alias</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;</span>$comp_function<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>command<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>current_word<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>previous_word<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>So to set this up all we need is to add the completion hook:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>  alias kgp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;kubectl get pods&#39;</span>
+</span></span><span style="display:flex;"><span>  complete -o default -F _alias_completion_wrapper kgp
+</span></span></code></pre></div><p>Now when bash wants to provide completion options for our alias it will first
 call <code>_alias_completion_wrapper</code> which expands the alias and updates the values of
 <code>COMP_WORDS</code>. Then we update the other <code>COMP_*</code> variables with their new values.
 Finally we find the completion function for our original command and we then

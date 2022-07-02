@@ -3,7 +3,7 @@
   <head>
     <title>Forcing my Reolink cameras to play nice with the other kids // Automate attention</title>
     <meta charset="utf-8" />
-    <meta name="generator" content="Hugo 0.89.4" />
+    <meta name="generator" content="Hugo 0.101.0" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="John Doe" />
     <meta name="description" content="" />
@@ -135,15 +135,15 @@ which claim to do one thing, but are actually working more by accident than
 anything else. This sent me down quite a few rabbit holes and old mailing lists
 to figure out what the various flags actually meant. Finally I ended up with
 this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ffmpeg <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -use_wallclock_as_timestamps <span style="color:#ae81ff">1</span> -fflags nobuffer -loglevel warning -hide_banner <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -rtsp_transport tcp -hwaccel qsv -c:v hevc_qsv <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -i <span style="color:#e6db74">&#39;rtsp://admin:password@10.20.1.14:554&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -vf <span style="color:#e6db74">&#39;fps=fps=20,scale_qsv=w=3840:h=2160&#39;</span> -c:v h264_qsv -timestamp now -g <span style="color:#ae81ff">100</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -profile main -b:v 6M -c:a copy -f rtsp -rtsp_transport tcp rtsp://0.0.0.0:8554/stua <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -vf <span style="color:#e6db74">&#39;fps=fps=5,scale_qsv=w=1280:h=720&#39;</span> -c:v h264_qsv -timestamp now -g <span style="color:#ae81ff">25</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>  -profile main -b:v 1M -an -f rtsp -rtsp_transport tcp rtsp://0.0.0.0:8554/stua_sub
-</code></pre></div><p>Disclaimer; I found it very difficult to fully grasp all of these flags.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ffmpeg <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -use_wallclock_as_timestamps <span style="color:#ae81ff">1</span> -fflags nobuffer -loglevel warning -hide_banner <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -rtsp_transport tcp -hwaccel qsv -c:v hevc_qsv <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -i <span style="color:#e6db74">&#39;rtsp://admin:password@10.20.1.14:554&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -vf <span style="color:#e6db74">&#39;fps=fps=20,scale_qsv=w=3840:h=2160&#39;</span> -c:v h264_qsv -timestamp now -g <span style="color:#ae81ff">100</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -profile main -b:v 6M -c:a copy -f rtsp -rtsp_transport tcp rtsp://0.0.0.0:8554/stua <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -vf <span style="color:#e6db74">&#39;fps=fps=5,scale_qsv=w=1280:h=720&#39;</span> -c:v h264_qsv -timestamp now -g <span style="color:#ae81ff">25</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -profile main -b:v 1M -an -f rtsp -rtsp_transport tcp rtsp://0.0.0.0:8554/stua_sub
+</span></span></code></pre></div><p>Disclaimer; I found it very difficult to fully grasp all of these flags.
 Especially since they can change meaning depending on where they are placed
 relative to the input and output declarations. So please throw some feedback at
 me if you see something that&rsquo;s incorrectly explained.</p>
@@ -207,24 +207,24 @@ not. Something to keep in mind when experimenting with this.</p>
 value for reads on the last image is somewhat higher than the actual value.</p>
 <p>For the rtsp-simple-server the configuration was very straight forward so I just
 needed to set the paths of the mainstream and substreams:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">    <span style="color:#f92672">paths</span>:
-      <span style="color:#f92672">stua</span>:
-        <span style="color:#f92672">runOnInit</span>:
-          <span style="color:#ae81ff">ffmpeg &lt;input_flags&gt; -i &#39;rtsp://admin:password@10.20.1.14:554&#39; \</span>
-            <span style="color:#ae81ff">&lt;main_output_flags&gt; rtsp://0.0.0.0:8554/stua \</span>
-            <span style="color:#ae81ff">&lt;sub_output_flags&gt; rtsp://0.0.0.0:8554/stua_sub</span>
-        <span style="color:#f92672">runOnInitRestart</span>: <span style="color:#66d9ef">yes</span>
-      <span style="color:#f92672">stua_sub</span>:
-        <span style="color:#f92672">source</span>: <span style="color:#ae81ff">publisher</span>
-</code></pre></div><p>Basically I&rsquo;m adding a path <code>stua</code> which on startup will run the ffmpeg command
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>    <span style="color:#f92672">paths</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">stua</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">runOnInit</span>:
+</span></span><span style="display:flex;"><span>          <span style="color:#ae81ff">ffmpeg &lt;input_flags&gt; -i &#39;rtsp://admin:password@10.20.1.14:554&#39; \</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">&lt;main_output_flags&gt; rtsp://0.0.0.0:8554/stua \</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#ae81ff">&lt;sub_output_flags&gt; rtsp://0.0.0.0:8554/stua_sub</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">runOnInitRestart</span>: <span style="color:#66d9ef">yes</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">stua_sub</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">source</span>: <span style="color:#ae81ff">publisher</span>
+</span></span></code></pre></div><p>Basically I&rsquo;m adding a path <code>stua</code> which on startup will run the ffmpeg command
 we discussed earlier. This command publishes the main stream to the <code>stua</code> path,
 and the substream to the <code>stua_sub</code> path. Right now I&rsquo;m running all of this in a
 single container built like so:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> aler9/rtsp-simple-server AS rtsp</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> akashisn/ffmpeg:4.4.1-qsv</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>rtsp /rtsp-simple-server /<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [ <span style="color:#e6db74">&#34;/rtsp-simple-server&#34;</span> ]<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>Eventually though, I&rsquo;ll probably split this into two images, and run one
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-Dockerfile" data-lang="Dockerfile"><span style="display:flex;"><span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> aler9/rtsp-simple-server AS rtsp</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> akashisn/ffmpeg:4.4.1-qsv</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">COPY</span> --from<span style="color:#f92672">=</span>rtsp /rtsp-simple-server /<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENTRYPOINT</span> [ <span style="color:#e6db74">&#34;/rtsp-simple-server&#34;</span> ]<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>Eventually though, I&rsquo;ll probably split this into two images, and run one
 container for each camera to better be able to share the load on my
 Kubernetes cluster.</p>
 <p>Now I just add the two streams to Frigate as if it were any other camera

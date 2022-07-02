@@ -24,7 +24,7 @@ kubectl get pods -n network I was saying too many words. Step one was to start u
       
       <guid>https://blog.brujordet.no/post/bash/how-a-simple-bash-prompt-became-a-complicated-problem/</guid>
       <description>tl;dr: This is a ´problem -&amp;gt; solution´ type post, reflecting on problems I encountered while writing a bash prompt generator.
- A small need for a more informative prompt This all started about 10 years ago when I was working as a Java consultant in Oslo. We had just moved from SVN to git, and the concept of feature branches was suddenly a thing. I hadn&amp;rsquo;t really been very involved with VCS before git, but now I felt like I understood it.</description>
+A small need for a more informative prompt This all started about 10 years ago when I was working as a Java consultant in Oslo. We had just moved from SVN to git, and the concept of feature branches was suddenly a thing. I hadn&amp;rsquo;t really been very involved with VCS before git, but now I felt like I understood it.</description>
     </item>
     
     <item>
