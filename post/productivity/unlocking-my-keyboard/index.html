@@ -119,7 +119,7 @@ Keys</a> plugin.</p>
 </span></span><span style="display:flex;"><span>WantedBy<span style="color:#f92672">=</span>multi-user.target
 </span></span></code></pre></div><p>Note that the udevmon location might vary depending on how you installed it.</p>
 <p>Then we should define the referenced <code>/etc/udevmon.yaml</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>- JOB: <span style="color:#e6db74">&#34;intercept -g `DEVNODE | dual-function-keys -c /etc/builtin-keyboard-modifications.yaml | uinput -d `DEVNODE&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>- JOB: <span style="color:#e6db74">&#34;intercept -g </span>$DEVNODE<span style="color:#e6db74"> | dual-function-keys -c /etc/builtin-keyboard-modifications.yaml | uinput -d </span>$DEVNODE<span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>  DEVICE:
 </span></span><span style="display:flex;"><span>    NAME: <span style="color:#e6db74">&#34;Apple Inc. Apple Internal Keyboard / Trackpad&#34;</span>
 </span></span><span style="display:flex;"><span>    EVENTS:
