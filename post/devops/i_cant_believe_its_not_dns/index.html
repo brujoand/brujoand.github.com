@@ -79,7 +79,7 @@ My homelab cluster is deployed using Kubespray which works by coordinating a myr
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          7 min read
+          8 min read
         </div><div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
   <title>tag</title>
@@ -208,12 +208,25 @@ page</a> where they suggested
 to disable hardware offloading of checksums on the calico interface.</p>
 <pre tabindex="0"><code>sudo ethtool --offload vxlan.calico rx off tx off
 </code></pre><p>And voila the DNS issues disappeared completely!! I was ecstatic and the world finally
-made sense again. With a new found bounce in my step I
-was eager to share the details at work, since I remembered that our Infra team
+made sense again. I was eager to share the details at work, since our Infra team
 had struggled with a similar DNS issue in one of our clusters. Luckily it was
 the exact same issue, so don&rsquo;t tell my that running a highly available
 Kubernetes cluster in your basement is a waste of time!</p>
-<p>So this time, it was actually not really DNS.</p>
+<h2 id="what-actually-happened">What actually happened?</h2>
+<p>From what I could gather after asking some questions on the Calico slack channel
+this is what happened:</p>
+<ul>
+<li>A LocalDNS pods calls out to the CoreDNS service</li>
+<li>The service IP rewrites the packet destination to match a CoreDNS pod</li>
+<li>The node routing will cause the packet to traverse the calico interface</li>
+<li>Kernel vxlan encapsulation code executes, which is where the checksum bug lives</li>
+<li>Checksum mismatch -&gt; ERROR -&gt; Retransmission</li>
+</ul>
+<p>So it seems that the reason this worked a few times, and the cluster got to a
+healthy ish state, was not actually related to UDP vs TCP. But rather when the LocalDNS and CoreDNS were on the same node, the packet could get routed without traversing the calico interface, and
+avoided the kernel vxlan encapsulation. Eventually all healthy pods were on the
+same nodes as the CoreDNS pods.</p>
+<p>Finally our Kubernetes powered Minecraft server is back up! :D</p>
 
     </div>
     <div class="post-footer">
