@@ -2,16 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://blog.brujordet.no/</loc>
+    <lastmod>2023-05-09T08:46:57+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/categories/</loc>
+    <lastmod>2023-05-09T08:46:57+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/devops/</loc>
+    <lastmod>2023-05-09T08:46:57+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/categories/devops/</loc>
+    <lastmod>2023-05-09T08:46:57+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/dns/</loc>
+    <lastmod>2023-05-09T08:46:57+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/post/devops/i_cant_believe_its_not_dns/</loc>
+    <lastmod>2023-05-09T08:46:57+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/kubernetes/</loc>
+    <lastmod>2023-05-09T08:46:57+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/post/</loc>
+    <lastmod>2023-05-09T08:46:57+02:00</lastmod>
+  </url><url>
+    <loc>https://blog.brujordet.no/tags/</loc>
+    <lastmod>2023-05-09T08:46:57+02:00</lastmod>
+  </url><url>
     <loc>https://blog.brujordet.no/tags/3d-printing/</loc>
     <lastmod>2022-07-21T09:04:50+02:00</lastmod>
   </url><url>
-    <loc>https://blog.brujordet.no/</loc>
-    <lastmod>2022-07-21T09:04:50+02:00</lastmod>
-  </url><url>
     <loc>https://blog.brujordet.no/tags/cad/</loc>
-    <lastmod>2022-07-21T09:04:50+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/categories/</loc>
     <lastmod>2022-07-21T09:04:50+02:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/tags/crafting/</loc>
@@ -26,20 +47,8 @@
     <loc>https://blog.brujordet.no/tags/jscad/</loc>
     <lastmod>2022-07-21T09:04:50+02:00</lastmod>
   </url><url>
-    <loc>https://blog.brujordet.no/post/</loc>
-    <lastmod>2022-07-21T09:04:50+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/tags/</loc>
-    <lastmod>2022-07-21T09:04:50+02:00</lastmod>
-  </url><url>
     <loc>https://blog.brujordet.no/post/crafting/unbreaking_a_bike_with_code/</loc>
     <lastmod>2022-07-21T09:04:50+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/tags/devops/</loc>
-    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/categories/devops/</loc>
-    <lastmod>2022-07-02T08:00:55+02:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/tags/hiring/</loc>
     <lastmod>2022-07-02T08:00:55+02:00</lastmod>
@@ -73,9 +82,6 @@
   </url><url>
     <loc>https://blog.brujordet.no/post/homelab/replacing_my_doorbell/</loc>
     <lastmod>2021-09-17T10:12:01+02:00</lastmod>
-  </url><url>
-    <loc>https://blog.brujordet.no/tags/kubernetes/</loc>
-    <lastmod>2021-09-11T08:55:15+02:00</lastmod>
   </url><url>
     <loc>https://blog.brujordet.no/post/homelab/using_custom_hardware_in_kubernetes/</loc>
     <lastmod>2021-09-11T08:55:15+02:00</lastmod>

@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>I can&#39;t believe it&#39;s not dns // Automate attention</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.111.3">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://blog.brujordet.no/css/main.min.4c68b05cd7072e94a56c3a8acdd6f6e73fb7a62ba6e1bb047413ce09c4fea7a8.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="I can&#39;t believe it&#39;s not dns"/>
+<meta name="twitter:description" content="A sudden urge to upgrade It was a warm spring day, kids were out of the house, I had just finished a round of Rocket League and I thought; Maybe I should upgrade my kubernetes cluster?
+My homelab cluster is deployed using Kubespray which works by coordinating a myriad of Ansible scripts. It&rsquo;s not the quickest solution, but it&rsquo;s solid and customizable. These upgrades are usually quite uneventful, but I wanted to make some larger changes to how my gitops flow works, so I decided to just wipe everything after backing up all my volumes and start from scratch."/>
+
+    <meta property="og:title" content="I can&#39;t believe it&#39;s not dns" />
+<meta property="og:description" content="A sudden urge to upgrade It was a warm spring day, kids were out of the house, I had just finished a round of Rocket League and I thought; Maybe I should upgrade my kubernetes cluster?
+My homelab cluster is deployed using Kubespray which works by coordinating a myriad of Ansible scripts. It&rsquo;s not the quickest solution, but it&rsquo;s solid and customizable. These upgrades are usually quite uneventful, but I wanted to make some larger changes to how my gitops flow works, so I decided to just wipe everything after backing up all my volumes and start from scratch." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.brujordet.no/post/devops/i_cant_believe_its_not_dns/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-05-09T08:46:57+02:00" />
+<meta property="article:modified_time" content="2023-05-09T08:46:57+02:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.brujordet.no/"><img class="app-header-avatar" src="/avatar.png" alt="John Doe" /></a>
+      <h1>Automate attention</h1>
+      <p>Tools and techniques I use to make life easier</p>
+      <a href="https://blog.brujordet.no//about">About me</a>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://twitter.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://www.linkedin.com/in/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+          <a target="_blank" href="https://www.github.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+      <a href="https://blog.brujordet.no//index.xml">RSS</a>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">I can&#39;t believe it&#39;s not dns</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          May 9, 2023
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://blog.brujordet.no/tags/devops/">devops</a><a class="tag" href="https://blog.brujordet.no/tags/kubernetes/">kubernetes</a><a class="tag" href="https://blog.brujordet.no/tags/dns/">dns</a></div></div>
+    </header>
+    <div class="post-content">
+      <h2 id="a-sudden-urge-to-upgrade">A sudden urge to upgrade</h2>
+<p>It was a warm spring day, kids were out of the house, I had just finished a
+round of Rocket League and I thought; Maybe I should upgrade my kubernetes
+cluster?</p>
+<p>My homelab cluster is deployed using
+<a href="https://github.com/kubernetes-sigs/kubespray">Kubespray</a> which works by
+coordinating a myriad of <a href="https://www.ansible.com/">Ansible</a> scripts.
+It&rsquo;s not the quickest solution, but it&rsquo;s solid and
+customizable. These upgrades are usually quite uneventful, but I wanted to make
+some larger changes to how my gitops flow works, so I decided to just wipe
+everything after backing up all my volumes and start from scratch.</p>
+<h2 id="well-thats-odd">Well, that&rsquo;s odd</h2>
+<p>I use <a href="https://github.com/Fluxcd/flux2">Flux</a> to deploy my workloads into
+kubernetes. It&rsquo;s quite frankly dead simple. I add yaml to git, Flux reads yaml
+and adds stuff to Kubernetes. But when I bootstrapped Flux into my freshly
+installed cluster. Nothing worked. Errors everywhere.</p>
+<p>It was quite clear from the logs that Flux couldn&rsquo;t do name resolution. Flux
+starts out by fetching all the helm repositories it needs to deploy the helm
+charts I&rsquo;ve created nice little yaml files for in my git repo. But it couldn&rsquo;t
+resolve a single domain name, so now it was stuck.</p>
+<h2 id="so-how-does-dns-in-kubernetes-even-work">So how does DNS in Kubernetes even work?</h2>
+<p>Well, it depends, but the default behavior when deploying a cluster with Kubespray is to use CoreDNS
+and NodeLocalDNS. The LocalDNS is basically a simplified CoreDNS service, that
+either responds with cached data or asks CoreDNS. CoreDNS also caches responses,
+but can either query an external DNS server or query the Kubernetes API.
+This means that there are a couple of CoreDNS pods which serve
+as the authoritative DNS for the cluster and has a service that load balances the
+traffic among the two pods (10.133.0.3 in my case). LocalDNS is then deployed as
+a daemonset with one pod per node and binding on the private ip 169.254.25.10.</p>
+<p>So the pods I deploy using Flux don&rsquo;t use CoreDNS directly instead they query
+LocalDNS which in turn queries CoreDNS, which again queries either an external
+DNS or the Kubernetes API to resolve the request.</p>
+<h2 id="the-detour">The detour</h2>
+<p>When I started digging into logs, it became clear that the CoreDNS pods
+were doing fine, but the LocalDNS pods were struggling massively.</p>
+<pre tabindex="0"><code>2023/05/05 09:56:06 [INFO] Starting node-cache image: 1.21.1
+2023/05/05 09:56:06 [INFO] Using Corefile /etc/coredns/Corefile
+2023/05/05 09:56:06 [INFO] Using Pidfile
+2023/05/05 09:56:07 [INFO] Skipping kube-dns configmap sync as no directory was specified
+2023/05/05 09:56:07 [INFO] Added interface - nodelocaldns
+cluster.local.:53 on 169.254.25.10
+in-addr.arpa.:53 on 169.254.25.10
+ip6.arpa.:53 on 169.254.25.10
+.:53 on 169.254.25.10
+[INFO] plugin/reload: Running configuration MD5 = 5bc9ac48f7ba58018ec5b8fd787058a9
+CoreDNS-1.7.0
+linux/amd64, go1.16.8,
+[INFO] Added back nodelocaldns rule - {raw PREROUTING [-p tcp -d 169.254.25.10 --dport 53 -j NOTRACK]}
+[INFO] Added back nodelocaldns rule - {raw PREROUTING [-p udp -d 169.254.25.10 --dport 53 -j NOTRACK]}
+[INFO] Added back nodelocaldns rule - {filter INPUT [-p tcp -d 169.254.25.10 --dport 53 -j ACCEPT]}
+[INFO] Added back nodelocaldns rule - {filter INPUT [-p udp -d 169.254.25.10 --dport 53 -j ACCEPT]}
+[INFO] Added back nodelocaldns rule - {raw OUTPUT [-p tcp -s 169.254.25.10 --sport 53 -j NOTRACK]}
+[INFO] Added back nodelocaldns rule - {raw OUTPUT [-p udp -s 169.254.25.10 --sport 53 -j NOTRACK]}
+[INFO] Added back nodelocaldns rule - {filter OUTPUT [-p tcp -s 169.254.25.10 --sport 53 -j ACCEPT]}
+[INFO] Added back nodelocaldns rule - {filter OUTPUT [-p udp -s 169.254.25.10 --sport 53 -j ACCEPT]}
+[INFO] Added back nodelocaldns rule - {raw OUTPUT [-p tcp -d 169.254.25.10 --dport 53 -j NOTRACK]}
+[INFO] Added back nodelocaldns rule - {raw OUTPUT [-p udp -d 169.254.25.10 --dport 53 -j NOTRACK]}
+[INFO] Added back nodelocaldns rule - {raw OUTPUT [-p tcp -d 169.254.25.10 --dport 8080 -j NOTRACK]}
+[INFO] Added back nodelocaldns rule - {raw OUTPUT [-p tcp -s 169.254.25.10 --sport 8080 -j NOTRACK]}
+[ERROR] plugin/errors: 2 netchecker-service.default.svc.cluster.local. AAAA: dial tcp 10.133.0.3:53: i/o timeout
+[ERROR] plugin/errors: 2 netchecker-service.default.svc.cluster.local. A: dial tcp 10.133.0.3:53: i/o timeout
+[ERROR] plugin/errors: 2 netchecker-service.default.svc.cluster.local. AAAA: dial tcp 10.133.0.3:53: i/o timeout
+[ERROR] plugin/errors: 2 netchecker-service.default.svc.cluster.local. A: dial tcp 10.133.0.3:53: i/o timeout
+[ERROR] plugin/errors: 2 netchecker-service.default.svc.cluster.local. AAAA: dial tcp 10.133.0.3:53: i/o timeout
+[ERROR] plugin/errors: 2 netchecker-service.default.svc.cluster.local. A: dial tcp 10.133.0.3:53: i/o timeout
+.... these errors go on forever....
+</code></pre><p>There are a couple of things to point out here. Firstly we see a dump of
+iptable rules in the beginning. Usually a Container Network Interface (CNI)
+handles the internal network and firewall rules for the cluster. But since the
+LocalDNS pods
+are using host networking instead of the cluster network they are out of scope
+and write their own iptable rules. The problem though is that my CNI
+<a href="https://www.tigera.io/project-calico/">calico</a> was overwriting the rules made
+by the LocalDNS pods.
+Initially I jumped at this as a possible solution, and found a way to instruct
+calico to <a href="https://docs.tigera.io/calico/latest/reference/resources/felixconfig">append the existing rules
+instead</a>
+which did end up ensuring that the LocalDNS rules were kept around. But as you
+might have guessed, this was not the reason for LocalDNS pods timing out
+against the CoreDNS service.</p>
+<h2 id="its-all-so-confusing">It&rsquo;s all so confusing</h2>
+<p>The hardest part about this problem was the inconsistency. My initial
+deployment with Flux failed hard. So I tried resetting and recreating the
+cluster multiple times. And finally I gave up and went to bed. The next morning
+though things had happened. Some pods had been created, some of them were
+even running but others were crashing. All errors were related to DNS not working.</p>
+<p>I tried debugging one of the LocalDNS pods, and sure I could query the CoreDNS
+service, almost every time. But sometimes it would time out. The LocalDNS pods
+are by default configured to use TCP when querying CoreDNS, while <code>dig</code>
+which I was using to test prefers UDP. And sure enough, when I added the <code>+tcp</code>
+flag to my dig commands, forcing it to use TCP, the queries were all failing with a timeout. But why?</p>
+<p>Another confusing aspect of this was that the cluster was slowly
+moving into a working state with all my deployments becoming healthy, even though
+the LocalDNS pods war spewing out errors. After
+adding a CoreDNS dashboard I saw that the LocalDNS pods will eventually try
+UDP if TCP keeps failing. So now and then they will manage to get a response
+from CoreDNS over UDP and cache that response for dear life. I tried to reconfigure the LocalDNS to
+use UDP instead, thinking this would surely mitigate the issue. But now all UDP
+queries were met with a timeout too. (╯°□°)╯︵ ┻━┻</p>
+<h2 id="frustration-and-denial">Frustration and denial</h2>
+<p>At this point I was basically questioning my own competence and will to breathe.
+I had spent days reading, thinking and creating slack
+threads in various public channels. I even created an issue on the CoreDNS Github page
+asking for guidance.
+The discussions on that issue did steer me in the right direction thought as we
+were able to verify that CoreDNS and the LocalDNS pods were configured properly.
+This problem had to be related to network and likely related to the CNI, or hardware, or both.</p>
+<h2 id="slow-and-steady-wins-the-race">Slow and steady wins the race</h2>
+<p>I won&rsquo;t bore you with the details but at this point I had tried and Googled
+pretty much everything I could think of. I caught myself mindlessly searching
+for &ldquo;calico kubespray nodelocaldns timeout&rdquo; and various permutations like some
+depressed Zombie whenever I sat down somewhere. But eventually I started digging
+more into the network interfaces.
+I was looking for hardware problems but found none.
+I played with tcpdump to verify that the connections were actually
+being made and on a whim did a <code>netstat -s</code> to print a summary of statistics for
+the network interface grouped by protocols. To my surprise there were a large
+amount of checksum errors, and retransmissions. Finally, a proper clue!</p>
+<p>A lot of network cards will use have hardware offloading to handle
+the checksums which speeds up packet handling, if these checksums are wrong
+though, the TCP packet will have to be resent. Armed with a new set of search
+terms I found a problem that finally matched mine on the <a href="https://github.com/projectcalico/calico/issues/3145">Calico Github
+page</a> where they suggested
+to disable hardware offloading of checksums on the calico interface.</p>
+<pre tabindex="0"><code>sudo ethtool --offload vxlan.calico rx off tx off
+</code></pre><p>And voila the DNS issues disappeared completely!! I was ecstatic and the world finally
+made sense again. With a new found bounce in my step I
+was eager to share the details at work, since I remembered that our Infra team
+had struggled with a similar DNS issue in one of our clusters. Luckily it was
+the exact same issue, so don&rsquo;t tell my that running a highly available
+Kubernetes cluster in your basement is a waste of time!</p>
+<p>So this time, it was actually not really DNS.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

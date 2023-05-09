@@ -6,7 +6,17 @@
     <description>Recent content in devops on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Jul 2022 08:00:55 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 May 2023 08:46:57 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/categories/devops/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>I can&#39;t believe it&#39;s not dns</title>
+      <link>https://blog.brujordet.no/post/devops/i_cant_believe_its_not_dns/</link>
+      <pubDate>Tue, 09 May 2023 08:46:57 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/post/devops/i_cant_believe_its_not_dns/</guid>
+      <description>A sudden urge to upgrade It was a warm spring day, kids were out of the house, I had just finished a round of Rocket League and I thought; Maybe I should upgrade my kubernetes cluster?
+My homelab cluster is deployed using Kubespray which works by coordinating a myriad of Ansible scripts. It&amp;rsquo;s not the quickest solution, but it&amp;rsquo;s solid and customizable. These upgrades are usually quite uneventful, but I wanted to make some larger changes to how my gitops flow works, so I decided to just wipe everything after backing up all my volumes and start from scratch.</description>
+    </item>
+    
     <item>
       <title>Open a pull request to merge this engineer</title>
       <link>https://blog.brujordet.no/post/devops/open_a_pull_request_to_merge_this_engineer/</link>
