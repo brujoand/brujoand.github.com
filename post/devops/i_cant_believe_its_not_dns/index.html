@@ -216,7 +216,7 @@ Kubernetes cluster in your basement is a waste of time!</p>
 <p>From what I could gather after asking some questions on the Calico slack channel
 this is what happened:</p>
 <ul>
-<li>A LocalDNS pods calls out to the CoreDNS service</li>
+<li>A LocalDNS pod calls out to the CoreDNS service</li>
 <li>The service IP rewrites the packet destination to match a CoreDNS pod</li>
 <li>The node routing will cause the packet to traverse the calico interface</li>
 <li>Kernel vxlan encapsulation code executes, which is where the checksum bug lives</li>
