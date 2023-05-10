@@ -227,6 +227,23 @@ healthy ish state, was not actually related to UDP vs TCP. But rather when the L
 avoided the kernel vxlan encapsulation. Eventually all healthy pods were on the
 same nodes as the CoreDNS pods.</p>
 <p>Finally our Kubernetes powered Minecraft server is back up! :D</p>
+<h2 id="ps-further-reading">PS: Further reading</h2>
+<p>If you want to dig deeper into this, I&rsquo;ve listed some interesting links as to
+how this all happened. From my understand there was initially a kernel bug in
+the code that handles vxlan encapsulation. In anticipation of a fix most CNIs
+created workarounds which solved the problem for their users. Later the kernel
+bug was patched, and some of the CNI workarounds were removed. However at some
+point the kernel bug reappeared leaving some of the CNIs vulnerable to the bug
+yet again.</p>
+<ul>
+<li><a href="https://github.com/projectcalico/calico/issues/3795">Bug reported to Calico in 2020</a></li>
+<li><a href="https://github.com/kubernetes/kubernetes/issues/98758">Bug reported to Kubernetes 2020</a></li>
+<li><a href="https://github.com/flannel-io/flannel/issues/1279">Bug reported to Flannel 2020</a></li>
+<li><a href="https://github.com/projectcalico/calico/pull/6842">Bug re-reported after it returned 2022</a></li>
+<li><a href="https://github.com/kubernetes-sigs/kubespray/issues/8992">Same bug reported to kubespray 2022</a></li>
+</ul>
+<p>I didn&rsquo;t find any reference to the actual kernel bug though which would have
+been interesting to see.</p>
 
     </div>
     <div class="post-footer">
