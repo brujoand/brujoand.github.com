@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>No, we&#39;ve got Airthings at home // Automate attention</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.118.2">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="John Doe" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://blog.brujordet.no/css/main.min.4c68b05cd7072e94a56c3a8acdd6f6e73fb7a62ba6e1bb047413ce09c4fea7a8.css" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="No, we&#39;ve got Airthings at home"/>
+<meta name="twitter:description" content="The need for air sensing I had a conversation with my wife about ventilation that went something like this:
+I have a soft spot for buying sensors and gadgets at night when I&rsquo;m supposed to go to sleep. Always thinking that &ldquo;Oh, this could be a cool addition If I ever do that project idea&rdquo;. This summer though I finally pulled the trigger on my sensor adventure and created a cute little water temperature sensor for our above ground pool."/>
+
+    <meta property="og:title" content="No, we&#39;ve got Airthings at home" />
+<meta property="og:description" content="The need for air sensing I had a conversation with my wife about ventilation that went something like this:
+I have a soft spot for buying sensors and gadgets at night when I&rsquo;m supposed to go to sleep. Always thinking that &ldquo;Oh, this could be a cool addition If I ever do that project idea&rdquo;. This summer though I finally pulled the trigger on my sensor adventure and created a cute little water temperature sensor for our above ground pool." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.brujordet.no/post/crafting/no_weve_got_airthings_at_home/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2023-10-10T08:51:47+02:00" />
+<meta property="article:modified_time" content="2023-10-10T08:51:47+02:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://blog.brujordet.no/"><img class="app-header-avatar" src="/avatar.png" alt="John Doe" /></a>
+      <h1>Automate attention</h1>
+      <p>Tools and techniques I use to make life easier</p>
+      <a href="https://blog.brujordet.no//about">About me</a>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://twitter.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+          <a target="_blank" href="https://www.linkedin.com/in/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-linkedin">
+  <title>linkedin</title>
+  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+</svg></a>
+        
+          <a target="_blank" href="https://www.github.com/brujoand" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg></a>
+        
+      </div>
+      <a href="https://blog.brujordet.no//index.xml">RSS</a>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">No, we&#39;ve got Airthings at home</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Oct 10, 2023
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          9 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://blog.brujordet.no/tags/crafting/">crafting</a><a class="tag" href="https://blog.brujordet.no/tags/diy/">diy</a><a class="tag" href="https://blog.brujordet.no/tags/sensors/">sensors</a><a class="tag" href="https://blog.brujordet.no/tags/jscad/">jscad</a><a class="tag" href="https://blog.brujordet.no/tags/electronics/">electronics</a></div></div>
+    </header>
+    <div class="post-content">
+      <h2 id="the-need-for-air-sensing">The need for air sensing</h2>
+<p>I had a conversation with my wife about ventilation that went something like this:</p>
+<img src="/airthings_at_home.png" alt="We've got Airthings at home" width="100%"/>
+<p>I have a soft spot for buying sensors and gadgets at night
+when I&rsquo;m supposed to go to sleep. Always thinking that &ldquo;Oh, this could be a cool
+addition If I ever do that project idea&rdquo;. This summer though I finally pulled
+the trigger on my sensor adventure and created a cute little water temperature
+sensor for our above ground pool. I had not really been looking forward to the
+initial learning curve, which is probably why I&rsquo;ve put this off for so long, but
+I was in for a surprise. I found <a href="https://esphome.io/">ESPHome</a> which is an amazing
+platform for building IoT devices, and it has support for pretty much all the
+sensors and micro controllers I have stashed away.</p>
+<p>After building the water sensor, an air sensor felt like it would be a
+breeze. And it actually was, no dramatic effect here, just a simple sunshine
+story. I know, anti-climatic but sometimes we have to treasure the wins! :D
+(I&rsquo;ll post the horror story of my cat flap project when I build up the courage)</p>
+<h2 id="the-parts">The Parts</h2>
+<ul>
+<li><a href="https://www.wemos.cc/en/latest/d1/d1_mini.html">D1 Mini</a> # The brain aka Micro Controller</li>
+<li><a href="https://sensirion.com/products/catalog/SPS30/">SPS30</a> # The particle sensor</li>
+<li><a href="https://www.digikey.no/en/products/detail/senseair/004-0-0053/10416532">Senseair S8</a> # The CO2 sensor</li>
+<li><a href="https://www.bosch-sensortec.com/products/environmental-sensors/humidity-sensors-bme280/">BME280/BMP280</a># Combined Temp/Humidity/Pressure sensor</li>
+</ul>
+<p>These components were all in my electronics stash, and most of them were a
+perfect fit for the task. Except for the last sensor, which isn&rsquo;t actually made for
+sensing temperature, but does it as a way of calculating relative humidity. And
+waiting for a new sensor did not seem like an option.</p>
+<p>It was time to get the breadboard and some jumper wires and get this ting
+connected. A breadboard is basically just a &ldquo;plug and play&rdquo; board which let&rsquo;s
+you connect components easily without having to solder them in place.
+As you can see from the memeified picture at the top, it wasn&rsquo;t pretty. But at
+this stage that&rsquo;s not the point. Instead it&rsquo;s time to start creating the
+configuration for ESPHome and test if all of these components work.</p>
+<h2 id="proof-of-concept">Proof of Concept</h2>
+<p>So first we start by creating a configuration file for ESPHome, with something
+like this:</p>
+</br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">esphome</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">name</span>: <span style="color:#ae81ff">airmon_stue</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">esp8266</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">board</span>: <span style="color:#ae81ff">d1_mini</span>
+</span></span></code></pre></div><p>We gave our device a name, and identified what model of
+microprocessor we&rsquo;re using.</p>
+</br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">uart</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">rx_pin</span>: <span style="color:#ae81ff">GPIO14</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">tx_pin</span>: <span style="color:#ae81ff">GPIO16</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">baud_rate</span>: <span style="color:#ae81ff">9600</span>
+</span></span></code></pre></div><p>Then we tell ESPHome that there is a device connected which will send us data on
+GPIO 14 and we can send it data on GPIO16. The GPIO&rsquo;s are just the connection
+ports on the micro controller that we are using.
+UART stands for Universal Asynchronous
+Receiver/Transmitter and it&rsquo;s a protocol that allows devices to communicate.
+This is old school serial communication and data is sent one bit at the time.
+The baudrate determines the speed of communication. So with this configuration
+we can talk to the Sensair CO2 sensor. This is an extremely common way to
+connect to devices like this, but if you have many devices you need many GPIO
+pins as the connection is always one to one.</p>
+</br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">i2c</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">sda</span>: <span style="color:#ae81ff">GPIO4</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">scl</span>: <span style="color:#ae81ff">GPIO5</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">scan</span>: <span style="color:#66d9ef">true</span>
+</span></span></code></pre></div><p>Next we configure the I2C, or Inter-Integrated Circuit, which is another
+protocol that allows devices to communicate over two wires. This one is not
+asynchronous though like UART, and requires us to use the dedicated i2c ports (4
+and 5) on the micro controller. There are two wires to connect, one is for data and one is
+for a clock. The clock let&rsquo;s the connected devices know when they can
+send data, so with this protocol we can connect multiple devices together
+without them speaking at the same time. Saving our precious IO ports!
+In our case both the Particle sensor and the Temp sensor connect this way.</p>
+</br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">sensor</span>:
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">platform</span>: <span style="color:#ae81ff">senseair</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">co2</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Airmon Stue CO2&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">update_interval</span>: <span style="color:#ae81ff">60s</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">platform</span>: <span style="color:#ae81ff">bme280</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">temperature</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Airmon Stue Temperature&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">oversampling</span>: <span style="color:#ae81ff">16x</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pressure</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Airmon Stue Pressure&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">humidity</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Airmon Stue Humidity&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">address</span>: <span style="color:#ae81ff">0x76</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">update_interval</span>: <span style="color:#ae81ff">60s</span>
+</span></span><span style="display:flex;"><span>  - <span style="color:#f92672">platform</span>: <span style="color:#ae81ff">sps30</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pm_1_0</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Airmon Stue PM &lt;1µm Weight concentration&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">id</span>: <span style="color:#e6db74">&#34;airmon_stue_PM_1_0&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pm_2_5</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Airmon Stue PM &lt;2.5µm Weight concentration&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">id</span>: <span style="color:#e6db74">&#34;airmon_stue_PM_2_5&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pm_10_0</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Airmon Stue PM &lt;10µm Weight concentration&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">id</span>: <span style="color:#e6db74">&#34;airmon_stue_PM_10_0&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">pm_size</span>:
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">name</span>: <span style="color:#e6db74">&#34;Typical Particle size&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">id</span>: <span style="color:#e6db74">&#34;pm_size&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">address</span>: <span style="color:#ae81ff">0x69</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">update_interval</span>: <span style="color:#ae81ff">10s</span>
+</span></span></code></pre></div><p>Now that we&rsquo;ve defined how to communicate with the sensors we can define the
+sensors data. Here we&rsquo;ve setup the CO2 sensor using the
+&ldquo;sensair&rdquo; platform and set a name for the sensor. We do the same for the
+Temp/Humidity/Pressure sensor and finally the particle sensor. Each of them with
+their specific platform which is basically ESPHomes built in support or driver
+if you&rsquo;d like for that particular device.</p>
+</br>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">logger</span>:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">api</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">password</span>: <span style="color:#e6db74">&#34;&lt;some password&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">ota</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">password</span>: <span style="color:#e6db74">&#34;&lt;not the same password&gt;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">wifi</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">ssid</span>: <span style="color:#e6db74">&#34;My_dedicated_IOT_wifi&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">password</span>: <span style="color:#e6db74">&#34;&lt;yet another password&gt;&#34;</span>
+</span></span></code></pre></div><p>We add an empty logger directive to enable logging and set a password for the
+device API endpoint. This allows Home Assistant to communicate with the device.
+The same goes for the OTA password for when we want to upgrade/reconfigure the
+device. Finally we tell it how to connect to our IOT wifi network.
+</br></p>
+<h2 id="lets-deploy-some-firmware">Let&rsquo;s deploy some firmware</h2>
+<p>Now we just need to connect to the device using usb, and issue the magic command</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>esphome run config.yaml
+</span></span></code></pre></div><p>This will cause ESPHome to compile the firmware, package it with our
+configuration and upload it to the micro controller. But alas, only the UART
+connected CO2 sensor worked. I thought maybe this was due to the particle sensor
+drawing to much power, since I now had 3 sensors and a micro controller powered
+through usb. But adding a dedicated 5v power supply changed nothing
+unfortunately.</p>
+<p>After reading up on I2C however, the problem was quite obvious because the
+protocol requires a stable signal to work. A signal going over the wire can be 1 of 3 states.</p>
+<ul>
+<li>On/High/+</li>
+<li>Off/Low/-</li>
+<li>Floating between the tow</li>
+</ul>
+<p>I2C requires that both wires should be high when not sending
+data. When a device wants to send data, they connect the signal to ground,
+which will pull it Low, or the Off state. But in my case the signal
+was never stable in the high position, it was floating between high and low,
+which caused all communication to break down.</p>
+<p>The solution was to add a cable from the 3.3v power port on the micro controller
+to both of the I2C cables though a pull up resistor to pull them high when not
+in use. 3.3v is what the micro controller will recognize as high in this case.
+With the pull up resistor in place, both signals were high when not in
+use, and communication could finally happen giving this output on the command line:</p>
+<pre tabindex="0"><code>[10:05:20][D][sensor:093]: &#39;Airmon Stue PM &lt;1µm Weight concentration&#39;: Sending state 0.43919 µg/m³ with 2 decimals of accuracy
+[10:05:20][D][sensor:093]: &#39;Airmon Stue PM &lt;2.5µm Weight concentration&#39;: Sending state 0.70996 µg/m³ with 2 decimals of accuracy
+[10:05:20][D][sensor:093]: &#39;Airmon Stue PM &lt;4µm Weight concentration&#39;: Sending state 0.91270 µg/m³ with 2 decimals of accuracy
+[10:05:20][D][sensor:093]: &#39;Airmon Stue PM &lt;10µm Weight concentration&#39;: Sending state 1.01576 µg/m³ with 2 decimals of accuracy
+[10:05:20][D][sensor:093]: &#39;Typical Particle size&#39;: Sending state 0.85657 µm with 0 decimals of accuracy
+...
+[10:05:27][D][sensor:093]: &#39;Airmon Stue Temperature&#39;: Sending state 31.49000 °C with 1 decimals of accuracy
+[10:05:27][D][sensor:093]: &#39;Airmon Stue Pressure&#39;: Sending state 961.61102 hPa with 1 decimals of accuracy
+[10:05:27][D][sensor:093]: &#39;Airmon Stue Humidity&#39;: Sending state 25.32520 % with 1 decimals of accuracy
+...
+[10:05:40][D][sensor:093]: &#39;Typical Particle size&#39;: Sending state 0.85347 µm with 0 decimals of accuracy
+[10:05:41][D][senseair:059]: SenseAir Received CO₂=741ppm Status=0x00
+[10:05:41][D][sensor:093]: &#39;Airmon Stue CO2&#39;: Sending state 741.00000 ppm with 0 decimals of accuracy
+</code></pre><p>Success! :D</p>
+<h2 id="cleaning-up-the-wires">Cleaning up the wires</h2>
+<p>Since everything is now working it was time to move away from the horrible mess
+on the breadboard to a cleaner design. Some people design custom PCBs to mount
+their devices, but being in Norway there was no time to wait for that shipping
+(not to mention the import tax which would have doubled the price).</p>
+<p>So instead I used some perfboards, which basically look like PCBs with holes
+everywhere. These holes allow us to solder devices and cables in place where we
+want them. It&rsquo;s not as neat as a custom PCB, but it beats the breadboard.</p>
+<img src="/perfboard.png" alt="Tidy little perfboard" width="100%"/>
+<p>I made one mistake with the design above though, which I had to fix after
+assembling everything. The orange wire going from 13S to 13F should have gone
+all the way to 13D. But fortunately it wasn&rsquo;t a big deal to change.</p>
+<img src="/airmon_complete.png" alt="Airmon finally completed" width="100%"/>
+<p>With all the components soldered in place and a 5v power supply added, we&rsquo;re
+ready for housing which I slapped together using jsCad and printed. It&rsquo;s not
+going to win any design awards, but it fits everything nicely and has
+ventilation holes for all the sensors. I jumped over to Home Assistant, added
+a new device to the ESPHome integration using the password from the config file
+and I could finally get some data. My plan was to have one sensor in our living
+room and one in the basement next to the 3d printer, so I kept both new sensors
+next to eachother for a few days to verify that they gave the same data.</p>
+<img src="/airmon_graphs.png" alt="Airmon graph" width="100%"/>
+<p>As you can see the two top lines are the new sensors, and the bottom decibel and
+CO2 are from my old Netatmo climate sensor. From  what I have been able to
+figure out the Netatmo doesn&rsquo;t actually measure CO2 but calculates it from other
+measurements, but it doesn&rsquo;t seem to be far off from the Sensair sensors
+actually.</p>
+<p>But the two new sensor seem to agree on everything, except the temp which I
+pretty much expected to not be accurate. I have other sensors around the house
+for that so to me it&rsquo;s not a big deal.</p>
+<h2 id="wrapping-up">Wrapping up</h2>
+<p>Now I&rsquo;m planning some new dashboards for air quality in Home Assistant and I&rsquo;ve
+already added an automation to open more windows if the air quality get&rsquo;s bad. I
+had also planned on running a controlled test of the particle sensor by lighting
+a match next to it, but we needed to get a fire going in the fireplace and that
+absolutely verified that it was sensing particles. A tiny bit of smoke came into the
+room when I closed the door to the fireplace and the sensor immediately showed 50+ ug/m3.</p>
+<p>Also; I actually wanted to add a Radon sensor on the basement device, but those were
+crazy expensive at around $300. So compared to the $140 I spent on parts for these two
+devices in total it was just not worth it to add the Radon sensor.
+Later I&rsquo;m hoping to design some 3d printed ventilation duct&rsquo;s with HEPA filters so
+I can use the CO2 and particle information to actually improve the ventialation.
+But you know, these things take time :P</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

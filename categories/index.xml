@@ -6,22 +6,22 @@
     <description>Recent content in Categories on Automate attention</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 09 May 2023 08:46:57 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/categories/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Oct 2023 08:51:47 +0200</lastBuildDate><atom:link href="https://blog.brujordet.no/categories/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>crafting</title>
+      <link>https://blog.brujordet.no/categories/crafting/</link>
+      <pubDate>Tue, 10 Oct 2023 08:51:47 +0200</pubDate>
+      
+      <guid>https://blog.brujordet.no/categories/crafting/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>devops</title>
       <link>https://blog.brujordet.no/categories/devops/</link>
       <pubDate>Tue, 09 May 2023 08:46:57 +0200</pubDate>
       
       <guid>https://blog.brujordet.no/categories/devops/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>crafting</title>
-      <link>https://blog.brujordet.no/categories/crafting/</link>
-      <pubDate>Thu, 21 Jul 2022 09:04:50 +0200</pubDate>
-      
-      <guid>https://blog.brujordet.no/categories/crafting/</guid>
       <description></description>
     </item>
     
